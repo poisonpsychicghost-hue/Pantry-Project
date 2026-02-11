@@ -14,16 +14,96 @@ class Pantry:
         pass
 
     def load_from_file(self, filename):
-        # needs input verification, clean user interface options, data validations
+        self._pantry_list = []
+#I think I wrote this like you said, I am pretty sure its in the right order
+        with open(filename, "r") as file:
+            for line in file:
+                fields = line.strip().split(',')
 
-        """Save all foods in pantry to a file """
-        pass
+                (category, name, quantity, perishable, days_left,
+                 storage_location, purchase_date, notes, ripeness, is_cut, washed,
+                 meat_type, dairy_type, frozen_type, baked_type, condiment_type, snack_type,
+                 frozen, use_today, open_date, frozen_at_home, ready_to_eat, homemade, flavor, requested) = fields
+
+                quantity = int(quantity)
+                perishable = perishable == "True"
+                days_left = int(days_left)
+                is_cut = is_cut == "True"
+                washed = washed == "True"
+                frozen = frozen == "True"
+                use_today = use_today == "True"
+                ready_to_eat = ready_to_eat == "True"
+                homemade = homemade == "True"
+                is_open = open_date not in [None, "", "None"]
+                frozen_at_home = frozen_at_home == "True"
+
+                if category == "Fresh_Produce":
+                    item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date, notes)
+                elif category == "Fruit_Produce":
+                    item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                             ripeness, is_cut, washed, notes)
+                elif category == "Raw_Meat":
+                    item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location, purchase_date,
+                                        frozen, use_today, notes)
+                elif category == "Dairy":
+                    item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location, purchase_date,
+                                     open_date, is_open, notes)
+                elif category == "Other_Frozen":
+                    item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
+                                           purchase_date, open_date, frozen_at_home, is_open, notes)
+                elif category == "Baked_Goods":
+                    item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
+                                           purchase_date, ready_to_eat, homemade, notes)
+                elif category == "Condiment_Spice":
+                    item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                               open_date, is_open, condiment_type, notes)
+                elif category == "Snacks_Shelf_Stable":
+                    item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
+                                                   purchase_date, open_date, is_open, flavor, requested, notes)
+                else:
+                    item_obj = Food(name, quantity, perishable, days_left)
+
+                self._pantry_list.append(item_obj)
+        print(f"Pantry loaded from {filename}")
 
     def save_to_file(self, filename):
-        # needs input verification, clean user interface options, data validations
-
         """Load foods from a file into Pantry"""
-        pass
+
+        with open(filename, "w") as file:
+            for item in self._pantry_list:
+                data = [
+                    str(item._category),
+                    str(item._name),
+                    str(item._quantity),
+                    str(item._perishable),
+                    str(item._days_left),
+                    str(getattr(item, '_storage_location', '')),
+                    str(getattr(item, '_purchase_date', '')),
+                    str(getattr(item, '_notes', '')),
+                    str(getattr(item, '_ripeness', '')),
+                    str(getattr(item, '_is_cut', '')),
+                    str(getattr(item, '_washed', '')),
+                    str(getattr(item, '_meat_type', '')),
+                    str(getattr(item, '_dairy_type', '')),
+                    str(getattr(item, '_frozen_type', '')),
+                    str(getattr(item, '_baked_type', '')),
+                    str(getattr(item, '_condiment_type', '')),
+                    str(getattr(item, '_snack_type', '')),
+                    str(getattr(item, '_frozen', '')),
+                    str(getattr(item, '_use_today', '')),
+                    str(getattr(item, '_open_date', '')),
+                    str(getattr(item, '_frozen_at_home', '')),
+                    str(getattr(item, '_ready_to_eat', '')),
+                    str(getattr(item, '_homemade', '')),
+                    str(getattr(item, '_flavor', '')),
+                    str(getattr(item, '_requested', '')),
+
+
+
+                ]
+                file.write(','.join(data) + '\n')
+        print(f"Pantry saved to {filename}")
+        #how does this look?
 
     def printout_pantry(self, method):
         # needs input verification, clean user interface options, data validations
@@ -1439,10 +1519,70 @@ def help_me():
 
 
 global_common_typos = {"example": "exampel", "tomato": "tomtao"}
-# Look Up common typos for top 200 common food words in America (min 3 typos per word).
-# learn about json to implement this
+#TODO: Look Up common typos for top 200 common food words in America (min 3 typos per word).
+#TODO: Learn about json to implement this
 
 # ---------------------------------
 # ----------Main Program-----------
 # ---------------------------------
+
+#--------Pantry-----------
+test_pantry = Pantry("Test")
+
+# --------- Food ---------
+fd = Food("rice", 10, False, 130)
+print(fd._name, fd._quantity, fd._perishable, fd._days_left)
+fd.define()
+test_pantry._pantry_list.append(fd)
+
+# --------- Fresh_Produce ---------
+fp = Fresh_Produce("asparagus", 2, True, 5, "drawer", "2026-03-02", "Farmers market bundle")
+print(fp._name, fp._storage_location, fp._purchase_date, fp._notes)
+fp.define()
+test_pantry._pantry_list.append(fp)
+
+# --------- Fruit_Produce ---------
+fruit = Fruit_Produce("strawberry", 6, True, 3, "back fridge", "today", "overripe", True, False, "already soft")
+print(fruit._name, fruit._ripeness, fruit._washed, fruit._is_cut, fruit._notes)
+fruit.define()
+test_pantry._pantry_list.append(fruit)
+
+# --------- Raw_Meat ---------
+meat = Raw_Meat("duck breast", 4, True, 2, "duck", "fridge", "2-10", False, False, "will freeze tonight")
+print(meat._name, meat._meat_type, meat._storage_location, meat._frozen, meat._use_today, meat._notes)
+meat.define()
+test_pantry._pantry_list.append(meat)
+
+# --------- Dairy ---------
+dairy = Dairy("quark", 1, True, 8, "fresh cheese", "fridge", "2-9", "2-10", True, "German specialty")
+print(dairy._name, dairy._dairy_type, dairy._is_open, dairy._open_date, dairy._notes)
+dairy.define()
+test_pantry._pantry_list.append(dairy)
+
+# --------- Other_Frozen ---------
+ofz = Other_Frozen("edamame", 3, False, 90, "veg", "deep freezer", "2-1", "2-5", True, True, "bulk bag from Costco")
+print(ofz._name, ofz._frozen_type, ofz._storage_location, ofz._frozen_at_home, ofz._is_open, ofz._notes)
+ofz.define()
+test_pantry._pantry_list.append(ofz)
+
+# --------- Baked_Goods ---------
+baked = Baked_Goods("cookie", 15, True, 4, "pastry", "counter", "2-9", True, False, "soft batch")
+print(baked._name, baked._baked_type, baked._ready_to_eat, baked._homemade, baked._notes)
+baked.define()
+test_pantry._pantry_list.append(baked)
+
+# --------- Condiment_Spice ---------
+cond = Condiment_Spice("mustard", 2, False, 40, "fridge door", "2-7", "2-10", True, "sauce", "dijon, kid opened")
+print(cond._name, cond._condiment_type, cond._is_open, cond._days_left, cond._notes)
+cond.define()
+test_pantry._pantry_list.append(cond)
+
+# --------- Snacks_Shelf_Stable ---------
+snack = Snacks_Shelf_Stable("granola bar", 5, False, 25, "cereal", "pantry", "2-3", "2-9", False, "peanut butter", "Sam", "school snack pack")
+print(snack._name, snack._snack_type, snack._is_open, snack._flavor, snack._requested, snack._notes)
+snack.define()
+test_pantry._pantry_list.append(snack)
+
+#---------Save_To_File---------
+test_pantry.save_to_file("test_pantry_1")
 
