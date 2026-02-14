@@ -17,6 +17,8 @@ class Pantry:
         self._shopping_list = []  # starts with empty shopping list
         self._name = name
 
+
+
     def load_from_file(self, filename):
         """Loads saved Inventory Data from a saved .
             txt and imports it into Program for user applications"""
@@ -935,8 +937,13 @@ class Pantry:
     def add_to_pantry(self, item):
         """Adds an Existing Food Object to Pantry List"""
         # make sure save runs at end of method
-        self._pantry_list.append(item)
-        self.save_to_file(f"{self._name}.txt")
+        if item not in self._pantry_list:
+            self._pantry_list.append(item)
+            self.save_to_file(f"{self._name}.txt")
+            print(f"Adding {item._name} to {self._name}'s pantry")
+        else:
+            print(f"Item: {item._name} already in {self._name}'s pantry!")
+
 
     def remove_item(self, item):
         # Include duplicates to have a secondary verification before final removal
@@ -945,12 +952,19 @@ class Pantry:
         # make sure save runs at end of method
         """ program takes user inputs
             and removes Food items from Pantry List"""
-        self._pantry_list.remove(item)
-        item._quantity = 0
-        self._shopping_list.append(item)
-        self.save_to_file(f"{self._name}.txt")
+        if item in self._pantry_list:
 
-    def use_item(self, quantity):
+            self._pantry_list.remove(item)
+            print(f"Removing {item._name} to {self._name}'s pantry")
+            item._quantity = 0
+            self._shopping_list.append(item)
+            self.save_to_file(f"{self._name}.txt")
+            print(f"Added {item_name} to {self._name}'s Shopping List")
+
+        else:
+            print("Item not found!")
+
+    def use_item(self, item, quantity):
         # Include duplicates to have a secondary verification before final usage modification
         # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
@@ -958,11 +972,19 @@ class Pantry:
         """User chooses a Food item to subtract a quantity from
             If user uses all items in inventory, displays a prompt
             informing user and removing it from the Pantry List"""
-        item._quantity -= quantity
-        if item._quantity < 0:
-            item._quantity = 0
-            self.remove_item(item)
-        self.save_to_file(f"{self._name}.txt")
+        if item in self._pantry_list:
+            orig_quantity = item._quantity
+            item._quantity -= quantity
+
+            if item._quantity < 0:
+                item._quantity = 0
+                self.remove_item(item)
+                print(f"Used {orig_quantity} of {item._name}. {item._name.capitalize()} now out of stock and moved to shopping list")
+            else:
+                print(f"Used {quantity} of {item._name}. {item._quantity} {item._name} left in pantry")
+            self.save_to_file(f"{self._name}.txt")
+        else:
+            print("Item not found")
 
     def modify_item(self):
         # Include duplicates to have a secondary verification before final modification
@@ -1036,6 +1058,7 @@ class Food:
             self._days_left -= days_passed
             if self._days_left < 0:
                 self._days_left = 0
+
 
     def is_expired(self):
         """Checks if Perishable is True
