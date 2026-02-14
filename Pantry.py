@@ -1,6 +1,10 @@
 # ---------------------------------
 # -----------Definitions-----------
 # ---------------------------------
+from datetime import datetime
+
+today = datetime.now().strftime("%Y-m-%d")  # Y-M-D '2025-04-24'
+
 
 class Pantry:
     """Pantry Manager Class:
@@ -11,11 +15,15 @@ class Pantry:
             defines name of Pantry (Default: 'Home')"""
         self._pantry_list = []  # starts with empty pantry
         self._shopping_list = []  # starts with empty shopping list
-        pass
+        self._name = name
+
+
 
     def load_from_file(self, filename):
+        """Loads saved Inventory Data from a saved .
+            txt and imports it into Program for user applications"""
+        # need to add ._shopping_list to save/load
         self._pantry_list = []
-#I think I wrote this like you said, I am pretty sure its in the right order
         with open(filename, "r") as file:
             for line in file:
                 fields = line.strip().split(',')
@@ -38,19 +46,21 @@ class Pantry:
                 frozen_at_home = frozen_at_home == "True"
 
                 if category == "Fresh_Produce":
-                    item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date, notes)
+                    item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                             notes)
                 elif category == "Fruit_Produce":
                     item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
                                              ripeness, is_cut, washed, notes)
                 elif category == "Raw_Meat":
-                    item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location, purchase_date,
+                    item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location,
+                                        purchase_date,
                                         frozen, use_today, notes)
                 elif category == "Dairy":
                     item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location, purchase_date,
                                      open_date, is_open, notes)
                 elif category == "Other_Frozen":
                     item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
-                                           purchase_date, open_date, frozen_at_home, is_open, notes)
+                                            purchase_date, open_date, frozen_at_home, is_open, notes)
                 elif category == "Baked_Goods":
                     item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
                                            purchase_date, ready_to_eat, homemade, notes)
@@ -68,7 +78,7 @@ class Pantry:
 
     def save_to_file(self, filename):
         """Load foods from a file into Pantry"""
-
+        # need to add ._shopping_list to save/load
         with open(filename, "w") as file:
             for item in self._pantry_list:
                 data = [
@@ -98,19 +108,55 @@ class Pantry:
                     str(getattr(item, '_flavor', '')),
                     str(getattr(item, '_requested', '')),
 
-
-
                 ]
                 file.write(','.join(data) + '\n')
         print(f"Pantry saved to {filename}")
-        #how does this look?
 
-    def printout_pantry(self, method):
+    def printout_pantry(self):
         # needs input verification, clean user interface options, data validations
+        # would it be better to load from save before split logic|confirm internal data?
 
         """User Chooses a Method which allows multiple types of printout of Pantry to be delivered
         Options include By Quantity, Alphabetically, and By Category(Eventually)"""
-        pass
+        print(f"Printout {self._name}'s Inventory?")
+        method = input(
+            "Please choose an Inventory Sort Method \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)").lower()
+        today = datetime.now().strftime("%Y-%m-%d")
+        header = f"=+= Pantry {self._name} Inventory Report for {today} =+="
+
+        print(header)
+        border = "-^" * 25
+        print(border)
+        while True:
+            if method == "exit":
+                break
+            elif method not in ["alphabet", "category", "quantity"]:
+                print("Invalid Input... \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)")
+            else:
+                print_filename = f"pantry_printout_{today}.txt"
+                with open(print_filename, "w") as file:
+                    file.write(header + f"\n{border}" + "\n")
+
+                    if method == "alphabet":
+                        self._pantry_list.sort(key=lambda item: item._name)
+                        for item in self._pantry_list:
+                            print_out = item.define()
+                            file.write(print_out + "\n")
+
+
+                    elif method == "category":
+                        self._pantry_list.sort(key=lambda item: item._category)
+                        for item in self._pantry_list:
+                            print_out = item.define()
+                            file.write(print_out + "\n")
+
+                    elif method == "quantity":
+                        self._pantry_list.sort(key=lambda item: item._quantity, reverse=True)
+                        for item in self._pantry_list:
+                            print_out = item.define()
+                            file.write(print_out + "\n")
+                break
+                        # I think this should work?
 
     def printout_shopping_list(self, method):
         # needs input verification, clean user interface options, data validations
@@ -496,7 +542,7 @@ class Pantry:
                         break
 
                 item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location,
-                                         purchase_date, open_date, is_open, notes)
+                                 purchase_date, open_date, is_open, notes)
                 print()
                 item_obj.define()
 
@@ -891,12 +937,14 @@ class Pantry:
 
     def add_to_pantry(self, item):
         """Adds an Existing Food Object to Pantry List"""
+        # make sure save runs at end of method
         pass
 
     def remove_item(self, method):
         # Include duplicates to have a secondary verification before final removal
         # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
+        # make sure save runs at end of method
         """User Chooses Method -> program takes user inputs depending
             on method-choice and removes Food items from Pantry List"""
         pass
@@ -905,6 +953,7 @@ class Pantry:
         # Include duplicates to have a secondary verification before final usage modification
         # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
+        # make sure save runs at end of method
         """User chooses a Food item to subtract a quantity from
             If user uses all items in inventory, displays a prompt
             informing user and removing it from the Pantry List"""
@@ -914,6 +963,7 @@ class Pantry:
         # Include duplicates to have a secondary verification before final modification
         # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
+        # make sure save runs at end of method
         """User chooses a created Food Item to modify
             the Attributes of in the case of Errors or new Information"""
         pass
@@ -922,6 +972,7 @@ class Pantry:
         # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
         # check Subclasses to verify what can be combined
+        # make sure save runs at end of method
         """Takes all non-perishable items with the same name and adds them all together
             creating a new item of the same name with the total sum as its new quantity
             deletes the previous iterations of the Food Item."""
@@ -989,10 +1040,11 @@ class Food:
             perish_var = "Y"
         else:
             perish_var = "N"
-        print("--*--=" * 6)
-        print("Basic Food Item Summary:")
-        print(
-            f"Name: {self._name}| Quantity: {self._quantity}| Perishable?: {perish_var}| Days Remaining: {self._days_left} ")
+        result = "--*--=" * 6 + "\n"
+        result += "\nBasic Food Item Summary:"
+        result += f"\nName: {self._name}| Quantity: {self._quantity}| Perishable?: {perish_var}| Days Remaining: {self._days_left} "
+        print(result)
+        return result
 
     def to_dict(self):
         """Return dictionary of this food item for saving."""
@@ -1045,10 +1097,13 @@ class Fresh_Produce(Food):
     def define(self):
         """Prints Unique Produce Stats in addition
             to running Super's define for Base Attrib."""
-        super().define()
-        print("Produce Specific Item Summary:")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Additional Notes:{self._notes}")
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "\nProduce Specific Item Summary:"
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def is_expired(self):
         """Prints Unique Produce Spoilage Messages"""
@@ -1099,11 +1154,14 @@ class Fruit_Produce(Food):
         else:
             cut_var = "N"
 
-        super().define()
-        print("Fruit Specific Item Summary:")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Ripeness: {self._ripeness}| Washed?: {wash_var}| Cut?: {cut_var}")
-        print(f"Additional Notes:{self._notes}")
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "\nFruit Specific Item Summary:"
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nRipeness: {self._ripeness}| Washed?: {wash_var}| Cut?: {cut_var}"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def ripeness_mover(self):
         """Takes Time Check and Changes _ripeness
@@ -1173,14 +1231,17 @@ class Raw_Meat(Food):
         else:
             use_today_var = "N"
 
-        super().define()
-        print("Meat Specific Item Summary:")
-        print(f"Meat Type: {self._meat_type}")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Frozen?: {froz_var}| Use Today?: {use_today_var}")
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "\nMeat Specific Item Summary:"
+        result += f"\nMeat Type: {self._meat_type}"
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nFrozen?: {froz_var}| Use Today?: {use_today_var}"
         if self._use_today == True:
-            print(f"{self._name} Needs to be used TODAY!")
-        print(f"Additional Notes:{self._notes}")
+            result += f"\n{self._name} Needs to be used TODAY!"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def is_expired(self):
         """Prints Unique Meat Spoilage Messages"""
@@ -1242,12 +1303,15 @@ class Dairy(Food):
         else:
             open_var = "N"
 
-        super().define()
-        print("Dairy Specific Item Summary:")
-        print(f"Dairy Type: {self._dairy_type}")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Open? {open_var}| Open Date: {self._open_date}")
-        print(f"Additional Notes:{self._notes}")
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "\nDairy Specific Item Summary:"
+        result += f"Dairy Type: {self._dairy_type}"
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nOpen? {open_var}| Open Date: {self._open_date}"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def is_expired(self):
         """Prints Unique Dairy Spoilage Messages"""
@@ -1308,12 +1372,15 @@ class Other_Frozen(Food):
         else:
             open_var = "N"
 
-        super().define()
-        print("Frozen Specific Item Summary:")
-        print(f"Frozen Type: {self._frozen_type}| Home Freeze?: {home_var}")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Open?: {open_var}| Open Date: {self._open_date}")
-        print(f"Additional Notes:{self._notes}")
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "\nFrozen Specific Item Summary:"
+        result += f"\nFrozen Type: {self._frozen_type}| Home Freeze?: {home_var}"
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def is_expired(self):
         """Prints Unique Frozen Spoilage Messages"""
@@ -1375,11 +1442,15 @@ class Baked_Goods(Food):
             home_var = "Y"
         else:
             home_var = "N"
-        super().define()
-        print("Bakery Specific Item Summary:")
-        print(f"Baked Type: {self._baked_type}| Homemade? {home_var}| Ready to Eat?: {ready_var} ")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Additional Notes:{self._notes}")
+
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "\nBakery Specific Item Summary:"
+        result += f"\nBaked Type: {self._baked_type}| Homemade? {home_var}| Ready to Eat?: {ready_var} "
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def is_expired(self):
         """Prints Unique Baked Spoilage Messages"""
@@ -1429,12 +1500,15 @@ class Condiment_Spice(Food):
             open_var = "Y"
         else:
             open_var = "N"
-        super().define()
-        print("Condiment/Spice Specific Item Summary:")
-        print(f"Condiment/Spice?: {self._condiment_type}")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Open?: {open_var}| Open Date: {self._open_date}")
-        print(f"Additional Notes:{self._notes}")
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "\nCondiment/Spice Specific Item Summary:"
+        result += f"\nCondiment/Spice?: {self._condiment_type}"
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def is_expired(self):
         """Prints Unique Condiment Spoilage Messages"""
@@ -1494,13 +1568,16 @@ class Snacks_Shelf_Stable(Food):
         else:
             open_var = "N"
 
-        super().define()
-        print("Shelf Stable Specific Item Summary:")
-        print(f"Food/Snack Type: {self._snack_type}| Flavor: {self._flavor}")
-        print(f"Location: {self._storage_location}| Purchase Date: {self._purchase_date}")
-        print(f"Open?: {open_var}| Open Date: {self._open_date}")
-        print(f"Requested By: {self._requested}")
-        print(f"Additional Notes:{self._notes}")
+        result = super().define()
+        result += "--*--=" * 6 + "\n"
+        result += "Shelf Stable Specific Item Summary:"
+        result += f"\nFood/Snack Type: {self._snack_type}| Flavor: {self._flavor}"
+        result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
+        result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
+        result += f"\nRequested By: {self._requested}"
+        result += f"\nAdditional Notes:{self._notes}"
+        print(result)
+        return result
 
     def is_expired(self):
         """Prints Unique Snack Spoilage Messages"""
@@ -1519,14 +1596,14 @@ def help_me():
 
 
 global_common_typos = {"example": "exampel", "tomato": "tomtao"}
-#TODO: Look Up common typos for top 200 common food words in America (min 3 typos per word).
-#TODO: Learn about json to implement this
+# TODO: Look Up common typos for top 200 common food words in America (min 3 typos per word).
+# TODO: Learn about json to implement this
 
 # ---------------------------------
 # ----------Main Program-----------
 # ---------------------------------
 
-#--------Pantry-----------
+# --------Pantry-----------
 test_pantry = Pantry("Test")
 
 # --------- Food ---------
@@ -1578,11 +1655,12 @@ cond.define()
 test_pantry._pantry_list.append(cond)
 
 # --------- Snacks_Shelf_Stable ---------
-snack = Snacks_Shelf_Stable("granola bar", 5, False, 25, "cereal", "pantry", "2-3", "2-9", False, "peanut butter", "Sam", "school snack pack")
+snack = Snacks_Shelf_Stable("granola bar", 5, False, 25, "cereal", "pantry", "2-3", "2-9", False, "peanut butter",
+                            "Sam", "school snack pack")
 print(snack._name, snack._snack_type, snack._is_open, snack._flavor, snack._requested, snack._notes)
 snack.define()
 test_pantry._pantry_list.append(snack)
 
-#---------Save_To_File---------
+# ---------Save_To_File---------
 test_pantry.save_to_file("test_pantry_1")
-
+test_pantry.printout_pantry()
