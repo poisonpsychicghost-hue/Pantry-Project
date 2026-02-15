@@ -979,26 +979,31 @@ class Pantry:
                 if item_lookup_val.lower() == item._name.lower():
                     selected = item
                     break
-            if selected:
-                attr_map = {attr.lstrip('_'): attr for attr in vars(selected)}
-                print(f"Modifiable Attributes: {', '.join(attr_map.keys())}")
-                attr_to_mod = input("Which attribute do you want to update? ").lower().strip()
-                if attr_to_mod in attr_map:
-                    new_value = input(f"Enter new value for {attr_to_mod}: ")
-                    old_val = getattr(selected, attr_map[attr_to_mod])
-                    if isinstance(old_val, int):
-                        new_value = int(new_value)
-                    elif isinstance(old_val, bool):
-                        new_value = new_value.lower() in ["true", "yes", "y", "1"]
-                        setattr(selected, attr_map[attr_to_mod], new_value)
-                        print(f"{attr_to_mod} updated succesfully")
-                        self.save_to_file(f"{self._name}.txt")
-                    else:
-                        print("Invalid Attribute. No changees made.")
+            if not selected:
+                print("Item not found. Try again or 'exit'.")
+                continue
+
+            attr_map = {attr.lstrip('_'): attr for attr in vars(selected)}
+            print(f"Modifiable Attributes: {', '.join(attr_map.keys())}")
+            attr_to_mod = input("Which attribute do you want to update? ").lower().strip()
+            if attr_to_mod in attr_map:
+                new_value = input(f"Enter new value for {attr_to_mod}: ")
+                old_val = getattr(selected, attr_map[attr_to_mod])
+                if isinstance(old_val, int):
+                    new_value = int(new_value)
+                elif isinstance(old_val, bool):
+                    new_value = new_value.lower() in ["true", "yes", "y", "1"]
+                setattr(selected, attr_map[attr_to_mod], new_value)
+                print(f"{attr_to_mod} updated succesfully")
+                self.save_to_file(f"{self._name}.txt")
+                another = input("Modify another attribute of this item (Y/N): ").lower()
+                if another != "y":
                     break
+        else:
+            print("Invalid Attribute. No changees made.")
+
 
     def sort_items(self, method="alphabet"):
-        # needs input verification, clean user interface options, data validations
         """Sorts Items in chosen inventory list
             by chosen method (Expiry, Quantity>, Quantity<, Category, Alphabet<)"""
         if method == "alphabet":
@@ -1010,6 +1015,7 @@ class Pantry:
         else:
             print(f"Unknown sort method: {method}. Returning unsorted list.")
             return self._pantry_list
+
 
     def find_item(self, name):
         """Looks for an Item by Name and
@@ -1023,6 +1029,7 @@ class Pantry:
             if item._name.lower() == name.lower():
                 print(f"Item {item._name} found in Pantry {self._name}'s Shopping List!")
                 return item
+
 
     def save_and_exit(self):
         # needs input verification, clean user interface options, data validations
@@ -1666,64 +1673,16 @@ global_common_typos = {"example": "exampel", "tomato": "tomtao"}
 # ----------Main Program-----------
 # ---------------------------------
 
-# --------Pantry-----------
-test_pantry = Pantry("Test")
-
-# --------- Food ---------
-fd = Food("rice", 10, False, 130)
-print(fd._name, fd._quantity, fd._perishable, fd._days_left)
-fd.define()
-test_pantry._pantry_list.append(fd)
-
-# --------- Fresh_Produce ---------
-fp = Fresh_Produce("asparagus", 2, True, 5, "drawer", "2026-03-02", "Farmers market bundle")
-print(fp._name, fp._storage_location, fp._purchase_date, fp._notes)
-fp.define()
-test_pantry._pantry_list.append(fp)
-
-# --------- Fruit_Produce ---------
-fruit = Fruit_Produce("strawberry", 6, True, 3, "back fridge", "today", "overripe", True, False, "already soft")
-print(fruit._name, fruit._ripeness, fruit._washed, fruit._is_cut, fruit._notes)
-fruit.define()
-test_pantry._pantry_list.append(fruit)
-
-# --------- Raw_Meat ---------
-meat = Raw_Meat("duck breast", 4, True, 2, "duck", "fridge", "2-10", False, False, "will freeze tonight")
-print(meat._name, meat._meat_type, meat._storage_location, meat._frozen, meat._use_today, meat._notes)
-meat.define()
-test_pantry._pantry_list.append(meat)
-
-# --------- Dairy ---------
-dairy = Dairy("quark", 1, True, 8, "fresh cheese", "fridge", "2-9", "2-10", True, "German specialty")
-print(dairy._name, dairy._dairy_type, dairy._is_open, dairy._open_date, dairy._notes)
-dairy.define()
-test_pantry._pantry_list.append(dairy)
-
-# --------- Other_Frozen ---------
-ofz = Other_Frozen("edamame", 3, False, 90, "veg", "deep freezer", "2-1", "2-5", True, True, "bulk bag from Costco")
-print(ofz._name, ofz._frozen_type, ofz._storage_location, ofz._frozen_at_home, ofz._is_open, ofz._notes)
-ofz.define()
-test_pantry._pantry_list.append(ofz)
-
-# --------- Baked_Goods ---------
-baked = Baked_Goods("cookie", 15, True, 4, "pastry", "counter", "2-9", True, False, "soft batch")
-print(baked._name, baked._baked_type, baked._ready_to_eat, baked._homemade, baked._notes)
-baked.define()
-test_pantry._pantry_list.append(baked)
-
+test_pantry2 = Pantry("test2")
 # --------- Condiment_Spice ---------
 cond = Condiment_Spice("mustard", 2, False, 40, "fridge door", "2-7", "2-10", True, "sauce", "dijon, kid opened")
 print(cond._name, cond._condiment_type, cond._is_open, cond._days_left, cond._notes)
 cond.define()
-test_pantry._pantry_list.append(cond)
+test_pantry2.add_to_pantry(cond)
 
-# --------- Snacks_Shelf_Stable ---------
-snack = Snacks_Shelf_Stable("granola bar", 5, False, 25, "cereal", "pantry", "2-3", "2-9", False, "peanut butter",
-                            "Sam", "school snack pack")
-print(snack._name, snack._snack_type, snack._is_open, snack._flavor, snack._requested, snack._notes)
-snack.define()
-test_pantry._pantry_list.append(snack)
+# ------------ Modify --------------
+test_pantry2.modify_item()
 
-# ---------Save_To_File---------
-test_pantry.save_to_file("test_pantry_1")
-test_pantry.printout_pantry()
+test_pantry2.printout_pantry()
+print(cond.define())
+

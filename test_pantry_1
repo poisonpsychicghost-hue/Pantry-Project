@@ -5,5 +5,5 @@ Raw_Meat,Duck breast,4,True,2,fridge,2-10,will freeze tonight,,,,duck,,,,,,False
 Dairy,Quark,1,True,3,fridge,2-9,German specialty,,,,,fresh cheese,,,,,,,2-10,,,,,
 Other_Frozen,Edamame,3,False,90,deep freezer,2-1,bulk bag from Costco,,,,,,veg,,,,,,2-5,True,,,,
 Baked_Goods,Cookie,15,True,3,counter,2-9,soft batch,,,,,,,pastry,,,,,,,True,False,,
-Condiment_Spice,Mustard,2,False,30,fridge door,2-7,dijon, kid opened,,,,,,,,sauce,,,,2-10,,,,,
+Condiment_Spice,Mustard,2,False,30,fridge door,2-7,dijon, kid opened,,,,,,,,sauce,,,,2-10,,,,
 Snacks_Shelf_Stable,Granola bar,5,False,25,pantry,2-3,school snack pack,,,,,,,,,cereal,,,2-9,,,,peanut butter,Sam
