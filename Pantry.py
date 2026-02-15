@@ -999,7 +999,7 @@ class Pantry:
                 attr_to_mod = input("Which attribute do you want to update? ").lower().strip()
                 if attr_to_mod in attr_map:
                     new_value = input(f"Enter new value for {attr_to_mod}: ")
-                    old_val = getattr(selected, attr_map[attr_to_modify])
+                    old_val = getattr(selected, attr_map[attr_to_mod])
                     if isinstance(old_val, int):
                         new_value = int(new_value)
                     elif isinstance(old_val, bool):
@@ -1037,8 +1037,16 @@ class Pantry:
         # needs input verification, clean user interface options, data validations
         """Asks User if they want to save,
             then either save and exits, or just exits without saving"""
-
-        pass
+        print("Save and Exit Program")
+        import sys
+        exit_var = input("Do you want to save before you exit? (Y/N)").lower()
+        if exit_var not in ["y", "n"]:
+            print("Invalid Input. \nDo you want to save before you exit? (Y/N) ")
+        elif exit_var == "y":
+            self.save_to_file(f"{self._name}.txt")
+            sys.exit("Pantry Saved \nThank You for Using Pantry Manager!")
+        else:
+            sys.exit("Thank You for Using Pantry Manager!")
 
 
 class Food:
@@ -1098,7 +1106,8 @@ class Food:
         result = "\n" + "--*--=" * 6
 
         result += f"\nName: {self._name}| Quantity: {self._quantity}| Perishable?: {perish_var}| Days Remaining: {self._days_left} \n"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def to_dict(self):
@@ -1157,7 +1166,8 @@ class Fresh_Produce(Food):
         result += "\nProduce Specific Item Summary:"
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def is_expired(self):
@@ -1215,7 +1225,8 @@ class Fruit_Produce(Food):
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nRipeness: {self._ripeness}| Washed?: {wash_var}| Cut?: {cut_var}"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def ripeness_mover(self):
@@ -1295,7 +1306,8 @@ class Raw_Meat(Food):
         if self._use_today == True:
             result += f"\n{self._name} Needs to be used TODAY!"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def is_expired(self):
@@ -1365,7 +1377,8 @@ class Dairy(Food):
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nOpen? {open_var}| Open Date: {self._open_date}"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def is_expired(self):
@@ -1434,7 +1447,8 @@ class Other_Frozen(Food):
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def is_expired(self):
@@ -1504,7 +1518,8 @@ class Baked_Goods(Food):
         result += f"\nBaked Type: {self._baked_type}| Homemade? {home_var}| Ready to Eat?: {ready_var} "
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def is_expired(self):
@@ -1562,7 +1577,8 @@ class Condiment_Spice(Food):
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def is_expired(self):
@@ -1631,7 +1647,8 @@ class Snacks_Shelf_Stable(Food):
         result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
         result += f"\nRequested By: {self._requested}"
         result += f"\nAdditional Notes:{self._notes}"
-        print(result)
+        # add silent function
+        # print(result)
         return result
 
     def is_expired(self):
