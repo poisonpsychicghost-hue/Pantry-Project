@@ -993,18 +993,18 @@ class Pantry:
                 if item_lookup_val.lower() == item._name.lower():
                     selected = item
                     break
-            if selected == True:
-                attr_map = {attr.lstrip('_'): attr for attr in vars(item)}
+            if selected:
+                attr_map = {attr.lstrip('_'): attr for attr in vars(selected)}
                 print(f"Modifiable Attributes: {', '.join(attr_map.keys())}")
                 attr_to_mod = input("Which attribute do you want to update? ").lower().strip()
                 if attr_to_mod in attr_map:
                     new_value = input(f"Enter new value for {attr_to_mod}: ")
-                    old_val = getattr(item, attr_map[attr_to_modify])
+                    old_val = getattr(selected, attr_map[attr_to_modify])
                     if isinstance(old_val, int):
                         new_value = int(new_value)
                     elif isinstance(old_val, bool):
                         new_value = new_value.lower() in ["true", "yes", "y", "1"]
-                        setattr(item, attr_map[attr_to_mod], new_value)
+                        setattr(selected, attr_map[attr_to_mod], new_value)
                         print(f"{attr_to_mod} updated succesfully")
                         self.save_to_file(f"{self._name}.txt")
                     else:
