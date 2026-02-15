@@ -132,27 +132,13 @@ class Pantry:
                 print("Invalid Input... \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)")
             else:
                 print_filename = f"pantry_printout_{today}.txt"
+                sorted_items = self.sort_items(method)
+
                 with open(print_filename, "w") as file:
                     file.write(header + f"\n{border}" + "\n")
-
-                    if method == "alphabet":
-                        self._pantry_list.sort(key=lambda item: item._name)
-                        for item in self._pantry_list:
-                            print_out = item.define()
-                            file.write(print_out + "\n")
-
-
-                    elif method == "category":
-                        self._pantry_list.sort(key=lambda item: item._category)
-                        for item in self._pantry_list:
-                            print_out = item.define()
-                            file.write(print_out + "\n")
-
-                    elif method == "quantity":
-                        self._pantry_list.sort(key=lambda item: item._quantity, reverse=True)
-                        for item in self._pantry_list:
-                            print_out = item.define()
-                            file.write(print_out + "\n")
+                    for item in sorted_items:
+                        print_out = item.define()
+                        file.write(print_out + "\n")
                 break
 
     def printout_shopping_list(self, method):
@@ -1011,14 +997,19 @@ class Pantry:
                         print("Invalid Attribute. No changees made.")
                     break
 
-    def sort_items(self):
+    def sort_items(self, method="alphabet"):
         # needs input verification, clean user interface options, data validations
         """Sorts Items in chosen inventory list
             by chosen method (Expiry, Quantity>, Quantity<, Category, Alphabet<)"""
-
-        # reuse sorting logic
-
-        pass
+        if method == "alphabet":
+            return sorted(self._pantry_list, key=lambda item: item._name)
+        elif method == "category":
+            return sorted(self._pantry_list, key=lambda item: item._category)
+        elif method == "quantity":
+            return sorted(self._pantry_list, key=lambda item: item._quantity, reverse=True)
+        else:
+            print(f"Unknown sort method: {method}. Returning unsorted list.")
+            return self._pantry_list
 
     def find_item(self, name):
         """Looks for an Item by Name and
