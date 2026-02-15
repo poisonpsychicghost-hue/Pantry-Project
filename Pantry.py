@@ -17,8 +17,6 @@ class Pantry:
         self._shopping_list = []  # starts with empty shopping list
         self._name = name
 
-
-
     def load_from_file(self, filename):
         """Loads saved Inventory Data from a saved .
             txt and imports it into Program for user applications"""
@@ -924,6 +922,7 @@ class Pantry:
                 final_confirmation_input = input("Is this correct (Y/N)").lower()
                 if final_confirmation_input == "y":
                     self._pantry_list.append(item_obj)
+                    self.save_to_file(f"{self._name}.txt")
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
@@ -936,7 +935,6 @@ class Pantry:
 
     def add_to_pantry(self, item):
         """Adds an Existing Food Object to Pantry List"""
-        # make sure save runs at end of method
         if item not in self._pantry_list:
             self._pantry_list.append(item)
             self.save_to_file(f"{self._name}.txt")
@@ -944,31 +942,23 @@ class Pantry:
         else:
             print(f"Item: {item._name} already in {self._name}'s pantry!")
 
-
     def remove_item(self, item):
-        # Include duplicates to have a secondary verification before final removal
-        # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
-        # make sure save runs at end of method
         """ program takes user inputs
             and removes Food items from Pantry List"""
         if item in self._pantry_list:
 
             self._pantry_list.remove(item)
-            print(f"Removing {item._name} to {self._name}'s pantry")
+            print(f"Removing {item._name} from {self._name}'s pantry")
             item._quantity = 0
             self._shopping_list.append(item)
             self.save_to_file(f"{self._name}.txt")
-            print(f"Added {item_name} to {self._name}'s Shopping List")
-
+            print(f"Added {item._name} to {self._name}'s Shopping List")
         else:
             print("Item not found!")
 
     def use_item(self, item, quantity):
-        # Include duplicates to have a secondary verification before final usage modification
-        # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
-        # make sure save runs at end of method
         """User chooses a Food item to subtract a quantity from
             If user uses all items in inventory, displays a prompt
             informing user and removing it from the Pantry List"""
@@ -979,7 +969,8 @@ class Pantry:
             if item._quantity < 0:
                 item._quantity = 0
                 self.remove_item(item)
-                print(f"Used {orig_quantity} of {item._name}. {item._name.capitalize()} now out of stock and moved to shopping list")
+                print(
+                    f"Used {orig_quantity} of {item._name}. {item._name.capitalize()} now out of stock and moved to shopping list")
             else:
                 print(f"Used {quantity} of {item._name}. {item._quantity} {item._name} left in pantry")
             self.save_to_file(f"{self._name}.txt")
@@ -987,36 +978,60 @@ class Pantry:
             print("Item not found")
 
     def modify_item(self):
-        # Include duplicates to have a secondary verification before final modification
-        # needs input verification, clean user interface options, data validations
         # track common typos in common food words and add mistake-correction
-        # make sure save runs at end of method
         """User chooses a created Food Item to modify
             the Attributes of in the case of Errors or new Information"""
-        pass
+        print(f"Items in {self._name}'s inventory to be modified")
+        for item in self._pantry_list:
+            print(item._name)
+        while True:
+            item_lookup_val = input("Which item do you want to modify? ('exit' to escape)")
+            if item_lookup_val.lower() == "exit":
+                break
+            selected = None
+            for item in self._pantry_list:
+                if item_lookup_val.lower() == item._name.lower():
+                    selected = item
+                    break
+            if selected == True:
+                attr_map = {attr.lstrip('_'): attr for attr in vars(item)}
+                print(f"Modifiable Attributes: {', '.join(attr_map.keys())}")
+                attr_to_mod = input("Which attribute do you want to update? ").lower().strip()
+                if attr_to_mod in attr_map:
+                    new_value = input(f"Enter new value for {attr_to_mod}: ")
+                    old_val = getattr(item, attr_map[attr_to_modify])
+                    if isinstance(old_val, int):
+                        new_value = int(new_value)
+                    elif isinstance(old_val, bool):
+                        new_value = new_value.lower() in ["true", "yes", "y", "1"]
+                        setattr(item, attr_map[attr_to_mod], new_value)
+                        print(f"{attr_to_mod} updated succesfully")
+                        self.save_to_file(f"{self._name}.txt")
+                    else:
+                        print("Invalid Attribute. No changees made.")
+                    break
 
-    def combine_items(self):
-        # needs input verification, clean user interface options, data validations
-        # track common typos in common food words and add mistake-correction
-        # check Subclasses to verify what can be combined
-        # make sure save runs at end of method
-        """Takes all non-perishable items with the same name and adds them all together
-            creating a new item of the same name with the total sum as its new quantity
-            deletes the previous iterations of the Food Item."""
-        # This will be the one item/list modification method that doesn't make a zero-quantity version in the shopping list.
-        pass
-
-    def sort_items(self, inventory, method):
+    def sort_items(self):
         # needs input verification, clean user interface options, data validations
         """Sorts Items in chosen inventory list
             by chosen method (Expiry, Quantity>, Quantity<, Category, Alphabet<)"""
+
+        # reuse sorting logic
+
         pass
 
     def find_item(self, name):
-        # needs input verification, clean user interface options, data validations
         """Looks for an Item by Name and
             quickly displays information about it including Qty, Expiry, etc."""
-        pass
+        for item in self._pantry_list:
+            if item._name.lower() == name.lower():
+                print(f"Item {item._name} found in Pantry {self._name}'s Inventory!")
+                item.define()
+                return item
+        for item in self._shopping_list:
+            if item._name.lower() == name.lower():
+                print(f"Item {item._name} found in Pantry {self._name}'s Shopping List!")
+                return item
 
     def save_and_exit(self):
         # needs input verification, clean user interface options, data validations
@@ -1058,7 +1073,6 @@ class Food:
             self._days_left -= days_passed
             if self._days_left < 0:
                 self._days_left = 0
-
 
     def is_expired(self):
         """Checks if Perishable is True
