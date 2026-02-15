@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="refactored food.define() for Pantry's printout_pantry() method">
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added more method logic, removing passes.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pantry_printout_2026-02-14.txt" beforeDir="false" afterPath="$PROJECT_DIR$/pantry_printout_2026-02-14.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +50,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.Pantry.executor": "Debug",
+    "Python.Pantry.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -122,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771091758908</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added more method logic, removing passes.">
+      <option name="closed" value="true" />
+      <created>1771109663459</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1771109663459</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,6 +149,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated Code to have save/load" />
     <MESSAGE value="refactored food.define() for Pantry's printout_pantry() method" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored food.define() for Pantry's printout_pantry() method" />
+    <MESSAGE value="added more method logic, removing passes." />
+    <option name="LAST_COMMIT_MESSAGE" value="added more method logic, removing passes." />
   </component>
 </project>
