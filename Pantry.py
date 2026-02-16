@@ -204,11 +204,13 @@ class Pantry:
                 final_confirmation_input = input("Is this correct (Y/N)").lower()
                 if final_confirmation_input == "y":
                     self._pantry_list.append(item_obj)
-                    break
+                    break  # theres a break here
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["produce"]:
                 name = input("What is this food's name?: ")
@@ -268,8 +270,10 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["fruit"]:
                 name = input("What is this food's name?: ")
@@ -360,8 +364,10 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["meat"]:
                 name = input("What is this food's name?: ")
@@ -451,8 +457,10 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["dairy"]:
                 name = input("What is this food's name?: ")
@@ -535,8 +543,10 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["frozen"]:
                 name = input("What is this food's name?: ")
@@ -629,8 +639,10 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["bakery"]:
                 name = input("What is this food's name?: ")
@@ -722,8 +734,10 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["condiment", "spice"]:
                 name = input("What is this food's name?: ")
@@ -807,8 +821,10 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             elif category in ["snacks", "shelf stable"]:
                 name = input("What is this food's name?: ")
@@ -912,12 +928,15 @@ class Pantry:
                     break
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
+                    break
                 else:
                     print("Invalid Input, Please Try Again")
+                    continue
 
             else:
                 print(
                     "Improper Selection... Please Try Again: \n(basic, produce, fruit, meat, dairy, frozen, bakery, condiment, spice, snack, shelf stable) \n('EXIT' to quit)")
+                continue
 
     def add_to_pantry(self, item):
         """Adds an Existing Food Object to Pantry List"""
@@ -1082,7 +1101,10 @@ class Food:
         """Checks if Perishable is True
             and if days left are zero
             Adds a 'Check Me!' expired label with days since listed"""
-        pass
+        if self._perishable == True and self._days_left == 0:
+            self._notes += "\nCheck Me Before Use!"
+            return True
+        return False
 
     def update_quantity(self, amount):
         # needs input verification, clean user interface options, data validations
@@ -1168,7 +1190,10 @@ class Fresh_Produce(Food):
 
     def is_expired(self):
         """Prints Unique Produce Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook.")
+        return expired
 
 
 class Fruit_Produce(Food):
@@ -1240,7 +1265,13 @@ class Fruit_Produce(Food):
 
     def is_expired(self):
         """Prints Unique Fruit Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            if not self._is_cut:
+                self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat.")
+            else:
+                self._notes = ("Throw Away! Unsafe to Eat!")
+        return expired
 
 
 class Raw_Meat(Food):
@@ -1308,7 +1339,13 @@ class Raw_Meat(Food):
 
     def is_expired(self):
         """Prints Unique Meat Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            if not self._frozen:
+                self._notes += ("\nCheck For Rot and/or Discoloration \nIf None: Is Okay to Cook.")
+            else:
+                self._notes += ("\nCheck for Freezer-Burn!")
+        return expired
 
     def make_use_today(self):
         """Changes _use_today State to True
@@ -1379,7 +1416,13 @@ class Dairy(Food):
 
     def is_expired(self):
         """Prints Unique Dairy Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            if not self._is_open:
+                self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook.")
+            else:
+                self._notes = ("Spoiled! Throw Away! \nUnsafe To Eat!")
+        return expired
 
     def open_dairy(self):
         # use same logic from dairy's __init__ here
@@ -1449,7 +1492,10 @@ class Other_Frozen(Food):
 
     def is_expired(self):
         """Prints Unique Frozen Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            self._notes += ("\nCheck For Freezer-Burn \nIf None: Is Okay to Eat/Cook.")
+        return expired
 
 
 class Baked_Goods(Food):
@@ -1520,7 +1566,10 @@ class Baked_Goods(Food):
 
     def is_expired(self):
         """Prints Unique Baked Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook.")
+        return expired
 
 
 class Condiment_Spice(Food):
@@ -1579,7 +1628,13 @@ class Condiment_Spice(Food):
 
     def is_expired(self):
         """Prints Unique Condiment Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            if not self.is_open:
+                self._notes += ("First Check Smell \nCheck For Mold/Damp/Dry \nIf None: Is Okay to Use/Cook.")
+            else:
+                self._notes += ("Check Freshness Upon Opening! \nIf Okay, Please Reset Days Till Expired")
+        return expired
 
     def open_spice(self):
         """Changes State of _is_open from False to True
@@ -1649,7 +1704,13 @@ class Snacks_Shelf_Stable(Food):
 
     def is_expired(self):
         """Prints Unique Snack Spoilage Messages"""
-        pass
+        expired = super().is_expired()
+        if expired:
+            if not self._is_open:
+                self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook (May Be Stale!).")
+            else:
+                self._notes += ("Check Freshness Upon Opening!")
+        return expired
 
     def open_snack(self):
         """Changes is_opened state from False to True
