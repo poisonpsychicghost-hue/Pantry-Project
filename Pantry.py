@@ -204,7 +204,7 @@ class Pantry:
                 final_confirmation_input = input("Is this correct (Y/N)").lower()
                 if final_confirmation_input == "y":
                     self._pantry_list.append(item_obj)
-                    break  # theres a break here
+                    break #theres a break here
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
                     break
@@ -1110,7 +1110,16 @@ class Food:
         # needs input verification, clean user interface options, data validations
         """Updates an Item's Quantity
             preventing negative amounts stored and checking for absurdities"""
-        pass
+        try:
+            amount_int = int(amount)
+            if amount_int < 0:
+                amount_int = 0
+            self._quantity = amount_int
+            return True
+        except ValueError:
+            print("Invalid Input. Amount Must be a Number!")
+            return False
+
 
     def define(self):
         """Prints out all saved information on Food Item
@@ -1195,7 +1204,6 @@ class Fresh_Produce(Food):
             self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook.")
         return expired
 
-
 class Fruit_Produce(Food):
     """Subclass of Food:
         Fresh Produce: Ready To Eat
@@ -1251,17 +1259,33 @@ class Fruit_Produce(Food):
         return result
 
     def ripeness_mover(self):
-        """Takes Time Check and Changes _ripeness
+        """Changes _ripeness
             and _days_left on a Fruit Item"""
-        pass
+        new_ripeness = input("What is the new Ripeness of Fruit? (Unripe/Ripe/Overripe)").lower()
+        if new_ripeness not in ["unripe", "ripe", "overripe"]:
+            print("Invalid Input! Ripeness Not Changed")
+            return False
+        elif new_ripeness == "unripe":
+            self._days_left = 7
+            self._ripeness = new_ripeness
+        elif new_ripeness == "ripe":
+            self._days_left = 3
+            self._ripeness = new_ripeness
+        else:
+            self._days_left = 1
+            self._ripeness = new_ripeness
+        print(f"Ripeness updated to {self._ripeness}. Days left updated to {self._days_left}.")
+        return True
 
     def cut_fruit(self):
         """Changes _is_cut State from False to True"""
-        pass
+        self._is_cut = True
+        return True
 
     def wash_fruit(self):
         """Changes _washed State from False to True"""
-        pass
+        self._washed = True
+        return True
 
     def is_expired(self):
         """Prints Unique Fruit Spoilage Messages"""
@@ -1497,7 +1521,6 @@ class Other_Frozen(Food):
             self._notes += ("\nCheck For Freezer-Burn \nIf None: Is Okay to Eat/Cook.")
         return expired
 
-
 class Baked_Goods(Food):
     """Subclass of Food:
         Breads, Pastas, Pastries
@@ -1571,7 +1594,6 @@ class Baked_Goods(Food):
             self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook.")
         return expired
 
-
 class Condiment_Spice(Food):
     """Subclass of Food:
         Condiments, Spices, Herbs, Sauces
@@ -1635,7 +1657,6 @@ class Condiment_Spice(Food):
             else:
                 self._notes += ("Check Freshness Upon Opening! \nIf Okay, Please Reset Days Till Expired")
         return expired
-
     def open_spice(self):
         """Changes State of _is_open from False to True
             and adjusts _days_left by _condiment_type rules."""
