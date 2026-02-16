@@ -204,7 +204,7 @@ class Pantry:
                 final_confirmation_input = input("Is this correct (Y/N)").lower()
                 if final_confirmation_input == "y":
                     self._pantry_list.append(item_obj)
-                    break #theres a break here
+                    break  # theres a break here
                 elif final_confirmation_input == "n":
                     print("Many Apologies, Please Try Again")
                     break
@@ -1102,8 +1102,9 @@ class Food:
             and if days left are zero
             Adds a 'Check Me!' expired label with days since listed"""
         if self._perishable == True and self._days_left == 0:
-            self._notes += "\nCheck Me Before Use!"
-            return True
+            if "Check Me Before Use!" not in self._notes:
+                self._notes += "\nCheck Me Before Use!"
+            return true
         return False
 
     def update_quantity(self, amount):
@@ -1119,7 +1120,6 @@ class Food:
         except ValueError:
             print("Invalid Input. Amount Must be a Number!")
             return False
-
 
     def define(self):
         """Prints out all saved information on Food Item
@@ -1204,6 +1204,7 @@ class Fresh_Produce(Food):
             self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook.")
         return expired
 
+
 class Fruit_Produce(Food):
     """Subclass of Food:
         Fresh Produce: Ready To Eat
@@ -1280,11 +1281,13 @@ class Fruit_Produce(Food):
     def cut_fruit(self):
         """Changes _is_cut State from False to True"""
         self._is_cut = True
+        print(f"Fruit {self._name} has been cut.")
         return True
 
     def wash_fruit(self):
         """Changes _washed State from False to True"""
         self._washed = True
+        print(f"Fruit {self._name} has been washed.")
         return True
 
     def is_expired(self):
@@ -1374,12 +1377,18 @@ class Raw_Meat(Food):
     def make_use_today(self):
         """Changes _use_today State to True
             and _days_left to 1"""
-        pass
+        self._use_today = True
+        self._days_left = 0
+        print(f"Meat Item {self._name} has been made Use Today! Days Remaining changed to 1.")
+        return True
 
     def freeze_meat(self):
         """Changes _frozen State to True
             and _days_left to 60"""
-        pass
+        self._frozen = True
+        self._days_left = 60
+        print(f"Meat Item: {self._name} has been frozen. Days Remaining changed to 60.")
+        return True
 
 
 class Dairy(Food):
@@ -1452,8 +1461,17 @@ class Dairy(Food):
         # use same logic from dairy's __init__ here
         """Changes _is_open state to True and
             _days_left to 3 unless _dairy_type is not 'Cheese' """
+        self._is_open = True
+        if self._dairy_type.lower() != "cheese":
+            self._days_left = 3
+            print(f"Dairy Item {self._name} has been opened. Days Remaining adjusted to 3")
+        else:
+            self._days_left = self._days_left
+            print(f"Dairy Item {self._name} has been opened. Days Remaining have not been adjusted. Item is a Cheese.")
 
-    pass
+        return True
+
+        pass
 
 
 class Other_Frozen(Food):
@@ -1520,6 +1538,7 @@ class Other_Frozen(Food):
         if expired:
             self._notes += ("\nCheck For Freezer-Burn \nIf None: Is Okay to Eat/Cook.")
         return expired
+
 
 class Baked_Goods(Food):
     """Subclass of Food:
@@ -1594,6 +1613,7 @@ class Baked_Goods(Food):
             self._notes += ("\nCheck For Rot/Mold \nIf None: Is Okay to Eat/Cook.")
         return expired
 
+
 class Condiment_Spice(Food):
     """Subclass of Food:
         Condiments, Spices, Herbs, Sauces
@@ -1652,15 +1672,26 @@ class Condiment_Spice(Food):
         """Prints Unique Condiment Spoilage Messages"""
         expired = super().is_expired()
         if expired:
-            if not self.is_open:
+            if not self._is_open:
                 self._notes += ("First Check Smell \nCheck For Mold/Damp/Dry \nIf None: Is Okay to Use/Cook.")
             else:
                 self._notes += ("Check Freshness Upon Opening! \nIf Okay, Please Reset Days Till Expired")
         return expired
+
     def open_spice(self):
         """Changes State of _is_open from False to True
             and adjusts _days_left by _condiment_type rules."""
-        pass
+        self._is_open = True
+        if self._condiment_type.lower() == "sauce":
+            self._days_left = 30
+            print(f"Sauce {self._name} opened. Days Remaining changed to 30.")
+        elif self._condiment_type.lower() in ["spice", "dried spice", "herb", "dried herb"]:
+            self._days_left = 180
+            print(f"Herb/Spice {self._name} opened. Days Remaining changed to 180.")
+        else:
+            self._days_left = 60
+            print(f"Unknown Condiment Type {self._name} opened. Days Remaining changed to 60")
+        return True
 
 
 class Snacks_Shelf_Stable(Food):
@@ -1735,9 +1766,11 @@ class Snacks_Shelf_Stable(Food):
 
     def open_snack(self):
         """Changes is_opened state from False to True
-            in addition to updating _days_left by _snack_type standards"""
-        # Use same logic as __init__ here
-        pass
+            in addition to updating _days_left"""
+        self._is_open = True
+        self._days_left = 30
+        print(f"Snack/Shelf Stable {self._name} has been opened. Days Remaining set to 30")
+        return True
 
 
 def help_me():
