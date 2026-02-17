@@ -199,7 +199,6 @@ class Pantry:
         print(f"Shopping List saved to {shopping_filename}")
 
     def printout_pantry(self):
-        # would it be better to load from save before split logic|confirm internal data?
         """User Chooses a Method which allows multiple types of printout of Pantry to be delivered
         Options include By Quantity, Alphabetically, and By Category(Eventually)"""
         print(f"Printout {self._name}'s Inventory?")
@@ -1301,6 +1300,7 @@ class Fresh_Produce(Food):
             return True
         return False
 
+
 class Fruit_Produce(Food):
     """Subclass of Food:
         Fresh Produce: Ready To Eat
@@ -1396,6 +1396,7 @@ class Fruit_Produce(Food):
                 self._notes = ("Throw Away! Unsafe to Eat!")
                 return True
         return False
+
 
 class Raw_Meat(Food):
     """Subclass of Food:
@@ -1866,6 +1867,61 @@ class Snacks_Shelf_Stable(Food):
 
 def help_me():
     """Prints out all calls and needed variables within program"""
+    directory = ["dummy1", "dummy2"]  # fill this in, matching first str per tuple in list below
+    help_texts = {
+
+        # fill this in with tuples e.g.("dummy": "dummy: is a filler text to be replaced a la 'lorem ipsum' ")
+    }
+
+    print("Welcome to Pantry Manager Help Menu!")
+    print("#-+-" * 6 + "\n")
+    print(f"{'-----' * 2}  Directory  {'-----' * 2}")
+    print(f"\n{directory}")
+    while True:
+        help_lookup_var = input(
+            "What do you need help with? \n('Directory' to reprint directory) \n('Exit' to escape)").lower()
+        if help_lookup_var == "exit":
+            break
+        elif help_lookup_var not in directory:
+            print("Invalid Input. Please Try Again.")
+            continue
+        elif help_lookup_var == "directory":
+            for idx, item in enumerate(directory, start=1):
+                print(f"{idx}: {item}")
+            continue
+        else:
+            # break here to keep from looping enternally
+            # fill in with help split logic input/prints
+            print(help_texts.get(help_lookup_var, "No detailed Help found for this command."))
+            while True:
+                repeat_request_var = input("Continue Help Lookup? (Y/N)").lower()
+                if repeat_request_var not in ["y", "n"]:
+                    print("Invalid Input")
+                    continue
+                else:
+                    break
+            if repeat_request_var == "y":
+                for idx, item in enumerate(directory, start=1):
+                    print(f"{idx}: {item}")
+                continue
+            else:
+                print("Thank You for Using Pantry Manager Help Menu! \nGood Bye!")
+                break
+
+
+def sys_daily_startup():
+    """This is an Empty Docstring to be Filled out
+        Later"""
+    # add in needed argument
+    # Run Pantry Load -> Date Update -> days_left Update ->
+    # Print Initial Printouts for both lists (pantry/shopping) ->
+    # Check expired, use_today, and perishable + days_left <= 3 ->
+    # Print Daily Warnings Message ->
+    # Ask for any Modification Requests ->
+    # Implement Modifications Requested with loops back for repeated Modifys ->
+    # Update Printout sheets if Modified ->
+    # Ask for save_and_exit
+
     pass
 
 
@@ -1880,6 +1936,3 @@ global_common_typos = {"example": "exampel", "tomato": "tomtao"}
 # TODO: Build test program to save -> orig_name |
 # Build test program to load / edit / save -> new_name |
 # Build test program to load / check / exit w/out save -> orig/new |
-
-
-# I think that does it?
