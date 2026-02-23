@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="fixed ndention errors and loops in modify_item">
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added structure to helper function, added sys_daily_startup dummied with TODOs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +37,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Pantry.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -182,7 +186,55 @@
       <option name="project" value="LOCAL" />
       <updated>1771194988289</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixed errors in management methods. should be ready for full test.">
+      <option name="closed" value="true" />
+      <created>1771205401177</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1771205401177</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added in logic for is_expired, caught some bugs in create_item that were causing unnecessary recursion">
+      <option name="closed" value="true" />
+      <created>1771256812002</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1771256812002</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added more logic to Food methods: is_expired, update_quantity, ripe_mover, cut_fruit, and wash_fruit">
+      <option name="closed" value="true" />
+      <created>1771259160362</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1771259160362</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Finished rest of Food subclass methods.">
+      <option name="closed" value="true" />
+      <created>1771260720328</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1771260720328</updated>
+    </task>
+    <task id="LOCAL-00014" summary="cleaned up, added shopping save/load and printout. &#10;added test TODO">
+      <option name="closed" value="true" />
+      <created>1771267532864</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1771267532864</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added structure to helper function, added sys_daily_startup dummied with TODOs">
+      <option name="closed" value="true" />
+      <created>1771295357852</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1771295357852</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,6 +258,12 @@
     <MESSAGE value="finished save_and_exit, commented out extra prints in define()'s logic." />
     <MESSAGE value="Updated sort_items and refactored sorting to utilize the method." />
     <MESSAGE value="fixed ndention errors and loops in modify_item" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed ndention errors and loops in modify_item" />
+    <MESSAGE value="fixed errors in management methods. should be ready for full test." />
+    <MESSAGE value="added in logic for is_expired, caught some bugs in create_item that were causing unnecessary recursion" />
+    <MESSAGE value="added more logic to Food methods: is_expired, update_quantity, ripe_mover, cut_fruit, and wash_fruit" />
+    <MESSAGE value="Finished rest of Food subclass methods." />
+    <MESSAGE value="cleaned up, added shopping save/load and printout. &#10;added test TODO" />
+    <MESSAGE value="added structure to helper function, added sys_daily_startup dummied with TODOs" />
+    <option name="LAST_COMMIT_MESSAGE" value="added structure to helper function, added sys_daily_startup dummied with TODOs" />
   </component>
 </project>

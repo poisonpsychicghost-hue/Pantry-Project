@@ -1869,8 +1869,24 @@ def help_me():
     """Prints out all calls and needed variables within program"""
     directory = ["dummy1", "dummy2"]  # fill this in, matching first str per tuple in list below
     help_texts = {
-
-        # fill this in with tuples e.g.("dummy": "dummy: is a filler text to be replaced a la 'lorem ipsum' ")
+        "help_me": "Shows this help menu.",
+        "sys_daily_startup": "Runs daily update and checks.",
+        "load_from_file": "Loads pantry and shopping lists from file.",
+        "save_to_file": "Saves pantry and shopping lists to file.",
+        "printout_pantry": "Prints sorted pantry inventory.",
+        "printout_shopping": "Prints shopping list.",
+        "create_item": "Creates a new food item.",
+        "add_to_pantry": "Adds an item to pantry.",
+        "remove_item": "Removes an item from pantry.",
+        "use_item": "Uses a quantity of an item.",
+        "modify_item": "Modifies attributes of an item.",
+        "sort_items": "Sorts pantry items.",
+        "find_item": "Finds an item by name.",
+        "save_and_exit": "Saves all work and exits the program.",
+        "time_day_passed": "Advances perishable timers.",
+        "is_expired": "Checks if item is expired.",
+        "update_quantity": "Updates item quantity.",
+        "define": "Prints or returns item info.",
     }
 
     print("Welcome to Pantry Manager Help Menu!")
@@ -1890,16 +1906,14 @@ def help_me():
                 print(f"{idx}: {item}")
             continue
         else:
-            # break here to keep from looping enternally
-            # fill in with help split logic input/prints
             print(help_texts.get(help_lookup_var, "No detailed Help found for this command."))
-            while True:
-                repeat_request_var = input("Continue Help Lookup? (Y/N)").lower()
-                if repeat_request_var not in ["y", "n"]:
-                    print("Invalid Input")
-                    continue
-                else:
-                    break
+        while True:
+            repeat_request_var = input("Continue Help Lookup? (Y/N)").lower()
+            if repeat_request_var not in ["y", "n"]:
+                print("Invalid Input")
+                continue
+            else:
+                break
             if repeat_request_var == "y":
                 for idx, item in enumerate(directory, start=1):
                     print(f"{idx}: {item}")
@@ -1913,19 +1927,26 @@ def sys_daily_startup():
     """This is an Empty Docstring to be Filled out
         Later"""
     # add in needed argument
+
     # Run Pantry Load -> Date Update -> days_left Update ->
+
     # Print Initial Printouts for both lists (pantry/shopping) ->
+
     # Check expired, use_today, and perishable + days_left <= 3 ->
+
     # Print Daily Warnings Message ->
+
     # Ask for any Modification Requests ->
+
     # Implement Modifications Requested with loops back for repeated Modifys ->
+
     # Update Printout sheets if Modified ->
+
     # Ask for save_and_exit
 
     pass
 
-
-global_common_typos = {"example": "exampel", "tomato": "tomtao"}
+# global_common_typos = {"example": "exampel", "tomato": "tomtao"}
 # TODO: Look Up common typos for top 200 common food words in America (min 3 typos per word).
 # Learn about json to implement this
 
