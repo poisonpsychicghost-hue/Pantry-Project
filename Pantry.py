@@ -1867,7 +1867,7 @@ class Snacks_Shelf_Stable(Food):
 
 def help_me():
     """Prints out all calls and needed variables within program"""
-    directory = ["dummy1", "dummy2"]  # fill this in, matching first str per tuple in list below
+    directory = ["help_me", "sys_daily_startup", "load_from_file", "save_to_file", "printout_pantry", "printout_shopping", "create_item", "add_to_pantry", "remove_item", "use_item", "modify_item", "sort_item", "find_item", "save_and_exit", "time_day_passed", "is_expired", "update_quantity", "define"]
     help_texts = {
         "help_me": "Shows this help menu.",
         "sys_daily_startup": "Runs daily update and checks.",
@@ -1927,9 +1927,30 @@ def sys_daily_startup():
     """This is an Empty Docstring to be Filled out
         Later"""
     # add in needed argument
+    start_input = None
+    start_input = input("\nPress Enter to Start Daily Startup")
+    if start_input:
+        initial_query = input("Welcome! \nDo You Have a Pantry to Load? (Y/N)").lower()
+        if initial_query not in ["y", "n"]:
+            print("Invalid Input")
+        elif initial_query == "y":
+            load_name = input("Which Pantry To Load?").lower()
+            try:
+                load_name = load_name.replace(" ", "_")
+                load_from_file(load_name)
+            except FileNotFoundError:
+                print("Invalid Input, File Not Found!")
+        else:
 
+            new_var = input("Would You Like to Start a New Pantry? (Y/N)").lower()
+            if new_var not in ["y", "n"]:
+                print("Invalid Input")
+
+            elif new_var == "y":
+                new_name = input("What is the new Pantry's name?").lower()
+                new_name = new_name.replace(" ", "_")
+                new_name = Pantry(new_name)
     # Run Pantry Load -> Date Update -> days_left Update ->
-
     # Print Initial Printouts for both lists (pantry/shopping) ->
 
     # Check expired, use_today, and perishable + days_left <= 3 ->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added structure to helper function, added sys_daily_startup dummied with TODOs">
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="Fixed help_me, still need to add directory to make it work.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
     </list>
@@ -234,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771295357852</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Fixed help_me, still need to add directory to make it work.">
+      <option name="closed" value="true" />
+      <created>1771870132989</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1771870132989</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -264,6 +272,7 @@
     <MESSAGE value="Finished rest of Food subclass methods." />
     <MESSAGE value="cleaned up, added shopping save/load and printout. &#10;added test TODO" />
     <MESSAGE value="added structure to helper function, added sys_daily_startup dummied with TODOs" />
-    <option name="LAST_COMMIT_MESSAGE" value="added structure to helper function, added sys_daily_startup dummied with TODOs" />
+    <MESSAGE value="Fixed help_me, still need to add directory to make it work." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed help_me, still need to add directory to make it work." />
   </component>
 </project>
