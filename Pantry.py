@@ -4,6 +4,10 @@
 from datetime import datetime
 
 today = datetime.now().strftime("%Y-m-%d")  # Y-M-D '2025-04-24'
+try:
+    yesterday
+except:
+    yesterday = today
 
 
 class Pantry:
@@ -1867,7 +1871,10 @@ class Snacks_Shelf_Stable(Food):
 
 def help_me():
     """Prints out all calls and needed variables within program"""
-    directory = ["help_me", "sys_daily_startup", "load_from_file", "save_to_file", "printout_pantry", "printout_shopping", "create_item", "add_to_pantry", "remove_item", "use_item", "modify_item", "sort_item", "find_item", "save_and_exit", "time_day_passed", "is_expired", "update_quantity", "define"]
+    directory = ["help_me", "sys_daily_startup", "load_from_file", "save_to_file", "printout_pantry",
+                 "printout_shopping", "create_item", "add_to_pantry", "remove_item", "use_item", "modify_item",
+                 "sort_item", "find_item", "save_and_exit", "time_day_passed", "is_expired", "update_quantity",
+                 "define"]
     help_texts = {
         "help_me": "Shows this help menu.",
         "sys_daily_startup": "Runs daily update and checks.",
@@ -1926,8 +1933,8 @@ def help_me():
 def sys_daily_startup():
     """This is an Empty Docstring to be Filled out
         Later"""
-    # add in needed argument
     start_input = None
+    pantry_obj = None
     start_input = input("\nPress Enter to Start Daily Startup")
     if start_input:
         initial_query = input("Welcome! \nDo You Have a Pantry to Load? (Y/N)").lower()
@@ -1937,35 +1944,62 @@ def sys_daily_startup():
             load_name = input("Which Pantry To Load?").lower()
             try:
                 load_name = load_name.replace(" ", "_")
-                load_from_file(load_name)
+                pantry_obj = Pantry(load_name)
+                pantry_obj.load_from_file(load_name)
             except FileNotFoundError:
                 print("Invalid Input, File Not Found!")
+                error_load_confirm = input("Create a new file? (Y/N)").lower()
+                if error_load_confirm not in ["y", "n"]:
+                    print("Invalid Input")
+                elif error_load_confirm == "n":
+                    pass
+                else:
+                    pantry_obj = Pantry(load_name)
         else:
-
             new_var = input("Would You Like to Start a New Pantry? (Y/N)").lower()
             if new_var not in ["y", "n"]:
                 print("Invalid Input")
-
             elif new_var == "y":
                 new_name = input("What is the new Pantry's name?").lower()
                 new_name = new_name.replace(" ", "_")
-                new_name = Pantry(new_name)
-    # Run Pantry Load -> Date Update -> days_left Update ->
-    # Print Initial Printouts for both lists (pantry/shopping) ->
+                pantry_obj = Pantry(new_name)
 
-    # Check expired, use_today, and perishable + days_left <= 3 ->
+    global today
+    global yesterday
+    new_day = datetime.now().strftime("%Y-%m-%d")
+    if new_day != today:
+        for item in pantry_obj._pantry_list:
+            item.time_day_passed(yesterday)
+            print(f"Updated {item._name}'s Days")
 
-    # Print Daily Warnings Message ->
+    pantry_obj.printout_pantry()
+    pantry_obj.printout_shopping_list("alphabet")
+
+    for item in pantry_obj._pantry_list:
+        if item._days_left == 0:
+            item.is_expired()
+        if item._use_today == True:
+            print(f"Use {item._name} Today!")
+        if (item._days_left <= 3) and (item._perishable == True):
+            print(f"Warning! {item._name} is in danger of spoiling!")
 
     # Ask for any Modification Requests ->
-
-    # Implement Modifications Requested with loops back for repeated Modifys ->
+    mod_request_var = input("Would you like to modify any Items? (Y/N)").lower()
+    if mod_request_var not in ["y", "n"]:
+        print("Invalid Input!")
+    elif mod_request_var == "n":
+        print("No Modifications Today.")
+        was_mod = False
+    else:
+        pantry_obj.modify_item()
+        was_mod = True
 
     # Update Printout sheets if Modified ->
-
+    if was_mod == True:
+        pantry_obj.printout_pantry()
+        pantry_obj.printout_shopping_list()
     # Ask for save_and_exit
-
-    pass
+    pantry_obj.save_and_exit()
 
 # global_common_typos = {"example": "exampel", "tomato": "tomtao"}
 # TODO: Look Up common typos for top 200 common food words in America (min 3 typos per word).
