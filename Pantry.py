@@ -302,19 +302,7 @@ class Pantry:
                         print("Invalid input. Please enter a number.")
 
                 item_obj = Food(name, quantity, perishable, days_left)
-                print()
-                item_obj.define()
 
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["produce"]:
                 name = input("What is this food's name?: ")
@@ -365,19 +353,6 @@ class Pantry:
                         break
 
                 item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date, notes)
-                print()
-                item_obj.define()
-
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["fruit"]:
                 name = input("What is this food's name?: ")
@@ -459,19 +434,6 @@ class Pantry:
 
                 item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
                                          ripeness, is_cut, washed, notes)
-                print()
-                item_obj.define()
-
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["meat"]:
                 name = input("What is this food's name?: ")
@@ -536,10 +498,14 @@ class Pantry:
                     use_today_input = input("Does this need to be used Today? (Y/N)").lower()
                     if use_today_input == "y":
                         use_today = True
+                        break
                     elif use_today_input == "n":
                         use_today = False
+                        break
                     else:
                         print("Invalid Input. Does this need to be used Today? (Y/N)")
+                        continue
+
 
                 while True:
                     notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
@@ -552,19 +518,6 @@ class Pantry:
 
                 item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location, purchase_date,
                                     frozen, use_today, notes)
-                print()
-                item_obj.define()
-
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["dairy"]:
                 name = input("What is this food's name?: ")
@@ -638,19 +591,6 @@ class Pantry:
 
                 item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location,
                                  purchase_date, open_date, is_open, notes)
-                print()
-                item_obj.define()
-
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["frozen"]:
                 name = input("What is this food's name?: ")
@@ -734,19 +674,7 @@ class Pantry:
 
                 item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
                                         purchase_date, open_date, frozen_at_home, is_open, notes)
-                print()
-                item_obj.define()
 
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["bakery"]:
                 name = input("What is this food's name?: ")
@@ -807,16 +735,16 @@ class Pantry:
                     else:
                         print("Invalid Input. Is this Ready-To-Eat? (Y/N)")
 
-                    while True:
-                        homemade_input = input("Is this Homemade? (Y/N)").lower()
-                        if homemade_input == "y":
-                            homemade = True
-                            break
-                        elif homemade_input == "n":
-                            homemade = False
-                            break
-                        else:
-                            print("Invalid Input. Is this Homemade? (Y/N)")
+                while True:
+                    homemade_input = input("Is this Homemade? (Y/N)").lower()
+                    if homemade_input == "y":
+                        homemade = True
+                        break
+                    elif homemade_input == "n":
+                        homemade = False
+                        break
+                    else:
+                        print("Invalid Input. Is this Homemade? (Y/N)")
 
                 while True:
                     notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
@@ -829,19 +757,6 @@ class Pantry:
 
                 item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
                                        purchase_date, ready_to_eat, homemade, notes)
-                print()
-                item_obj.define()
-
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["condiment", "spice"]:
                 name = input("What is this food's name?: ")
@@ -916,19 +831,7 @@ class Pantry:
 
                 item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
                                            open_date, is_open, condiment_type, notes)
-                print()
-                item_obj.define()
 
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             elif category in ["snacks", "shelf stable"]:
                 name = input("What is this food's name?: ")
@@ -1022,25 +925,27 @@ class Pantry:
 
                 item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
                                                purchase_date, open_date, is_open, flavor, requested_by, notes)
-                print()
-                item_obj.define()
-
-                final_confirmation_input = input("Is this correct (Y/N)").lower()
-                if final_confirmation_input == "y":
-                    self._pantry_list.append(item_obj)
-                    self.save_to_file(f"{self._name}.txt")
-                    break
-                elif final_confirmation_input == "n":
-                    print("Many Apologies, Please Try Again")
-                    break
-                else:
-                    print("Invalid Input, Please Try Again")
-                    continue
 
             else:
                 print(
                     "Improper Selection... Please Try Again: \n(basic, produce, fruit, meat, dairy, frozen, bakery, condiment, spice, snack, shelf stable) \n('EXIT' to quit)")
                 continue
+
+        print()
+        item_obj.define()
+        while True:
+            final_confirmation_input = input("Is this correct (Y/N)").lower()
+            if final_confirmation_input == "y":
+                self._pantry_list.append(item_obj)
+                self.save_to_file(f"{self._name}.txt")
+                break
+            elif final_confirmation_input == "n":
+                print("Many Apologies, Please Try Again")
+                break
+            else:
+                print("Invalid Input, Please Try Again")
+                continue
+
 
     def add_to_pantry(self, item):
         """Adds an Existing Food Object to Pantry List"""
@@ -1934,9 +1839,11 @@ def sys_daily_startup():
     """This is an Empty Docstring to be Filled out
         Later"""
     start_input = None
-    pantry_obj = None
+    new_pantry_bool = False
     start_input = input("\nPress Enter to Start Daily Startup")
-    if start_input:
+    if start_input== "" or start_input == "\n" or start_input.lower(
+
+    ) == "start":
         initial_query = input("Welcome! \nDo You Have a Pantry to Load? (Y/N)").lower()
         if initial_query not in ["y", "n"]:
             print("Invalid Input")
@@ -1945,7 +1852,7 @@ def sys_daily_startup():
             try:
                 load_name = load_name.replace(" ", "_")
                 pantry_obj = Pantry(load_name)
-                pantry_obj.load_from_file(load_name)
+                pantry_obj = pantry_obj.load_from_file(load_name)
             except FileNotFoundError:
                 print("Invalid Input, File Not Found!")
                 error_load_confirm = input("Create a new file? (Y/N)").lower()
@@ -1955,15 +1862,25 @@ def sys_daily_startup():
                     pass
                 else:
                     pantry_obj = Pantry(load_name)
+                    new_pantry_bool = True
         else:
-            new_var = input("Would You Like to Start a New Pantry? (Y/N)").lower()
-            if new_var not in ["y", "n"]:
-                print("Invalid Input")
-            elif new_var == "y":
-                new_name = input("What is the new Pantry's name?").lower()
-                new_name = new_name.replace(" ", "_")
-                pantry_obj = Pantry(new_name)
+            print("Lets Start a New Pantry!")
+            new_name = input("What is the new Pantry's name?").lower()
+            new_name = new_name.replace(" ", "_")
+            pantry_obj = Pantry(new_name)
+            new_pantry_bool = True
 
+    if new_pantry_bool:
+        print(f"{pantry_obj._name.capitalize()} is empty! Let's add items to prevent an empty pantry!")
+        while True:
+            pantry_obj.create_item()
+            more_items_var = input("Create More Items? (Y/N)").lower()
+            if more_items_var not in ["y", "n"]:
+                print("Invalid Input")
+            elif more_items_var == "n":
+                break
+            else:
+                continue
     global today
     global yesterday
     new_day = datetime.now().strftime("%Y-%m-%d")
@@ -2012,3 +1929,6 @@ def sys_daily_startup():
 # TODO: Build test program to save -> orig_name |
 # Build test program to load / edit / save -> new_name |
 # Build test program to load / check / exit w/out save -> orig/new |
+
+
+sys_daily_startup()

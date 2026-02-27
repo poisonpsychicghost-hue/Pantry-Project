@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="started working on main sys_daily_startup">
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="worked more on sys_startup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
     </list>
@@ -250,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771892953961</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="worked more on sys_startup">
+      <option name="closed" value="true" />
+      <created>1772216718575</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1772216718575</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -282,6 +290,7 @@
     <MESSAGE value="added structure to helper function, added sys_daily_startup dummied with TODOs" />
     <MESSAGE value="Fixed help_me, still need to add directory to make it work." />
     <MESSAGE value="started working on main sys_daily_startup" />
-    <option name="LAST_COMMIT_MESSAGE" value="started working on main sys_daily_startup" />
+    <MESSAGE value="worked more on sys_startup" />
+    <option name="LAST_COMMIT_MESSAGE" value="worked more on sys_startup" />
   </component>
 </project>
