@@ -3,7 +3,7 @@
 # ---------------------------------
 from datetime import datetime
 
-today = datetime.now().strftime("%Y-m-%d")  # Y-M-D '2025-04-24'
+today = datetime.now().strftime("%Y-%m-%d")  # Y-M-D '2025-04-24'
 try:
     yesterday
 except:
@@ -302,7 +302,7 @@ class Pantry:
                         print("Invalid input. Please enter a number.")
 
                 item_obj = Food(name, quantity, perishable, days_left)
-
+                break
 
             elif category in ["produce"]:
                 name = input("What is this food's name?: ")
@@ -353,6 +353,7 @@ class Pantry:
                         break
 
                 item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date, notes)
+                break
 
             elif category in ["fruit"]:
                 name = input("What is this food's name?: ")
@@ -434,6 +435,7 @@ class Pantry:
 
                 item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
                                          ripeness, is_cut, washed, notes)
+                break
 
             elif category in ["meat"]:
                 name = input("What is this food's name?: ")
@@ -518,6 +520,7 @@ class Pantry:
 
                 item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location, purchase_date,
                                     frozen, use_today, notes)
+                break
 
             elif category in ["dairy"]:
                 name = input("What is this food's name?: ")
@@ -591,6 +594,7 @@ class Pantry:
 
                 item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location,
                                  purchase_date, open_date, is_open, notes)
+                break
 
             elif category in ["frozen"]:
                 name = input("What is this food's name?: ")
@@ -674,7 +678,7 @@ class Pantry:
 
                 item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
                                         purchase_date, open_date, frozen_at_home, is_open, notes)
-
+                break
 
             elif category in ["bakery"]:
                 name = input("What is this food's name?: ")
@@ -757,6 +761,7 @@ class Pantry:
 
                 item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
                                        purchase_date, ready_to_eat, homemade, notes)
+                break
 
             elif category in ["condiment", "spice"]:
                 name = input("What is this food's name?: ")
@@ -831,7 +836,7 @@ class Pantry:
 
                 item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
                                            open_date, is_open, condiment_type, notes)
-
+                break
 
             elif category in ["snacks", "shelf stable"]:
                 name = input("What is this food's name?: ")
@@ -925,6 +930,7 @@ class Pantry:
 
                 item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
                                                purchase_date, open_date, is_open, flavor, requested_by, notes)
+                break
 
             else:
                 print(
@@ -1198,7 +1204,7 @@ class Fresh_Produce(Food):
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def is_expired(self):
@@ -1895,8 +1901,11 @@ def sys_daily_startup():
     for item in pantry_obj._pantry_list:
         if item._days_left == 0:
             item.is_expired()
-        if item._use_today == True:
-            print(f"Use {item._name} Today!")
+        try:
+            if item._use_today == True:
+                print(f"Use {item._name} Today!")
+        except AttributeError:
+            pass
         if (item._days_left <= 3) and (item._perishable == True):
             print(f"Warning! {item._name} is in danger of spoiling!")
 
