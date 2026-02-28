@@ -229,7 +229,7 @@ class Pantry:
                         file.write(print_out + "\n")
                 break
 
-    def printout_shopping_list(self, method):
+    def printout_shopping_list(self):
         """User Chooses a Method which allows multiple types of printout of Shopping List to be delivered
             Options include By Chronology, Alphabetically, and By Category(Eventually)"""
         print(f"Printout {self._name}'s Shopping List?")
@@ -1033,6 +1033,9 @@ class Pantry:
                     another_attr = input("Modify another attribute of this item (Y/N): ").lower()
                     if another_attr != "y":
                         break
+                    elif another_attr.lower() not in ["y", "n"]:
+                        print("Invalid Input, Please Try Again")
+                        continue
                 else:
                     print("Invalid Attribute. No changees made.")
             # Code Logic for return or exit Item Modify
@@ -1886,6 +1889,7 @@ def sys_daily_startup():
             elif more_items_var == "n":
                 place_holder_item = Food("PlaceHolder", 999, False, 999)
                 pantry_obj._pantry_list.append(place_holder_item)
+
                 break
             else:
                 continue
@@ -1948,8 +1952,7 @@ def sys_daily_startup():
 # ---------------------------------
 
 # TODO: Build test program to save -> orig_name |
-# Build test program to load / edit / save -> new_name |
 # Build test program to load / check / exit w/out save -> orig/new |
 
-
+#TODO: after debug, build a welcome text, and basic system run. include:
 sys_daily_startup()
