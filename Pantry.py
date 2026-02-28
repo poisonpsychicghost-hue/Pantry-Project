@@ -1940,6 +1940,7 @@ def sys_daily_startup():
     print()
     print()
     print("-=-+-" * 6)
+    return pantry_obj
     # Ask for save_and_exit
     pantry_obj.save_and_exit()
 
@@ -1955,4 +1956,81 @@ def sys_daily_startup():
 # Build test program to load / check / exit w/out save -> orig/new |
 
 #TODO: after debug, build a welcome text, and basic system run. include:
-sys_daily_startup()
+directory = ["help_me", "sys_daily_startup", "load_from_file", "save_to_file", "printout_pantry",
+                 "printout_shopping", "create_item", "add_to_pantry", "remove_item", "use_item", "modify_item",
+                 "sort_item", "find_item", "save_and_exit", "time_day_passed", "is_expired", "update_quantity",
+                 "define"]
+print("*--=--" * 6)
+print("*--=--" * 6)
+print("*--=--" * 6)
+print("Welcome to Pantry Manager System!")
+print("*--=--" * 6)
+print("Built By: Sirius_21")
+print("*--=--" * 6)
+print("*--=--" * 6)
+pantry_obj = sys_daily_startup()
+print("*--=--" * 6)
+print("*--=--" * 6)
+print("Daily Startup Complete!")
+
+while True:
+    for index_num, item in enumerate(directory):
+        print(f"{index_num + 1}. {item}")
+    dir_nav_value = input("Would you like to perform any other tasks? \n(Type number or action to use) \n('Exit' to exit)")
+    if dir_nav_value not in ["exit", "find_item", "find item", "find", "modify_item", "modify item", "modify", "sort_item", "sort item", "sort", "remove_item", "remove item", "remove", "add_to_pantry", "add to pantry", "add", "create_item", "create item", "create", "printout_shopping", "printout shopping", "printout_pantry", "printout pantry", "save_to_file", "save", "load_from_file", "load", "help me", "help_me", "start_up", "startup", "start", directory, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]:
+        print("Invalid Input!")
+        continue
+    elif dir_nav_value == "exit":
+        break
+    elif dir_nav_value in ["1", "help", "help me", "help_me"]:
+        help_me()
+        continue
+    elif dir_nav_value in ["2", "sys_daily_startup", "start_up", "startup", "start"]:
+        sys_daily_startup()
+        continue
+    elif dir_nav_value in ["3", "load_from_file", "load"]:
+        pantry_obj.load_from_file()
+        continue
+    elif dir_nav_value in ["4", "save_to_file", "save"]:
+        pantry_obj.save_to_file()
+        continue
+    elif dir_nav_value in ["5", "printout_pantry", "printout pantry"]:
+        pantry_obj.printout_pantry()
+        continue
+    elif dir_nav_value in ["6", "printout_shopping", "printout shopping"]:
+        pantry_obj.printout_shopping()
+        continue
+    elif dir_nav_value in ["7", "create_item", "create item", "create"]:
+        pantry_obj.create_item()
+        continue
+    elif dir_nav_value in ["8", "add_to_pantry", "add to pantry", "add"]:
+        pantry_obj.add_to_pantry()
+        continue
+    elif dir_nav_value in ["9", "remove_item", "remove item", "remove"]:
+        pantry_obj.remove_item()
+        continue
+    elif dir_nav_value in ["10", "use_item", "use item", "use"]:
+        pantry_obj.use_item()
+        continue
+    elif dir_nav_value in ["11", "modify_item", "modify item", "modify"]:
+        pantry_obj.modify_item()
+        continue
+    elif dir_nav_value in ["12", "sort_item", "sort item", "sort"]:
+        pantry_obj.sort_item()
+        continue
+    elif dir_nav_value in ["13", "find_item", "find item", "find"]:
+        pantry_obj.find_item()
+        continue
+    elif dir_nav_value in ["14", "save_and_exit", "save and exit"]:
+        pantry_obj.save_and_exit()
+        break
+    else:
+        pass
+
+print("*--=--" * 6)
+print("*--=--" * 6)
+print("*--=--" * 6)
+print("Thank You for using Pantry Manager!")
+print("*--=--" * 6)
+print("*--=--" * 6)
+print("GOODBYE!")
