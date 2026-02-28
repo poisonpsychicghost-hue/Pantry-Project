@@ -26,9 +26,9 @@ class Pantry:
             txt and imports it into Program for user applications"""
         # need to add ._shopping_list to save/load
         self._pantry_list = []
-        pantry_filename = "pantry_" + filename
+        pantry_filename = "pantry_" + filename.lower()
         shopping_filename = "shopping_" + filename
-        with open(filename, "r") as file:
+        with open(pantry_filename, "r") as file:
             for line in file:
                 fields = line.strip().split(',')
 
@@ -577,7 +577,7 @@ class Pantry:
                         open_date = input("When was it opened?")
                         break
                     elif openness_input == "n":
-                        is_open == False
+                        is_open = False
                         open_date = None
                         break
                     else:
@@ -1146,7 +1146,7 @@ class Food:
 
         result += f"\nName: {self._name}| Quantity: {self._quantity}| Perishable?: {perish_var}| Days Remaining: {self._days_left} \n"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def to_dict(self):
@@ -1266,7 +1266,7 @@ class Fruit_Produce(Food):
         result += f"\nRipeness: {self._ripeness}| Washed?: {wash_var}| Cut?: {cut_var}"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def ripeness_mover(self):
@@ -1371,7 +1371,7 @@ class Raw_Meat(Food):
             result += f"\n{self._name} Needs to be used TODAY!"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def is_expired(self):
@@ -1454,7 +1454,7 @@ class Dairy(Food):
         result += f"\nOpen? {open_var}| Open Date: {self._open_date}"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def is_expired(self):
@@ -1536,7 +1536,7 @@ class Other_Frozen(Food):
         result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def is_expired(self):
@@ -1608,7 +1608,7 @@ class Baked_Goods(Food):
         result += f"\nLocation: {self._storage_location}| Purchase Date: {self._purchase_date}"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def is_expired(self):
@@ -1669,7 +1669,7 @@ class Condiment_Spice(Food):
         result += f"\nOpen?: {open_var}| Open Date: {self._open_date}"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def is_expired(self):
@@ -1756,7 +1756,7 @@ class Snacks_Shelf_Stable(Food):
         result += f"\nRequested By: {self._requested}"
         result += f"\nAdditional Notes:{self._notes}"
         # add silent function
-        # print(result)
+        print(result)
         return result
 
     def is_expired(self):
@@ -1897,18 +1897,24 @@ def sys_daily_startup():
 
     pantry_obj.printout_pantry()
     pantry_obj.printout_shopping_list("alphabet")
-
+    print()
+    print()
+    print("-=-+-" * 6)
+    print("Today's Warnings!")
     for item in pantry_obj._pantry_list:
         if item._days_left == 0:
             item.is_expired()
         try:
             if item._use_today == True:
                 print(f"Use {item._name} Today!")
+
         except AttributeError:
             pass
         if (item._days_left <= 3) and (item._perishable == True):
             print(f"Warning! {item._name} is in danger of spoiling!")
-
+    print()
+    print()
+    print("-=-+-" * 6)
     # Ask for any Modification Requests ->
     mod_request_var = input("Would you like to modify any Items? (Y/N)").lower()
     if mod_request_var not in ["y", "n"]:
@@ -1924,6 +1930,10 @@ def sys_daily_startup():
     if was_mod == True:
         pantry_obj.printout_pantry()
         pantry_obj.printout_shopping_list()
+
+    print()
+    print()
+    print("-=-+-" * 6)
     # Ask for save_and_exit
     pantry_obj.save_and_exit()
 
