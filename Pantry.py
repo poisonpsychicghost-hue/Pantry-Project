@@ -218,6 +218,7 @@ class Pantry:
                 break
             elif method not in ["alphabet", "category", "quantity"]:
                 print("Invalid Input... \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)")
+                continue
             else:
                 print_filename = f"pantry_printout_{today}.txt"
                 sorted_items = self.sort_items(method)

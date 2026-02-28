@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="minor bug fixes">
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="built Main Program, fixed an issue in branching logic in modify_item()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
     </list>
@@ -306,7 +306,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772309738132</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="built Main Program, fixed an issue in branching logic in modify_item()">
+      <option name="closed" value="true" />
+      <created>1772312048838</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1772312048838</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -345,6 +353,7 @@
     <MESSAGE value="debugging sys_startup and related methods. fixed some validations in create_item&#10;needs more work. part 3&#10;cleaned more small bugs" />
     <MESSAGE value="added in placeholder obj to prevent crashes in new pantry creation in sys_daily_startup" />
     <MESSAGE value="minor bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor bug fixes" />
+    <MESSAGE value="built Main Program, fixed an issue in branching logic in modify_item()" />
+    <option name="LAST_COMMIT_MESSAGE" value="built Main Program, fixed an issue in branching logic in modify_item()" />
   </component>
 </project>
