@@ -812,18 +812,18 @@ class Pantry:
                         condiment_type = cond_type_input
                         break
 
-                    while True:
-                        openness_input = input("Has this been Opened? (Y/N)").lower()
-                        if openness_input == "y":
-                            is_open = True
-                            open_date = input("When was this opened?")
-                            break
-                        elif openness_input == "n":
-                            is_open = False
-                            open_date = None
-                            break
-                        else:
-                            print("Invalid Input. Has this been opened? (Y/N)")
+                while True:
+                    openness_input = input("Has this been Opened? (Y/N)").lower()
+                    if openness_input == "y":
+                        is_open = True
+                        open_date = input("When was this opened?")
+                        break
+                    elif openness_input == "n":
+                        is_open = False
+                        open_date = None
+                        break
+                    else:
+                        print("Invalid Input. Has this been opened? (Y/N)")
 
                 while True:
                     notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
@@ -838,7 +838,7 @@ class Pantry:
                                            open_date, is_open, condiment_type, notes)
                 break
 
-            elif category in ["snacks", "shelf stable"]:
+            elif category in ["snack", "shelf stable"]:
                 name = input("What is this food's name?: ")
                 while True:
                     qty_input = input("How many are there?: ")
