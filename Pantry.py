@@ -26,8 +26,8 @@ class Pantry:
             txt and imports it into Program for user applications"""
         # need to add ._shopping_list to save/load
         self._pantry_list = []
-        pantry_filename = "pantry_" + filename.lower()
-        shopping_filename = "shopping_" + filename
+        pantry_filename = "pantry_" + filename.lower() + ".txt"
+        shopping_filename = "shopping_" + filename.lower() + ".txt"
         with open(pantry_filename, "r") as file:
             for line in file:
                 fields = line.strip().split(',')
@@ -78,7 +78,7 @@ class Pantry:
                     item_obj = Food(name, quantity, perishable, days_left)
 
                 self._pantry_list.append(item_obj)
-        print(f"Shopping List loaded from {shopping_filename}")
+        print(f"Pantry List loaded from {pantry_filename}")
 
         with open(shopping_filename, "r") as file:
             for line in file:
@@ -1858,7 +1858,7 @@ def sys_daily_startup():
             try:
                 load_name = load_name.replace(" ", "_")
                 pantry_obj = Pantry(load_name)
-                pantry_obj = pantry_obj.load_from_file(load_name)
+                pantry_obj.load_from_file(load_name)
             except FileNotFoundError:
                 print("Invalid Input, File Not Found!")
                 error_load_confirm = input("Create a new file? (Y/N)").lower()
@@ -1884,6 +1884,8 @@ def sys_daily_startup():
             if more_items_var not in ["y", "n"]:
                 print("Invalid Input")
             elif more_items_var == "n":
+                place_holder_item = Food("PlaceHolder", 999, False, 999)
+                pantry_obj._pantry_list.append(place_holder_item)
                 break
             else:
                 continue
