@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="fixed logic for placeholder food obj">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added in some logic to the Main Program to allow directory usage">
       <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -338,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772471164996</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="added in some logic to the Main Program to allow directory usage">
+      <option name="closed" value="true" />
+      <created>1772473951887</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1772473951887</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -353,7 +360,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added more method logic, removing passes." />
     <MESSAGE value="cleaned up some prints for readability in printout." />
     <MESSAGE value="Added some more methods for Manager Class, deleted redundant method, cleaned up some comments." />
     <MESSAGE value="cleaned up variable choice in modify_item logic to be less vague" />
@@ -378,6 +384,7 @@
     <MESSAGE value="built Main Program, fixed an issue in branching logic in modify_item()" />
     <MESSAGE value="fixed a mistake in printout_shopping_list that I left in" />
     <MESSAGE value="fixed logic for placeholder food obj" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed logic for placeholder food obj" />
+    <MESSAGE value="added in some logic to the Main Program to allow directory usage" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in some logic to the Main Program to allow directory usage" />
   </component>
 </project>

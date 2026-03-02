@@ -217,8 +217,8 @@ class Pantry:
             if method == "exit":
                 break
             elif method not in ["alphabet", "category", "quantity"]:
-                print("Invalid Input... \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)")
-                continue
+                print("Invalid Input... deafulting to Alphabet")
+                method = "alphabet"
             else:
                 print_filename = f"pantry_printout_{today}.txt"
                 sorted_items = self.sort_items(method)
@@ -245,7 +245,8 @@ class Pantry:
             if method in ["exit", ""]:
                 break
             elif method not in ["alphabet", "category"]:
-                print("Invalid Input... \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)")
+                print("Invalid Input. Deafulting to Alphabet")
+                method = "alphabet"
             else:
                 print_filename = f"shopping_printout_{today}.txt"
                 if method == "alphabet":
