@@ -134,8 +134,8 @@ class Pantry:
 
     def save_to_file(self, filename):
         """Load foods from a file into Pantry"""
-        pantry_filename = "pantry_" + filename
-        shopping_filename = "shopping_" + filename
+        pantry_filename = "pantry_" + filename + ".txt"
+        shopping_filename = "shopping_" + filename + ".txt"
         with open(pantry_filename, "w") as file:
             for item in self._pantry_list:
                 data = [
@@ -1080,7 +1080,8 @@ class Pantry:
             sys.exit("Pantry Saved \nThank You for Using Pantry Manager!")
         else:
             sys.exit("Thank You for Using Pantry Manager!")
-
+def pantry_directory(self):
+    return list(enumerate(self._pantry_list))
 
 class Food:
     """Main Class of Pantry Items
@@ -1964,8 +1965,7 @@ def sys_daily_startup():
 #TODO: after debug, build a welcome text, and basic system run. include:
 directory = ["help_me", "sys_daily_startup", "load_from_file", "save_to_file", "printout_pantry",
                  "printout_shopping", "create_item", "add_to_pantry", "remove_item", "use_item", "modify_item",
-                 "sort_item", "find_item", "save_and_exit", "time_day_passed", "is_expired", "update_quantity",
-                 "define"]
+                 "sort_item", "find_item", "save_and_exit"]
 print("*--=--" * 6)
 print("*--=--" * 6)
 print("*--=--" * 6)
@@ -1983,7 +1983,7 @@ while True:
     for index_num, item in enumerate(directory):
         print(f"{index_num + 1}. {item}")
     dir_nav_value = input("Would you like to perform any other tasks? \n(Type number or action to use) \n('Exit' to exit)")
-    if dir_nav_value not in ["exit", "find_item", "find item", "find", "modify_item", "modify item", "modify", "sort_item", "sort item", "sort", "remove_item", "remove item", "remove", "add_to_pantry", "add to pantry", "add", "create_item", "create item", "create", "printout_shopping", "printout shopping", "printout_pantry", "printout pantry", "save_to_file", "save", "load_from_file", "load", "help me", "help_me", "start_up", "startup", "start", directory, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]:
+    if dir_nav_value not in ["exit", "find_item", "find item", "find", "modify_item", "modify item", "modify", "sort_item", "sort item", "sort", "remove_item", "remove item", "remove", "add_to_pantry", "add to pantry", "add", "create_item", "create item", "create", "printout_shopping", "printout shopping", "printout_pantry", "printout pantry", "save_to_file", "save", "load_from_file", "load", "help me", "help_me", "start_up", "startup", "start", directory, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]:
         print("Invalid Input!")
         continue
     elif dir_nav_value == "exit":
@@ -1995,10 +1995,18 @@ while True:
         sys_daily_startup()
         continue
     elif dir_nav_value in ["3", "load_from_file", "load"]:
-        pantry_obj.load_from_file()
+        filename = input("Please enter the Pantry to load's name: ")
+        try:
+            pantry_obj.load_from_file(filename)
+        except Exception as e:
+            print(f"Attention! File not Loaded: Error: {e}")
         continue
     elif dir_nav_value in ["4", "save_to_file", "save"]:
-        pantry_obj.save_to_file()
+        filename = input("Please enter the Pantry to save's name: ")
+        try:
+            pantry_obj.save_to_file(filename)
+        except Exception as e:
+            print(f"Attention! File not Saved: Error: {e}")
         continue
     elif dir_nav_value in ["5", "printout_pantry", "printout pantry"]:
         pantry_obj.printout_pantry()
@@ -2010,22 +2018,56 @@ while True:
         pantry_obj.create_item()
         continue
     elif dir_nav_value in ["8", "add_to_pantry", "add to pantry", "add"]:
-        pantry_obj.add_to_pantry()
+        print("*--=--" * 6)
+        print("Add to Pantry unsuported at this time! \nPlease Use Create Item for now. \nThank You")
+        print("*--=--" * 6)
         continue
     elif dir_nav_value in ["9", "remove_item", "remove item", "remove"]:
-        pantry_obj.remove_item()
+        pantry_directory_list = pantry_obj.pantry_directory()
+        for idx, item in pantry_directory_list:
+            print(f"{idx + 1}. {item} {item._category}")
+            try:
+                selection = int(input("Please enter item number: ")) - 1
+                selected_item = pantry_directory_list[selection]
+            except (ValueError, IndexError):
+                print("Invalid Selection!")
+        pantry_obj.remove_item(selected_item)
         continue
     elif dir_nav_value in ["10", "use_item", "use item", "use"]:
-        pantry_obj.use_item()
+        pantry_directory_list = pantry_obj.pantry_directory()
+        for idx, item in pantry_directory_list:
+            print(f"{idx + 1}. {item} {item._category}")
+            try:
+                selection = int(input("Please enter item number: ")) - 1
+                selected_item = pantry_directory_list[selection]
+            except (ValueError, IndexError):
+                print("Invalid Selection!")
+        try:
+            num_used = int(input("Please enter number of items to use: "))
+        except (ValueError):
+            print("Invalid Input")
+        pantry_obj.use_item(selected_item, num_used)
         continue
     elif dir_nav_value in ["11", "modify_item", "modify item", "modify"]:
         pantry_obj.modify_item()
         continue
     elif dir_nav_value in ["12", "sort_item", "sort item", "sort"]:
-        pantry_obj.sort_item()
+        method = input("Please enter sort method: ('Alphabet', 'Category' 'Quantity')").lower()
+        if method not in ["alphabet", "category", "quantity"]:
+            print("Invalid Input!")
+        else:
+            pantry_obj.sort_item(method)
         continue
     elif dir_nav_value in ["13", "find_item", "find item", "find"]:
-        pantry_obj.find_item()
+        pantry_directory_list = pantry_obj.pantry_directory()
+        for idx, item in pantry_directory_list:
+            print(f"{idx + 1}. {item} {item._category}")
+            try:
+                selection = int(input("Please enter item number: ")) - 1
+                selected_item = pantry_directory_list[selection]
+            except (ValueError, IndexError):
+                print("Invalid Selection!")
+        pantry_obj.find_item(selected_item)
         continue
     elif dir_nav_value in ["14", "save_and_exit", "save and exit"]:
         pantry_obj.save_and_exit()
