@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added in some logic to the Main Program to allow directory usage">
-      <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
-    </list>
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="cleaned up some bugs in printouts again." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -345,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772473951887</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="cleaned up some bugs in printouts again.">
+      <option name="closed" value="true" />
+      <created>1772474317914</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1772474317914</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -360,7 +366,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cleaned up some prints for readability in printout." />
     <MESSAGE value="Added some more methods for Manager Class, deleted redundant method, cleaned up some comments." />
     <MESSAGE value="cleaned up variable choice in modify_item logic to be less vague" />
     <MESSAGE value="finished save_and_exit, commented out extra prints in define()'s logic." />
@@ -385,6 +390,7 @@
     <MESSAGE value="fixed a mistake in printout_shopping_list that I left in" />
     <MESSAGE value="fixed logic for placeholder food obj" />
     <MESSAGE value="added in some logic to the Main Program to allow directory usage" />
-    <option name="LAST_COMMIT_MESSAGE" value="added in some logic to the Main Program to allow directory usage" />
+    <MESSAGE value="cleaned up some bugs in printouts again." />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up some bugs in printouts again." />
   </component>
 </project>
