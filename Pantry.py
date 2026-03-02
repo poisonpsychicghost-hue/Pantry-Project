@@ -1983,7 +1983,7 @@ print("Daily Startup Complete!")
 while True:
     for index_num, item in enumerate(directory):
         print(f"{index_num + 1}. {item}")
-    dir_nav_value = input("Would you like to perform any other tasks? \n(Type number or action to use) \n('Exit' to exit)")
+    dir_nav_value = input("Would you like to perform any other tasks? \n(Type number or action to use) \n('Exit' to exit)").lower().strip()
     if dir_nav_value not in ["exit", "find_item", "find item", "find", "modify_item", "modify item", "modify", "sort_item", "sort item", "sort", "remove_item", "remove item", "remove", "add_to_pantry", "add to pantry", "add", "create_item", "create item", "create", "printout_shopping", "printout shopping", "printout_pantry", "printout pantry", "save_to_file", "save", "load_from_file", "load", "help me", "help_me", "start_up", "startup", "start", directory, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]:
         print("Invalid Input!")
         continue
@@ -2029,7 +2029,7 @@ while True:
             print(f"{idx + 1}. {item} {item._category}")
             try:
                 selection = int(input("Please enter item number: ")) - 1
-                selected_item = pantry_directory_list[selection]
+                idx, selected_item = pantry_directory_list[selection]
             except (ValueError, IndexError):
                 print("Invalid Selection!")
         pantry_obj.remove_item(selected_item)
@@ -2040,7 +2040,7 @@ while True:
             print(f"{idx + 1}. {item} {item._category}")
             try:
                 selection = int(input("Please enter item number: ")) - 1
-                selected_item = pantry_directory_list[selection]
+                idx, selected_item = pantry_directory_list[selection]
             except (ValueError, IndexError):
                 print("Invalid Selection!")
         try:
@@ -2065,7 +2065,7 @@ while True:
             print(f"{idx + 1}. {item} {item._category}")
             try:
                 selection = int(input("Please enter item number: ")) - 1
-                selected_item = pantry_directory_list[selection]
+                idx, selected_item = pantry_directory_list[selection]
             except (ValueError, IndexError):
                 print("Invalid Selection!")
         pantry_obj.find_item(selected_item)
