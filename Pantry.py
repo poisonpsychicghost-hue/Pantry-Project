@@ -1888,12 +1888,15 @@ def sys_daily_startup():
             if more_items_var not in ["y", "n"]:
                 print("Invalid Input")
             elif more_items_var == "n":
-                place_holder_item = Food("PlaceHolder", 999, False, 999)
-                pantry_obj._pantry_list.append(place_holder_item)
 
                 break
             else:
                 continue
+        if len(pantry_obj._pantry_list) == 0:
+            print("No items were added! \nAdding PlaceHolder: Please Update When Possible!")
+            place_holder_item = Food("PlaceHolder", 999, False, 999)
+            pantry_obj._pantry_list.append(place_holder_item)
+
     global today
     global yesterday
     new_day = datetime.now().strftime("%Y-%m-%d")
