@@ -242,7 +242,7 @@ class Pantry:
         border = "-^" * 25
         print(border)
         while True:
-            if method == "exit":
+            if method in ["exit", ""]:
                 break
             elif method not in ["alphabet", "category"]:
                 print("Invalid Input... \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)")
@@ -1903,7 +1903,9 @@ def sys_daily_startup():
             print(f"Updated {item._name}'s Days")
 
     pantry_obj.printout_pantry()
-    pantry_obj.printout_shopping_list("alphabet")
+    pantry_obj.printout_shopping_list(
+
+    )
     print()
     print()
     print("-=-+-" * 6)
