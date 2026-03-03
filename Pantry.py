@@ -28,237 +28,249 @@ class Pantry:
         self._pantry_list = []
         pantry_filename = "pantry_" + filename.lower() + ".txt"
         shopping_filename = "shopping_" + filename.lower() + ".txt"
-        with open(pantry_filename, "r") as file:
-            for line in file:
-                fields = line.strip().split(',')
+        try:
+            with open(pantry_filename, "r") as file:
+                for line in file:
+                    fields = line.strip().split(',')
 
-                (category, name, quantity, perishable, days_left,
-                 storage_location, purchase_date, notes, ripeness, is_cut, washed,
-                 meat_type, dairy_type, frozen_type, baked_type, condiment_type, snack_type,
-                 frozen, use_today, open_date, frozen_at_home, ready_to_eat, homemade, flavor, requested) = fields
+                    (category, name, quantity, perishable, days_left,
+                     storage_location, purchase_date, notes, ripeness, is_cut, washed,
+                     meat_type, dairy_type, frozen_type, baked_type, condiment_type, snack_type,
+                     frozen, use_today, open_date, frozen_at_home, ready_to_eat, homemade, flavor, requested) = fields
 
-                quantity = int(quantity)
-                perishable = perishable == "True"
-                days_left = int(days_left)
-                is_cut = is_cut == "True"
-                washed = washed == "True"
-                frozen = frozen == "True"
-                use_today = use_today == "True"
-                ready_to_eat = ready_to_eat == "True"
-                homemade = homemade == "True"
-                is_open = open_date not in [None, "", "None"]
-                frozen_at_home = frozen_at_home == "True"
+                    quantity = int(quantity)
+                    perishable = perishable == "True"
+                    days_left = int(days_left)
+                    is_cut = is_cut == "True"
+                    washed = washed == "True"
+                    frozen = frozen == "True"
+                    use_today = use_today == "True"
+                    ready_to_eat = ready_to_eat == "True"
+                    homemade = homemade == "True"
+                    is_open = open_date not in [None, "", "None"]
+                    frozen_at_home = frozen_at_home == "True"
 
-                if category == "Fresh_Produce":
-                    item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                             notes)
-                elif category == "Fruit_Produce":
-                    item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                             ripeness, is_cut, washed, notes)
-                elif category == "Raw_Meat":
-                    item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location,
-                                        purchase_date,
-                                        frozen, use_today, notes)
-                elif category == "Dairy":
-                    item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location, purchase_date,
-                                     open_date, is_open, notes)
-                elif category == "Other_Frozen":
-                    item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
-                                            purchase_date, open_date, frozen_at_home, is_open, notes)
-                elif category == "Baked_Goods":
-                    item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
-                                           purchase_date, ready_to_eat, homemade, notes)
-                elif category == "Condiment_Spice":
-                    item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                               open_date, is_open, condiment_type, notes)
-                elif category == "Snacks_Shelf_Stable":
-                    item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
-                                                   purchase_date, open_date, is_open, flavor, requested, notes)
-                else:
-                    item_obj = Food(name, quantity, perishable, days_left)
+                    if category == "Fresh_Produce":
+                        item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                                 notes)
+                    elif category == "Fruit_Produce":
+                        item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                                 ripeness, is_cut, washed, notes)
+                    elif category == "Raw_Meat":
+                        item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location,
+                                            purchase_date,
+                                            frozen, use_today, notes)
+                    elif category == "Dairy":
+                        item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location, purchase_date,
+                                         open_date, is_open, notes)
+                    elif category == "Other_Frozen":
+                        item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
+                                                purchase_date, open_date, frozen_at_home, is_open, notes)
+                    elif category == "Baked_Goods":
+                        item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
+                                               purchase_date, ready_to_eat, homemade, notes)
+                    elif category == "Condiment_Spice":
+                        item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                                   open_date, is_open, condiment_type, notes)
+                    elif category == "Snacks_Shelf_Stable":
+                        item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
+                                                       purchase_date, open_date, is_open, flavor, requested, notes)
+                    else:
+                        item_obj = Food(name, quantity, perishable, days_left)
 
-                self._pantry_list.append(item_obj)
-        print(f"Pantry List loaded from {pantry_filename}")
+                    self._pantry_list.append(item_obj)
+            print(f"Pantry List loaded from {pantry_filename}")
 
-        with open(shopping_filename, "r") as file:
-            for line in file:
-                fields = line.strip().split(',')
+            with open(shopping_filename, "r") as file:
+                for line in file:
+                    fields = line.strip().split(',')
 
-                (category, name, quantity, perishable, days_left,
-                 storage_location, purchase_date, notes, ripeness, is_cut, washed,
-                 meat_type, dairy_type, frozen_type, baked_type, condiment_type, snack_type,
-                 frozen, use_today, open_date, frozen_at_home, ready_to_eat, homemade, flavor, requested) = fields
+                    (category, name, quantity, perishable, days_left,
+                     storage_location, purchase_date, notes, ripeness, is_cut, washed,
+                     meat_type, dairy_type, frozen_type, baked_type, condiment_type, snack_type,
+                     frozen, use_today, open_date, frozen_at_home, ready_to_eat, homemade, flavor, requested) = fields
 
-                quantity = int(quantity)
-                perishable = perishable == "True"
-                days_left = int(days_left)
-                is_cut = is_cut == "True"
-                washed = washed == "True"
-                frozen = frozen == "True"
-                use_today = use_today == "True"
-                ready_to_eat = ready_to_eat == "True"
-                homemade = homemade == "True"
-                is_open = open_date not in [None, "", "None"]
-                frozen_at_home = frozen_at_home == "True"
+                    quantity = int(quantity)
+                    perishable = perishable == "True"
+                    days_left = int(days_left)
+                    is_cut = is_cut == "True"
+                    washed = washed == "True"
+                    frozen = frozen == "True"
+                    use_today = use_today == "True"
+                    ready_to_eat = ready_to_eat == "True"
+                    homemade = homemade == "True"
+                    is_open = open_date not in [None, "", "None"]
+                    frozen_at_home = frozen_at_home == "True"
 
-                if category == "Fresh_Produce":
-                    item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                             notes)
-                elif category == "Fruit_Produce":
-                    item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                             ripeness, is_cut, washed, notes)
-                elif category == "Raw_Meat":
-                    item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location,
-                                        purchase_date,
-                                        frozen, use_today, notes)
-                elif category == "Dairy":
-                    item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location, purchase_date,
-                                     open_date, is_open, notes)
-                elif category == "Other_Frozen":
-                    item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
-                                            purchase_date, open_date, frozen_at_home, is_open, notes)
-                elif category == "Baked_Goods":
-                    item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
-                                           purchase_date, ready_to_eat, homemade, notes)
-                elif category == "Condiment_Spice":
-                    item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                               open_date, is_open, condiment_type, notes)
-                elif category == "Snacks_Shelf_Stable":
-                    item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
-                                                   purchase_date, open_date, is_open, flavor, requested, notes)
-                else:
-                    item_obj = Food(name, quantity, perishable, days_left)
+                    if category == "Fresh_Produce":
+                        item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                                 notes)
+                    elif category == "Fruit_Produce":
+                        item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                                 ripeness, is_cut, washed, notes)
+                    elif category == "Raw_Meat":
+                        item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location,
+                                            purchase_date,
+                                            frozen, use_today, notes)
+                    elif category == "Dairy":
+                        item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location, purchase_date,
+                                         open_date, is_open, notes)
+                    elif category == "Other_Frozen":
+                        item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
+                                                purchase_date, open_date, frozen_at_home, is_open, notes)
+                    elif category == "Baked_Goods":
+                        item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
+                                               purchase_date, ready_to_eat, homemade, notes)
+                    elif category == "Condiment_Spice":
+                        item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                                   open_date, is_open, condiment_type, notes)
+                    elif category == "Snacks_Shelf_Stable":
+                        item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
+                                                       purchase_date, open_date, is_open, flavor, requested, notes)
+                    else:
+                        item_obj = Food(name, quantity, perishable, days_left)
 
-                self._shopping_list.append(item_obj)
-        print(f"Shopping List loaded from {shopping_filename}")
+                    self._shopping_list.append(item_obj)
+            print(f"Shopping List loaded from {shopping_filename}")
+        except Exception as e:
+            print(f"Loading Failed! \nError: {e}")
 
     def save_to_file(self, filename):
         """Load foods from a file into Pantry"""
         pantry_filename = "pantry_" + filename + ".txt"
         shopping_filename = "shopping_" + filename + ".txt"
-        with open(pantry_filename, "w") as file:
-            for item in self._pantry_list:
-                data = [
-                    str(item._category),
-                    str(item._name),
-                    str(item._quantity),
-                    str(item._perishable),
-                    str(item._days_left),
-                    str(getattr(item, '_storage_location', '')),
-                    str(getattr(item, '_purchase_date', '')),
-                    str(getattr(item, '_notes', '')).replace('\n', '<br>'),
-                    str(getattr(item, '_ripeness', '')),
-                    str(getattr(item, '_is_cut', '')),
-                    str(getattr(item, '_washed', '')),
-                    str(getattr(item, '_meat_type', '')),
-                    str(getattr(item, '_dairy_type', '')),
-                    str(getattr(item, '_frozen_type', '')),
-                    str(getattr(item, '_baked_type', '')),
-                    str(getattr(item, '_condiment_type', '')),
-                    str(getattr(item, '_snack_type', '')),
-                    str(getattr(item, '_frozen', '')),
-                    str(getattr(item, '_use_today', '')),
-                    str(getattr(item, '_open_date', '')),
-                    str(getattr(item, '_frozen_at_home', '')),
-                    str(getattr(item, '_ready_to_eat', '')),
-                    str(getattr(item, '_homemade', '')),
-                    str(getattr(item, '_flavor', '')),
-                    str(getattr(item, '_requested', '')),
+        try:
+            with open(pantry_filename, "w") as file:
+                for item in self._pantry_list:
+                    data = [
+                        str(item._category),
+                        str(item._name),
+                        str(item._quantity),
+                        str(item._perishable),
+                        str(item._days_left),
+                        str(getattr(item, '_storage_location', '')),
+                        str(getattr(item, '_purchase_date', '')),
+                        str(getattr(item, '_notes', '')).replace('\n', '<br>'),
+                        str(getattr(item, '_ripeness', '')),
+                        str(getattr(item, '_is_cut', '')),
+                        str(getattr(item, '_washed', '')),
+                        str(getattr(item, '_meat_type', '')),
+                        str(getattr(item, '_dairy_type', '')),
+                        str(getattr(item, '_frozen_type', '')),
+                        str(getattr(item, '_baked_type', '')),
+                        str(getattr(item, '_condiment_type', '')),
+                        str(getattr(item, '_snack_type', '')),
+                        str(getattr(item, '_frozen', '')),
+                        str(getattr(item, '_use_today', '')),
+                        str(getattr(item, '_open_date', '')),
+                        str(getattr(item, '_frozen_at_home', '')),
+                        str(getattr(item, '_ready_to_eat', '')),
+                        str(getattr(item, '_homemade', '')),
+                        str(getattr(item, '_flavor', '')),
+                        str(getattr(item, '_requested', '')),
 
-                ]
-                file.write(','.join(data) + '\n')
-        print(f"Pantry saved to {pantry_filename}")
+                    ]
+                    file.write(','.join(data) + '\n')
+            print(f"Pantry saved to {pantry_filename}")
 
-        with open(shopping_filename, "w") as file:
-            for item in self._shopping_list:
-                data = [
-                    str(item._category),
-                    str(item._name),
-                    str(item._quantity),
-                    str(item._perishable),
-                    str(item._days_left),
-                    str(getattr(item, '_storage_location', '')),
-                    str(getattr(item, '_purchase_date', '')),
-                    str(getattr(item, '_notes', '')).replace('<br>', '\n'),
-                    str(getattr(item, '_ripeness', '')),
-                    str(getattr(item, '_is_cut', '')),
-                    str(getattr(item, '_washed', '')),
-                    str(getattr(item, '_meat_type', '')),
-                    str(getattr(item, '_dairy_type', '')),
-                    str(getattr(item, '_frozen_type', '')),
-                    str(getattr(item, '_baked_type', '')),
-                    str(getattr(item, '_condiment_type', '')),
-                    str(getattr(item, '_snack_type', '')),
-                    str(getattr(item, '_frozen', '')),
-                    str(getattr(item, '_use_today', '')),
-                    str(getattr(item, '_open_date', '')),
-                    str(getattr(item, '_frozen_at_home', '')),
-                    str(getattr(item, '_ready_to_eat', '')),
-                    str(getattr(item, '_homemade', '')),
-                    str(getattr(item, '_flavor', '')),
-                    str(getattr(item, '_requested', '')),
+            with open(shopping_filename, "w") as file:
+                for item in self._shopping_list:
+                    data = [
+                        str(item._category),
+                        str(item._name),
+                        str(item._quantity),
+                        str(item._perishable),
+                        str(item._days_left),
+                        str(getattr(item, '_storage_location', '')),
+                        str(getattr(item, '_purchase_date', '')),
+                        str(getattr(item, '_notes', '')).replace('<br>', '\n'),
+                        str(getattr(item, '_ripeness', '')),
+                        str(getattr(item, '_is_cut', '')),
+                        str(getattr(item, '_washed', '')),
+                        str(getattr(item, '_meat_type', '')),
+                        str(getattr(item, '_dairy_type', '')),
+                        str(getattr(item, '_frozen_type', '')),
+                        str(getattr(item, '_baked_type', '')),
+                        str(getattr(item, '_condiment_type', '')),
+                        str(getattr(item, '_snack_type', '')),
+                        str(getattr(item, '_frozen', '')),
+                        str(getattr(item, '_use_today', '')),
+                        str(getattr(item, '_open_date', '')),
+                        str(getattr(item, '_frozen_at_home', '')),
+                        str(getattr(item, '_ready_to_eat', '')),
+                        str(getattr(item, '_homemade', '')),
+                        str(getattr(item, '_flavor', '')),
+                        str(getattr(item, '_requested', '')),
 
-                ]
-                file.write(','.join(data) + '\n')
-        print(f"Shopping List saved to {shopping_filename}")
+                    ]
+                    file.write(','.join(data) + '\n')
+            print(f"Shopping List saved to {shopping_filename}")
+        except Exception as e:
+            print(f"Error Saving! \nError: {e}")
 
     def printout_pantry(self):
         """User Chooses a Method which allows multiple types of printout of Pantry to be delivered
         Options include By Quantity, Alphabetically, and By Category(Eventually)"""
         print(f"Printout {self._name}'s Inventory?")
-        method = input(
-            "Please choose an Inventory Sort Method \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)").lower()
-        today = datetime.now().strftime("%Y-%m-%d")
-        header = f"=+= Pantry {self._name} Inventory Report for {today} =+="
-        print(header)
-        border = "-^" * 25
-        print(border)
-        while True:
-            if method == "exit":
-                break
-            elif method not in ["alphabet", "category", "quantity"]:
-                print("Invalid Input... deafulting to Alphabet")
-                method = "alphabet"
-            else:
-                print_filename = f"pantry_printout_{today}.txt"
-                sorted_items = self.sort_items(method)
+        try:
+            method = input(
+                "Please choose an Inventory Sort Method \nPlease Enter: (Alphabet, Category, Quantity) \n(exit to escape)").lower()
+            today = datetime.now().strftime("%Y-%m-%d")
+            header = f"=+= Pantry {self._name} Inventory Report for {today} =+="
+            print(header)
+            border = "-^" * 25
+            print(border)
+            while True:
+                if method == "exit":
+                    break
+                elif method not in ["alphabet", "category", "quantity"]:
+                    print("Invalid Input... deafulting to Alphabet")
+                    method = "alphabet"
+                else:
+                    print_filename = f"pantry_printout_{today}.txt"
+                    sorted_items = self.sort_items(method)
 
-                with open(print_filename, "w") as file:
-                    file.write(header + f"\n{border}" + "\n")
-                    for item in sorted_items:
-                        print_out = item.define()
-                        file.write(print_out + "\n")
-                break
+                    with open(print_filename, "w") as file:
+                        file.write(header + f"\n{border}" + "\n")
+                        for item in sorted_items:
+                            print_out = item.define()
+                            file.write(print_out + "\n")
+                    break
+        except Exception as e:
+            print(f"Error Printing Pantry! \nError: {e}")
 
     def printout_shopping_list(self):
         """User Chooses a Method which allows multiple types of printout of Shopping List to be delivered
             Options include By Chronology, Alphabetically, and By Category(Eventually)"""
         print(f"Printout {self._name}'s Shopping List?")
-        method = input(
-            "Please choose an Shopping List Sort Method \nPlease Enter: (Alphabet, Category) \n(exit to escape)").lower()
-        today = datetime.now().strftime("%Y-%m-%d")
-        header = f"=+= Pantry {self._name} Shopping List Report for {today} =+="
-        print(header)
-        border = "-^" * 25
-        print(border)
-        while True:
-            if method in ["exit", ""]:
-                break
-            elif method not in ["alphabet", "category"]:
-                print("Invalid Input. Deafulting to Alphabet")
-                method = "alphabet"
-            else:
-                print_filename = f"shopping_printout_{today}.txt"
-                if method == "alphabet":
-                    sorted_items = sorted(self._shopping_list, key=lambda item: item._name)
+        try:
+            method = input(
+                "Please choose an Shopping List Sort Method \nPlease Enter: (Alphabet, Category) \n(exit to escape)").lower()
+            today = datetime.now().strftime("%Y-%m-%d")
+            header = f"=+= Pantry {self._name} Shopping List Report for {today} =+="
+            print(header)
+            border = "-^" * 25
+            print(border)
+            while True:
+                if method in ["exit", ""]:
+                    break
+                elif method not in ["alphabet", "category"]:
+                    print("Invalid Input. Deafulting to Alphabet")
+                    method = "alphabet"
                 else:
-                    sorted_items = sorted(self._shopping_list, key=lambda item: item._name)
-                with open(print_filename, "w") as file:
-                    file.write(header + f"\n{border}" + "\n")
-                    for item in sorted_items:
-                        print_out = f"{item._name} ({item._category}) \n- Added on: {item._shopp_add_date if item._shopp_add_date else ""}"
-                        file.write(print_out + "\n")
-                break
+                    print_filename = f"shopping_printout_{today}.txt"
+                    if method == "alphabet":
+                        sorted_items = sorted(self._shopping_list, key=lambda item: item._name)
+                    else:
+                        sorted_items = sorted(self._shopping_list, key=lambda item: item._name)
+                    with open(print_filename, "w") as file:
+                        file.write(header + f"\n{border}" + "\n")
+                        for item in sorted_items:
+                            print_out = f"{item._name} ({item._category}) \n- Added on: {item._shopp_add_date if item._shopp_add_date else ""}"
+                            file.write(print_out + "\n")
+                    break
+        except Exception as e:
+            print(f"Error Saving! \nError: {e}")
 
     def create_item(self):
         # track common typos in most common food words and add mistake-correction
@@ -267,822 +279,847 @@ class Pantry:
             adds them to pantry_list """
 
         current_item_num = len(self._pantry_list)
-        while True:
-            category = input(
-                "What type of food are we creating today?: \n(basic, produce, fruit, meat, dairy, frozen, bakery, condiment, spice, snack, shelf stable) \n('EXIT' to quit): ").lower()
-
-            if category == "exit":
-                break
-
-            if category in ["", "basic"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                item_obj = Food(name, quantity, perishable, days_left)
-                break
-
-            elif category in ["produce"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date, notes)
-                break
-
-            elif category in ["fruit"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    ripen_enter = input("How ripe is it? (Under/Ripe/Over)").lower()
-                    if ripen_enter not in ["under", "ripe", "over"]:
-                        print("Invalid Enter. How ripe is it? (Under/Ripe/Over)")
-                    else:
-                        ripeness = ripen_enter
-                        break
-
-                while True:
-                    cut_input = input("Has this been Cut/Sliced? (Y/N)").lower()
-                    if cut_input == "y":
-                        is_cut = True
-                        break
-                    elif cut_input == "n":
-                        is_cut = False
-                        break
-                    else:
-                        print("Invalid Input. Has this been Cut/Sliced? (Y/N)?")
-
-                while True:
-                    washed_input = input("Has this been Washed? (Y/N)").lower()
-                    if washed_input == "y":
-                        washed = True
-                        break
-                    elif washed_input == "n":
-                        washed = False
-                        break
-                    else:
-                        print("Invalid Input. Has this been Washed? (Y/N)")
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                         ripeness, is_cut, washed, notes)
-                break
-
-            elif category in ["meat"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    meat_input = input("What kind of Meat is it?")
-                    if meat_input == "":
-                        meat_input = "unspecified"
-                        break
-                    else:
-                        meat_type = meat_input
-                        break
-
-                while True:
-                    froz_input = input("Is this Frozen? (Y/N)").lower()
-                    if froz_input == "y":
-                        frozen = True
-                        break
-                    elif froz_input == "n":
-                        frozen = False
-                        break
-                    else:
-                        print("Invalid Input. Is this Frozen? (Y/N)")
-
-                while True:
-                    use_today_input = input("Does this need to be used Today? (Y/N)").lower()
-                    if use_today_input == "y":
-                        use_today = True
-                        break
-                    elif use_today_input == "n":
-                        use_today = False
-                        break
-                    else:
-                        print("Invalid Input. Does this need to be used Today? (Y/N)")
-                        continue
-
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location, purchase_date,
-                                    frozen, use_today, notes)
-                break
-
-            elif category in ["dairy"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    dairy_input = input("What type of Dairy is it? (e.g. Cheese, Milk, Yogurt, etc)")
-                    if dairy_input == "":
-                        dairy_type = "unspecified"
-                        break
-                    else:
-                        dairy_type = dairy_input
-                        break
-
-                while True:
-                    openness_input = input("Has it been opened? (Y/N)").lower()
-                    if openness_input == "y":
-                        is_open = True
-                        open_date = input("When was it opened?")
-                        break
-                    elif openness_input == "n":
-                        is_open = False
-                        open_date = None
-                        break
-                    else:
-                        print("Invalid Input. Has this been opened?")
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location,
-                                 purchase_date, open_date, is_open, notes)
-                break
-
-            elif category in ["frozen"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    frozen_type_input = input("wWhat is being Frozen? (e.g. Veg, Ready-To-Eat, Stock, etc.)")
-                    if frozen_type_input == "":
-                        frozen_type = "unspecified"
-                        break
-                    else:
-                        frozen_type = frozen_type_input
-                        break
-                while True:
-                    at_home_input = input("Was this frozen at home? (Y/N)").lower()
-                    if at_home_input == "y":
-                        frozen_at_home = True
-                        break
-                    elif at_home_input == "n":
-                        frozen_at_home = False
-                        break
-                    else:
-                        print("Invalid Input. Was this frozen at home? (Y/N)")
-
-                while True:
-                    openness_input = input("Has this been opened? (Y/N)").lower()
-                    if openness_input == "y":
-                        is_open = True
-                        open_date = input("When was this opened?")
-                        break
-                    elif openness_input == "n":
-                        is_open = False
-                        open_date = None
-                        break
-                    else:
-                        print("Invalid Input. Has this been opened? (Y/N)")
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
-                                        purchase_date, open_date, frozen_at_home, is_open, notes)
-                break
-
-            elif category in ["bakery"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    baked_input = input("What type of Baked Good is it? (e.g. Bread, Pastry, Pasta, etc.)")
-                    if baked_input == "":
-                        baked_type = "unspecified"
-                        break
-                    else:
-                        baked_type = baked_input
-                        break
-
-                while True:
-                    ready_input = input("Is this Ready-To-Eat? (Y/N)").lower()
-                    if ready_input == "y":
-                        ready_to_eat = True
-                        break
-                    elif ready_input == "n":
-                        ready_to_eat = False
-                        break
-                    else:
-                        print("Invalid Input. Is this Ready-To-Eat? (Y/N)")
-
-                while True:
-                    homemade_input = input("Is this Homemade? (Y/N)").lower()
-                    if homemade_input == "y":
-                        homemade = True
-                        break
-                    elif homemade_input == "n":
-                        homemade = False
-                        break
-                    else:
-                        print("Invalid Input. Is this Homemade? (Y/N)")
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
-                                       purchase_date, ready_to_eat, homemade, notes)
-                break
-
-            elif category in ["condiment", "spice"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    cond_type_input = input(
-                        "What type of Condiment/Spice is this? (Sauce, Dried Herb, Ground Spice, Etc.)")
-                    if cond_type_input == "":
-                        condiment_type = "unspecified"
-                        break
-                    else:
-                        condiment_type = cond_type_input
-                        break
-
-                while True:
-                    openness_input = input("Has this been Opened? (Y/N)").lower()
-                    if openness_input == "y":
-                        is_open = True
-                        open_date = input("When was this opened?")
-                        break
-                    elif openness_input == "n":
-                        is_open = False
-                        open_date = None
-                        break
-                    else:
-                        print("Invalid Input. Has this been opened? (Y/N)")
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
-                                           open_date, is_open, condiment_type, notes)
-                break
-
-            elif category in ["snack", "shelf stable"]:
-                name = input("What is this food's name?: ")
-                while True:
-                    qty_input = input("How many are there?: ")
-                    try:
-                        quantity = int(qty_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                while True:
-                    perish_input = input("Is it perishable? (Y/N): ").lower()
-                    if perish_input == "y":
-                        perishable = True
-                        break
-                    elif perish_input == "n":
-                        perishable = False
-                        break
-                    else:
-                        print("Invalid input, please enter Y or N.")
-
-                while True:
-                    days_input = input("How many days until it expires?: ")
-                    try:
-                        days_left = int(days_input)
-                        break
-                    except ValueError:
-                        print("Invalid input. Please enter a number.")
-
-                storage_location = input("Where are you storing it?")
-                while True:
-                    purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
-                    if purchase_enter_bool == "y":
-                        purchase_date = input("When did you purchase this?")
-                        break
-                    else:
-                        purchase_date = None
-                        break
-
-                while True:
-                    snack_input = input("What kind of snack/shelf stable item is this?")
-                    if snack_input == "":
-                        snack_type = "unspecified"
-                        break
-                    else:
-                        snack_type = snack_input
-                        break
-
-                while True:
-                    flavor_input = input("What flavor is this Snack? (leave blank for 'unspecified')")
-                    if flavor_input == "":
-                        flavor = "unspecified"
-                        break
-                    else:
-                        flavor = flavor_input
-                        break
-
-                while True:
-                    request_input = input("Was this Requested by someone? (Y/N)").lower()
-                    if request_input == "y":
-                        requested_by = input("By Whom was it Requested?")
-                        break
-                    elif request_input == "n":
-                        requested_by = None
-                        break
-                    else:
-                        print("Invalid Input. Was this Requested by someone? (Y/N)")
-
-                while True:
-                    openness_input = input("Has this been opened? (Y/N)").lower()
-                    if openness_input == "y":
-                        is_open = True
-                        open_date = input("When was this opened?")
-                        break
-                    elif openness_input == "n":
-                        is_open = False
-                        open_date = None
-                        break
-                    else:
-                        print("Invalid Input. Has this been opened? (Y/N)")
-
-                while True:
-                    notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
-                    if notes_enter_bool == "y":
-                        notes = input("Type Notes Here: ")
-                        break
-                    else:
-                        notes = ""
-                        break
-
-                item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
-                                               purchase_date, open_date, is_open, flavor, requested_by, notes)
-                break
-
-            else:
-                print(
-                    "Improper Selection... Please Try Again: \n(basic, produce, fruit, meat, dairy, frozen, bakery, condiment, spice, snack, shelf stable) \n('EXIT' to quit)")
-                continue
-
-        print()
-        item_obj.define()
-        while True:
-            final_confirmation_input = input("Is this correct (Y/N)").lower()
-            if final_confirmation_input == "y":
-                self._pantry_list.append(item_obj)
-                self.save_to_file(f"{self._name}.txt")
-                break
-            elif final_confirmation_input == "n":
-                print("Many Apologies, Please Try Again")
-                break
-            else:
-                print("Invalid Input, Please Try Again")
-                continue
-
+        try:
+            while True:
+                category = input(
+                    "What type of food are we creating today?: \n(basic, produce, fruit, meat, dairy, frozen, bakery, condiment, spice, snack, shelf stable) \n('EXIT' to quit): ").lower()
+
+                if category == "exit":
+                    break
+
+                if category in ["", "basic"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    item_obj = Food(name, quantity, perishable, days_left)
+                    break
+
+                elif category in ["produce"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Fresh_Produce(name, quantity, perishable, days_left, storage_location, purchase_date, notes)
+                    break
+
+                elif category in ["fruit"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        ripen_enter = input("How ripe is it? (Under/Ripe/Over)").lower()
+                        if ripen_enter not in ["under", "ripe", "over"]:
+                            print("Invalid Enter. How ripe is it? (Under/Ripe/Over)")
+                        else:
+                            ripeness = ripen_enter
+                            break
+
+                    while True:
+                        cut_input = input("Has this been Cut/Sliced? (Y/N)").lower()
+                        if cut_input == "y":
+                            is_cut = True
+                            break
+                        elif cut_input == "n":
+                            is_cut = False
+                            break
+                        else:
+                            print("Invalid Input. Has this been Cut/Sliced? (Y/N)?")
+
+                    while True:
+                        washed_input = input("Has this been Washed? (Y/N)").lower()
+                        if washed_input == "y":
+                            washed = True
+                            break
+                        elif washed_input == "n":
+                            washed = False
+                            break
+                        else:
+                            print("Invalid Input. Has this been Washed? (Y/N)")
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Fruit_Produce(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                             ripeness, is_cut, washed, notes)
+                    break
+
+                elif category in ["meat"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        meat_input = input("What kind of Meat is it?")
+                        if meat_input == "":
+                            meat_input = "unspecified"
+                            break
+                        else:
+                            meat_type = meat_input
+                            break
+
+                    while True:
+                        froz_input = input("Is this Frozen? (Y/N)").lower()
+                        if froz_input == "y":
+                            frozen = True
+                            break
+                        elif froz_input == "n":
+                            frozen = False
+                            break
+                        else:
+                            print("Invalid Input. Is this Frozen? (Y/N)")
+
+                    while True:
+                        use_today_input = input("Does this need to be used Today? (Y/N)").lower()
+                        if use_today_input == "y":
+                            use_today = True
+                            break
+                        elif use_today_input == "n":
+                            use_today = False
+                            break
+                        else:
+                            print("Invalid Input. Does this need to be used Today? (Y/N)")
+                            continue
+
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Raw_Meat(name, quantity, perishable, days_left, meat_type, storage_location, purchase_date,
+                                        frozen, use_today, notes)
+                    break
+
+                elif category in ["dairy"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        dairy_input = input("What type of Dairy is it? (e.g. Cheese, Milk, Yogurt, etc)")
+                        if dairy_input == "":
+                            dairy_type = "unspecified"
+                            break
+                        else:
+                            dairy_type = dairy_input
+                            break
+
+                    while True:
+                        openness_input = input("Has it been opened? (Y/N)").lower()
+                        if openness_input == "y":
+                            is_open = True
+                            open_date = input("When was it opened?")
+                            break
+                        elif openness_input == "n":
+                            is_open = False
+                            open_date = None
+                            break
+                        else:
+                            print("Invalid Input. Has this been opened?")
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Dairy(name, quantity, perishable, days_left, dairy_type, storage_location,
+                                     purchase_date, open_date, is_open, notes)
+                    break
+
+                elif category in ["frozen"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        frozen_type_input = input("wWhat is being Frozen? (e.g. Veg, Ready-To-Eat, Stock, etc.)")
+                        if frozen_type_input == "":
+                            frozen_type = "unspecified"
+                            break
+                        else:
+                            frozen_type = frozen_type_input
+                            break
+                    while True:
+                        at_home_input = input("Was this frozen at home? (Y/N)").lower()
+                        if at_home_input == "y":
+                            frozen_at_home = True
+                            break
+                        elif at_home_input == "n":
+                            frozen_at_home = False
+                            break
+                        else:
+                            print("Invalid Input. Was this frozen at home? (Y/N)")
+
+                    while True:
+                        openness_input = input("Has this been opened? (Y/N)").lower()
+                        if openness_input == "y":
+                            is_open = True
+                            open_date = input("When was this opened?")
+                            break
+                        elif openness_input == "n":
+                            is_open = False
+                            open_date = None
+                            break
+                        else:
+                            print("Invalid Input. Has this been opened? (Y/N)")
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Other_Frozen(name, quantity, perishable, days_left, frozen_type, storage_location,
+                                            purchase_date, open_date, frozen_at_home, is_open, notes)
+                    break
+
+                elif category in ["bakery"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        baked_input = input("What type of Baked Good is it? (e.g. Bread, Pastry, Pasta, etc.)")
+                        if baked_input == "":
+                            baked_type = "unspecified"
+                            break
+                        else:
+                            baked_type = baked_input
+                            break
+
+                    while True:
+                        ready_input = input("Is this Ready-To-Eat? (Y/N)").lower()
+                        if ready_input == "y":
+                            ready_to_eat = True
+                            break
+                        elif ready_input == "n":
+                            ready_to_eat = False
+                            break
+                        else:
+                            print("Invalid Input. Is this Ready-To-Eat? (Y/N)")
+
+                    while True:
+                        homemade_input = input("Is this Homemade? (Y/N)").lower()
+                        if homemade_input == "y":
+                            homemade = True
+                            break
+                        elif homemade_input == "n":
+                            homemade = False
+                            break
+                        else:
+                            print("Invalid Input. Is this Homemade? (Y/N)")
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Baked_Goods(name, quantity, perishable, days_left, baked_type, storage_location,
+                                           purchase_date, ready_to_eat, homemade, notes)
+                    break
+
+                elif category in ["condiment", "spice"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        cond_type_input = input(
+                            "What type of Condiment/Spice is this? (Sauce, Dried Herb, Ground Spice, Etc.)")
+                        if cond_type_input == "":
+                            condiment_type = "unspecified"
+                            break
+                        else:
+                            condiment_type = cond_type_input
+                            break
+
+                    while True:
+                        openness_input = input("Has this been Opened? (Y/N)").lower()
+                        if openness_input == "y":
+                            is_open = True
+                            open_date = input("When was this opened?")
+                            break
+                        elif openness_input == "n":
+                            is_open = False
+                            open_date = None
+                            break
+                        else:
+                            print("Invalid Input. Has this been opened? (Y/N)")
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Condiment_Spice(name, quantity, perishable, days_left, storage_location, purchase_date,
+                                               open_date, is_open, condiment_type, notes)
+                    break
+
+                elif category in ["snack", "shelf stable"]:
+                    name = input("What is this food's name?: ")
+                    while True:
+                        qty_input = input("How many are there?: ")
+                        try:
+                            quantity = int(qty_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    while True:
+                        perish_input = input("Is it perishable? (Y/N): ").lower()
+                        if perish_input == "y":
+                            perishable = True
+                            break
+                        elif perish_input == "n":
+                            perishable = False
+                            break
+                        else:
+                            print("Invalid input, please enter Y or N.")
+
+                    while True:
+                        days_input = input("How many days until it expires?: ")
+                        try:
+                            days_left = int(days_input)
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+
+                    storage_location = input("Where are you storing it?")
+                    while True:
+                        purchase_enter_bool = input("Do you want to enter a purchase date? (Y/N)").lower()
+                        if purchase_enter_bool == "y":
+                            purchase_date = input("When did you purchase this?")
+                            break
+                        else:
+                            purchase_date = None
+                            break
+
+                    while True:
+                        snack_input = input("What kind of snack/shelf stable item is this?")
+                        if snack_input == "":
+                            snack_type = "unspecified"
+                            break
+                        else:
+                            snack_type = snack_input
+                            break
+
+                    while True:
+                        flavor_input = input("What flavor is this Snack? (leave blank for 'unspecified')")
+                        if flavor_input == "":
+                            flavor = "unspecified"
+                            break
+                        else:
+                            flavor = flavor_input
+                            break
+
+                    while True:
+                        request_input = input("Was this Requested by someone? (Y/N)").lower()
+                        if request_input == "y":
+                            requested_by = input("By Whom was it Requested?")
+                            break
+                        elif request_input == "n":
+                            requested_by = None
+                            break
+                        else:
+                            print("Invalid Input. Was this Requested by someone? (Y/N)")
+
+                    while True:
+                        openness_input = input("Has this been opened? (Y/N)").lower()
+                        if openness_input == "y":
+                            is_open = True
+                            open_date = input("When was this opened?")
+                            break
+                        elif openness_input == "n":
+                            is_open = False
+                            open_date = None
+                            break
+                        else:
+                            print("Invalid Input. Has this been opened? (Y/N)")
+
+                    while True:
+                        notes_enter_bool = input("Do you want to enter any additional information? (Y/N)").lower()
+                        if notes_enter_bool == "y":
+                            notes = input("Type Notes Here: ")
+                            break
+                        else:
+                            notes = ""
+                            break
+
+                    item_obj = Snacks_Shelf_Stable(name, quantity, perishable, days_left, snack_type, storage_location,
+                                                   purchase_date, open_date, is_open, flavor, requested_by, notes)
+                    break
+
+                else:
+                    print(
+                        "Improper Selection... Please Try Again: \n(basic, produce, fruit, meat, dairy, frozen, bakery, condiment, spice, snack, shelf stable) \n('EXIT' to quit)")
+                    continue
+
+            print()
+            item_obj.define()
+            while True:
+                final_confirmation_input = input("Is this correct (Y/N)").lower()
+                if final_confirmation_input == "y":
+                    self._pantry_list.append(item_obj)
+                    self.save_to_file(f"{self._name}.txt")
+                    break
+                elif final_confirmation_input == "n":
+                    print("Many Apologies, Please Try Again")
+                    break
+                else:
+                    print("Invalid Input, Please Try Again")
+                    continue
+        except Exception as e:
+            print(f"Error in Item Creation! \nError: {e}")
 
     def add_to_pantry(self, item):
         """Adds an Existing Food Object to Pantry List"""
-        if item not in self._pantry_list:
-            self._pantry_list.append(item)
-            self.save_to_file(f"{self._name}.txt")
-            print(f"Adding {item._name} to {self._name}'s pantry")
-        else:
-            print(f"Item: {item._name} already in {self._name}'s pantry!")
-
+        try:
+            if item not in self._pantry_list:
+                self._pantry_list.append(item)
+                self.save_to_file(f"{self._name}.txt")
+                print(f"Adding {item._name} to {self._name}'s pantry")
+            else:
+                print(f"Item: {item._name} already in {self._name}'s pantry!")
+        except Exception as e:
+            print(f"Error Adding to Pantry! \nError: {e}")
     def remove_item(self, item):
         # track common typos in common food words and add mistake-correction
         """ program takes user inputs
             and removes Food items from Pantry List"""
-        if item in self._pantry_list:
+        try:
+            if item in self._pantry_list:
 
-            self._pantry_list.remove(item)
-            print(f"Removing {item._name} from {self._name}'s pantry")
-            item._quantity = 0
-            self._shopping_list.append(item)
-            self.save_to_file(f"{self._name}.txt")
-            print(f"Added {item._name} to {self._name}'s Shopping List")
-        else:
-            print("Item not found!")
+                self._pantry_list.remove(item)
+                print(f"Removing {item._name} from {self._name}'s pantry")
+                item._quantity = 0
+                self._shopping_list.append(item)
+                self.save_to_file(f"{self._name}.txt")
+                print(f"Added {item._name} to {self._name}'s Shopping List")
+            else:
+                print("Item not found!")
+        except Exception as e:
+            print(f"Error Removing from Pantry! \nError: {e}")
 
     def use_item(self, item, quantity):
         # track common typos in common food words and add mistake-correction
         """User chooses a Food item to subtract a quantity from
             If user uses all items in inventory, displays a prompt
             informing user and removing it from the Pantry List"""
-        if item in self._pantry_list:
-            orig_quantity = item._quantity
-            item._quantity -= quantity
+        try:
+            if item in self._pantry_list:
+                orig_quantity = item._quantity
+                item._quantity -= quantity
 
-            if item._quantity < 0:
-                item._quantity = 0
-                self.remove_item(item)
-                print(
-                    f"Used {orig_quantity} of {item._name}. {item._name.capitalize()} now out of stock and moved to shopping list")
+                if item._quantity < 0:
+                    item._quantity = 0
+                    self.remove_item(item)
+                    print(
+                        f"Used {orig_quantity} of {item._name}. {item._name.capitalize()} now out of stock and moved to shopping list")
+                else:
+                    print(f"Used {quantity} of {item._name}. {item._quantity} {item._name} left in pantry")
+                self.save_to_file(f"{self._name}.txt")
             else:
-                print(f"Used {quantity} of {item._name}. {item._quantity} {item._name} left in pantry")
-            self.save_to_file(f"{self._name}.txt")
-        else:
-            print("Item not found")
+                print("Item not found")
+        except Exception as e:
+            print(f"Error in Using Item! \nError: {e}")
 
     def modify_item(self):
         # track common typos in common food words and add mistake-correction
         """User chooses a created Food Item to modify
             the Attributes of in the case of Errors or new Information"""
         print(f"Items in {self._name}'s inventory to be modified")
-        for item in self._pantry_list:
-            print(item._name)
-        while True:
-            item_lookup_val = input("Which item do you want to modify? ('exit' to escape)")
-            if item_lookup_val.lower() == "exit":
-                break
-            selected = None
+        try:
             for item in self._pantry_list:
-                if item_lookup_val.lower() == item._name.lower():
-                    selected = item
-                    break
-            if not selected:
-                print("Item not found. Try again or 'exit'.")
-                continue
+                print(item._name)
             while True:
-                attr_map = {attr.lstrip('_'): attr for attr in vars(selected)}
-                print(f"Modifiable Attributes: {', '.join(attr_map.keys())}")
-                attr_to_mod = input("Which attribute do you want to update? ").lower().strip()
-                if attr_to_mod in attr_map:
-                    new_value = input(f"Enter new value for {attr_to_mod}: ")
-                    old_val = getattr(selected, attr_map[attr_to_mod])
-                    if isinstance(old_val, bool):
-                        new_value = new_value.lower() in ["true", "yes", "y", "1"]
-                    elif isinstance(old_val, int):
-                        new_value = int(new_value)
-                    setattr(selected, attr_map[attr_to_mod], new_value)
-                    print(f"{attr_to_mod} updated succesfully")
-                    self.save_to_file(f"{self._name}.txt")
-                    another_attr = input("Modify another attribute of this item (Y/N): ").lower()
-                    if another_attr != "y":
+                item_lookup_val = input("Which item do you want to modify? ('exit' to escape)")
+                if item_lookup_val.lower() == "exit":
+                    break
+                selected = None
+                for item in self._pantry_list:
+                    if item_lookup_val.lower() == item._name.lower():
+                        selected = item
                         break
-                    elif another_attr.lower() not in ["y", "n"]:
-                        print("Invalid Input, Please Try Again")
-                        continue
-                else:
-                    print("Invalid Attribute. No changees made.")
-            # Code Logic for return or exit Item Modify
+                if not selected:
+                    print("Item not found. Try again or 'exit'.")
+                    continue
+                while True:
+                    attr_map = {attr.lstrip('_'): attr for attr in vars(selected)}
+                    print(f"Modifiable Attributes: {', '.join(attr_map.keys())}")
+                    attr_to_mod = input("Which attribute do you want to update? ").lower().strip()
+                    if attr_to_mod in attr_map:
+                        new_value = input(f"Enter new value for {attr_to_mod}: ")
+                        old_val = getattr(selected, attr_map[attr_to_mod])
+                        if isinstance(old_val, bool):
+                            new_value = new_value.lower() in ["true", "yes", "y", "1"]
+                        elif isinstance(old_val, int):
+                            new_value = int(new_value)
+                        setattr(selected, attr_map[attr_to_mod], new_value)
+                        print(f"{attr_to_mod} updated succesfully")
+                        self.save_to_file(f"{self._name}.txt")
+                        another_attr = input("Modify another attribute of this item (Y/N): ").lower()
+                        if another_attr != "y":
+                            break
+                        elif another_attr.lower() not in ["y", "n"]:
+                            print("Invalid Input, Please Try Again")
+                            continue
+                    else:
+                        print("Invalid Attribute. No changees made.")
+        except Exception as e:
+            print(f"Error in Modifying Item! \nError: {e}")
 
     def sort_items(self, method="alphabet"):
         """Sorts Items in chosen inventory list
             by chosen method (Expiry, Quantity>, Quantity<, Category, Alphabet<)"""
-        if method == "alphabet":
-            return sorted(self._pantry_list, key=lambda item: item._name)
-        elif method == "category":
-            return sorted(self._pantry_list, key=lambda item: item._category)
-        elif method == "quantity":
-            return sorted(self._pantry_list, key=lambda item: item._quantity, reverse=True)
-        else:
-            print(f"Unknown sort method: {method}. Returning unsorted list.")
-            return self._pantry_list
+        try:
+            if method == "alphabet":
+                return sorted(self._pantry_list, key=lambda item: item._name)
+            elif method == "category":
+                return sorted(self._pantry_list, key=lambda item: item._category)
+            elif method == "quantity":
+                return sorted(self._pantry_list, key=lambda item: item._quantity, reverse=True)
+            else:
+                print(f"Unknown sort method: {method}. Returning unsorted list.")
+                return self._pantry_list
+        except Exception as e:
+            print(f"Error in Sorting! \nError: {e}")
 
     def find_item(self, name):
         """Looks for an Item by Name and
             quickly displays information about it including Qty, Expiry, etc."""
-        for item in self._pantry_list:
-            if item._name.lower() == name.lower():
-                print(f"Item {item._name} found in Pantry {self._name}'s Inventory!")
-                item.define()
-                return item
-        for item in self._shopping_list:
-            if item._name.lower() == name.lower():
-                print(f"Item {item._name} found in Pantry {self._name}'s Shopping List!")
-                return item
+        try:
+            for item in self._pantry_list:
+                if item._name.lower() == name.lower():
+                    print(f"Item {item._name} found in Pantry {self._name}'s Inventory!")
+                    item.define()
+                    return item._name
+            for item in self._shopping_list:
+                if item._name.lower() == name.lower():
+                    print(f"Item {item._name} found in Pantry {self._name}'s Shopping List!")
+                    return item._name
+        except Exception as e:
+            print(f"Error in Finding Item! \nError: {e}")
 
     def save_and_exit(self):
         """Asks User if they want to save,
             then either save and exits, or just exits without saving"""
         print("Save and Exit Program")
-        import sys
-        exit_var = input("Do you want to save before you exit? (Y/N)").lower()
-        if exit_var not in ["y", "n"]:
-            print("Invalid Input. \nDo you want to save before you exit? (Y/N) ")
-        elif exit_var == "y":
-            self.save_to_file(f"{self._name}.txt")
-            sys.exit("Pantry Saved \nThank You for Using Pantry Manager!")
-        else:
-            sys.exit("Thank You for Using Pantry Manager!")
-def pantry_directory(self):
-    return list(enumerate(self._pantry_list))
+        try:
+            import sys
+            exit_var = input("Do you want to save before you exit? (Y/N)").lower()
+            if exit_var not in ["y", "n"]:
+                print("Invalid Input. \nDo you want to save before you exit? (Y/N) ")
+            elif exit_var == "y":
+                self.save_to_file(f"{self._name}.txt")
+                sys.exit("Pantry Saved \nThank You for Using Pantry Manager!")
+            else:
+                sys.exit("Thank You for Using Pantry Manager!")
+        except Exception as e:
+            print(f"Error in Saving and Exiting Program! \nError: {e}")
+
+    def pantry_directory(self):
+        try:
+            return list(enumerate(self._pantry_list))
+        except Exception as e:
+            print(f"Error in Pantry-Directory! \nError: {e}")
 
 class Food:
     """Main Class of Pantry Items
@@ -1975,107 +2012,114 @@ print("*--=--" * 6)
 print("Built By: Sirius_21")
 print("*--=--" * 6)
 print("*--=--" * 6)
-pantry_obj = sys_daily_startup()
+try:
+    pantry_obj = sys_daily_startup()
+except Exception as e:
+    print(f"Error with System's Daily StartUp \n Error: {e}")
 print("*--=--" * 6)
 print("*--=--" * 6)
 print("Daily Startup Complete!")
 
-while True:
-    for index_num, item in enumerate(directory):
-        print(f"{index_num + 1}. {item}")
-    dir_nav_value = input("Would you like to perform any other tasks? \n(Type number or action to use) \n('Exit' to exit)").lower().strip()
-    if dir_nav_value not in ["exit", "find_item", "find item", "find", "modify_item", "modify item", "modify", "sort_item", "sort item", "sort", "remove_item", "remove item", "remove", "add_to_pantry", "add to pantry", "add", "create_item", "create item", "create", "printout_shopping", "printout shopping", "printout_pantry", "printout pantry", "save_to_file", "save", "load_from_file", "load", "help me", "help_me", "start_up", "startup", "start", directory, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]:
-        print("Invalid Input!")
-        continue
-    elif dir_nav_value == "exit":
-        break
-    elif dir_nav_value in ["1", "help", "help me", "help_me"]:
-        help_me()
-        continue
-    elif dir_nav_value in ["2", "sys_daily_startup", "start_up", "startup", "start"]:
-        sys_daily_startup()
-        continue
-    elif dir_nav_value in ["3", "load_from_file", "load"]:
-        filename = input("Please enter the Pantry to load's name: ")
-        try:
-            pantry_obj.load_from_file(filename)
-        except Exception as e:
-            print(f"Attention! File not Loaded: Error: {e}")
-        continue
-    elif dir_nav_value in ["4", "save_to_file", "save"]:
-        filename = input("Please enter the Pantry to save's name: ")
-        try:
-            pantry_obj.save_to_file(filename)
-        except Exception as e:
-            print(f"Attention! File not Saved: Error: {e}")
-        continue
-    elif dir_nav_value in ["5", "printout_pantry", "printout pantry"]:
-        pantry_obj.printout_pantry()
-        continue
-    elif dir_nav_value in ["6", "printout_shopping", "printout shopping"]:
-        pantry_obj.printout_shopping()
-        continue
-    elif dir_nav_value in ["7", "create_item", "create item", "create"]:
-        pantry_obj.create_item()
-        continue
-    elif dir_nav_value in ["8", "add_to_pantry", "add to pantry", "add"]:
-        print("*--=--" * 6)
-        print("Add to Pantry unsuported at this time! \nPlease Use Create Item for now. \nThank You")
-        print("*--=--" * 6)
-        continue
-    elif dir_nav_value in ["9", "remove_item", "remove item", "remove"]:
-        pantry_directory_list = pantry_obj.pantry_directory()
-        for idx, item in pantry_directory_list:
-            print(f"{idx + 1}. {item} {item._category}")
-            try:
-                selection = int(input("Please enter item number: ")) - 1
-                idx, selected_item = pantry_directory_list[selection]
-            except (ValueError, IndexError):
-                print("Invalid Selection!")
-        pantry_obj.remove_item(selected_item)
-        continue
-    elif dir_nav_value in ["10", "use_item", "use item", "use"]:
-        pantry_directory_list = pantry_obj.pantry_directory()
-        for idx, item in pantry_directory_list:
-            print(f"{idx + 1}. {item} {item._category}")
-            try:
-                selection = int(input("Please enter item number: ")) - 1
-                idx, selected_item = pantry_directory_list[selection]
-            except (ValueError, IndexError):
-                print("Invalid Selection!")
-        try:
-            num_used = int(input("Please enter number of items to use: "))
-        except (ValueError):
-            print("Invalid Input")
-        pantry_obj.use_item(selected_item, num_used)
-        continue
-    elif dir_nav_value in ["11", "modify_item", "modify item", "modify"]:
-        pantry_obj.modify_item()
-        continue
-    elif dir_nav_value in ["12", "sort_item", "sort item", "sort"]:
-        method = input("Please enter sort method: ('Alphabet', 'Category' 'Quantity')").lower()
-        if method not in ["alphabet", "category", "quantity"]:
+try:
+    while True:
+        for index_num, item in enumerate(directory):
+            print(f"{index_num + 1}. {item}")
+        dir_nav_value = input("Would you like to perform any other tasks? \n(Type number or action to use) \n('Exit' to exit)").lower().strip()
+        if dir_nav_value not in ["exit", "find_item", "find item", "find", "modify_item", "modify item", "modify", "sort_item", "sort item", "sort", "remove_item", "remove item", "remove", "add_to_pantry", "add to pantry", "add", "create_item", "create item", "create", "printout_shopping", "printout shopping", "printout_pantry", "printout pantry", "save_to_file", "save", "load_from_file", "load", "help me", "help_me", "start_up", "startup", "start", directory, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]:
             print("Invalid Input!")
-        else:
-            pantry_obj.sort_item(method)
-        continue
-    elif dir_nav_value in ["13", "find_item", "find item", "find"]:
-        pantry_directory_list = pantry_obj.pantry_directory()
-        for idx, item in pantry_directory_list:
-            print(f"{idx + 1}. {item} {item._category}")
+            continue
+        elif dir_nav_value == "exit":
+            break
+        elif dir_nav_value in ["1", "help", "help me", "help_me"]:
+            help_me()
+            continue
+        elif dir_nav_value in ["2", "sys_daily_startup", "start_up", "startup", "start"]:
+            sys_daily_startup()
+            continue
+        elif dir_nav_value in ["3", "load_from_file", "load"]:
+            filename = input("Please enter the Pantry to load's name: ")
+            try:
+                pantry_obj.load_from_file(filename)
+            except Exception as e:
+                print(f"Attention! File not Loaded: Error: {e}")
+            continue
+        elif dir_nav_value in ["4", "save_to_file", "save"]:
+            filename = input("Please enter the Pantry to save's name: ")
+            try:
+                pantry_obj.save_to_file(filename)
+            except Exception as e:
+                print(f"Attention! File not Saved: Error: {e}")
+            continue
+        elif dir_nav_value in ["5", "printout_pantry", "printout pantry"]:
+            pantry_obj.printout_pantry()
+            continue
+        elif dir_nav_value in ["6", "printout_shopping", "printout shopping"]:
+            pantry_obj.printout_shopping()
+            continue
+        elif dir_nav_value in ["7", "create_item", "create item", "create"]:
+            pantry_obj.create_item()
+            continue
+        elif dir_nav_value in ["8", "add_to_pantry", "add to pantry", "add"]:
+            print("*--=--" * 6)
+            print("Add to Pantry unsuported at this time! \nPlease Use Create Item for now. \nThank You")
+            print("*--=--" * 6)
+            continue
+        elif dir_nav_value in ["9", "remove_item", "remove item", "remove"]:
+            pantry_directory_list = pantry_obj.pantry_directory()
+            for idx, item in pantry_directory_list:
+                print(f"{idx + 1}. {item._name} {item._category}")
             try:
                 selection = int(input("Please enter item number: ")) - 1
                 idx, selected_item = pantry_directory_list[selection]
             except (ValueError, IndexError):
                 print("Invalid Selection!")
-        pantry_obj.find_item(selected_item)
-        continue
-    elif dir_nav_value in ["14", "save_and_exit", "save and exit"]:
-        pantry_obj.save_and_exit()
-        break
-    else:
-        pass
+            pantry_obj.remove_item(selected_item)
+            continue
+        elif dir_nav_value in ["10", "use_item", "use item", "use"]:
+            pantry_directory_list = pantry_obj.pantry_directory()
+            for idx, item in pantry_directory_list:
+                print(f"{idx + 1}. {item} {item._category}")
+            try:
+                selection = int(input("Please enter item number: ")) - 1
+                idx, selected_item = pantry_directory_list[selection]
+            except (ValueError, IndexError):
+                print("Invalid Selection!")
+            try:
+                num_used = int(input("Please enter number of items to use: "))
+            except (ValueError):
+                print("Invalid Input")
+            pantry_obj.use_item(selected_item, num_used)
+            continue
+        elif dir_nav_value in ["11", "modify_item", "modify item", "modify"]:
+            pantry_obj.modify_item()
+            continue
+        elif dir_nav_value in ["12", "sort_item", "sort item", "sort"]:
+            method = input("Please enter sort method: ('Alphabet', 'Category' 'Quantity')").lower()
+            if method not in ["alphabet", "category", "quantity"]:
+                print("Invalid Input!")
+            else:
+                pantry_obj.sort_item(method)
+            continue
+        elif dir_nav_value in ["13", "find_item", "find item", "find"]:
+            pantry_directory_list = pantry_obj.pantry_directory()
+            for idx, item in pantry_directory_list:
+                print(f"{idx + 1}. {item._name} {item._category}")
+            try:
+                selection = int(input("Please enter item number: ")) - 1
+                idx, selected_item = pantry_directory_list[selection]
+                name = selected_item._name
+            except (ValueError, IndexError):
+                print("Invalid Selection!")
 
+            print(pantry_obj.find_item(name))
+            continue
+        elif dir_nav_value in ["14", "save_and_exit", "save and exit"]:
+            pantry_obj.save_and_exit()
+            break
+        else:
+            pass
+except Exception as e:
+    print(f"Error With Main Program... \nError: {e}")
 print("*--=--" * 6)
 print("*--=--" * 6)
 print("*--=--" * 6)
