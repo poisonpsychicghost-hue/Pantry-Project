@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="minor fixes in Main Program: input cleanups">
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added try/except blocks (error prints to user) to pertinent functions. Fixed find_item function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
     </list>
@@ -378,7 +378,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772477247471</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="added try/except blocks (error prints to user) to pertinent functions. Fixed find_item function">
+      <option name="closed" value="true" />
+      <created>1772502552696</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1772502552696</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -393,7 +401,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="finished save_and_exit, commented out extra prints in define()'s logic." />
     <MESSAGE value="Updated sort_items and refactored sorting to utilize the method." />
     <MESSAGE value="fixed ndention errors and loops in modify_item" />
     <MESSAGE value="fixed errors in management methods. should be ready for full test." />
@@ -418,7 +425,8 @@
     <MESSAGE value="cleaned up some bugs in printouts again." />
     <MESSAGE value="fixed parsing error in save/load" />
     <MESSAGE value="minor fixes in Main Program: input cleanups" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor fixes in Main Program: input cleanups" />
+    <MESSAGE value="added try/except blocks (error prints to user) to pertinent functions. Fixed find_item function" />
+    <option name="LAST_COMMIT_MESSAGE" value="added try/except blocks (error prints to user) to pertinent functions. Fixed find_item function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

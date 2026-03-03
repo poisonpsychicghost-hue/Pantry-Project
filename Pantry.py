@@ -2073,6 +2073,7 @@ try:
                 idx, selected_item = pantry_directory_list[selection]
             except (ValueError, IndexError):
                 print("Invalid Selection!")
+                continue
             pantry_obj.remove_item(selected_item)
             continue
         elif dir_nav_value in ["10", "use_item", "use item", "use"]:
@@ -2084,10 +2085,12 @@ try:
                 idx, selected_item = pantry_directory_list[selection]
             except (ValueError, IndexError):
                 print("Invalid Selection!")
+                continue
             try:
                 num_used = int(input("Please enter number of items to use: "))
             except (ValueError):
                 print("Invalid Input")
+                continue
             pantry_obj.use_item(selected_item, num_used)
             continue
         elif dir_nav_value in ["11", "modify_item", "modify item", "modify"]:
