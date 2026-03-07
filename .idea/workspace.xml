@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added try/except blocks (error prints to user) to pertinent functions. Fixed find_item function">
+    <list default="true" id="6042c27c-ceb1-4dfb-8698-dac37cfadfcc" name="Changes" comment="added missing continues in main program call's exception blocks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pantry.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pantry.py" afterDir="false" />
     </list>
@@ -386,7 +386,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772502552696</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="added missing continues in main program call's exception blocks">
+      <option name="closed" value="true" />
+      <created>1772503326233</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1772503326233</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -401,7 +409,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated sort_items and refactored sorting to utilize the method." />
     <MESSAGE value="fixed ndention errors and loops in modify_item" />
     <MESSAGE value="fixed errors in management methods. should be ready for full test." />
     <MESSAGE value="added in logic for is_expired, caught some bugs in create_item that were causing unnecessary recursion" />
@@ -426,17 +433,7 @@
     <MESSAGE value="fixed parsing error in save/load" />
     <MESSAGE value="minor fixes in Main Program: input cleanups" />
     <MESSAGE value="added try/except blocks (error prints to user) to pertinent functions. Fixed find_item function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added try/except blocks (error prints to user) to pertinent functions. Fixed find_item function" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Pantry.py</url>
-          <line>2023</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added missing continues in main program call's exception blocks" />
+    <option name="LAST_COMMIT_MESSAGE" value="added missing continues in main program call's exception blocks" />
   </component>
 </project>

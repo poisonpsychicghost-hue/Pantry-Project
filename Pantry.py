@@ -1943,6 +1943,12 @@ def sys_daily_startup():
         for item in pantry_obj._pantry_list:
             item.time_day_passed(yesterday)
             print(f"Updated {item._name}'s Days")
+    for item in pantry_obj._pantry_list:
+        if item._days_left == 0:
+            item.is_expired()
+    for item in pantry_obj._pantry_list:
+        if item._quantity == 0:
+            pantry_obj.remove_item(item)
 
     pantry_obj.printout_pantry()
     pantry_obj.printout_shopping_list(
