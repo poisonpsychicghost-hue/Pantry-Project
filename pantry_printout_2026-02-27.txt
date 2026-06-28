@@ -1,0 +1,134 @@
+=+= Pantry orig Inventory Report for 2026-02-27 =+=
+-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Sourdough bread| Quantity: 2| Perishable?: Y| Days Remaining: 5 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Bakery Specific Item Summary:
+Baked Type: Bread| Homemade? N| Ready to Eat?: Y 
+Location: bread-box| Purchase Date: 2-20-26
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Blueberry scones| Quantity: 8| Perishable?: Y| Days Remaining: 3 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Bakery Specific Item Summary:
+Baked Type: Pastry| Homemade? Y| Ready to Eat?: Y 
+Location: Countertop| Purchase Date: 2-24-26
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Hot mustard| Quantity: 1| Perishable?: Y| Days Remaining: 30 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Condiment/Spice Specific Item Summary:
+Condiment/Spice?: Sauce
+Location: fridge| Purchase Date: 2-20-26
+Open?: Y| Open Date: 2-20
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Chile flakes| Quantity: 1| Perishable?: N| Days Remaining: 60 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Condiment/Spice Specific Item Summary:
+Condiment/Spice?: Crushed Spice
+Location: Cabinet| Purchase Date: 2-5-26
+Open?: N| Open Date: None
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Gouda| Quantity: 10| Perishable?: Y| Days Remaining: 10 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Dairy Specific Item Summary:Dairy Type: Cheese
+Location: Fridge| Purchase Date: 2-18-26
+Open? Y| Open Date: 2-18
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Milk: whol gallon| Quantity: 1| Perishable?: Y| Days Remaining: 3 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Dairy Specific Item Summary:Dairy Type: Milk
+Location: Fridge| Purchase Date: 2-24-26
+Open? Y| Open Date: 2-24
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Broccoli| Quantity: 3| Perishable?: Y| Days Remaining: 7 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Produce Specific Item Summary:
+Location: Fridge| Purchase Date: 2-20-26
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Carrots| Quantity: 5| Perishable?: Y| Days Remaining: 7 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Produce Specific Item Summary:
+Location: Fridge| Purchase Date: 2-20-26
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Strawberries| Quantity: 14| Perishable?: Y| Days Remaining: 4 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Fruit Specific Item Summary:
+Location: Back Fridge| Purchase Date: 2-20-16
+Ripeness: ripe| Washed?: Y| Cut?: N
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Chicken nuggets| Quantity: 2| Perishable?: N| Days Remaining: 60 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Frozen Specific Item Summary:
+Frozen Type: Kids Food| Home Freeze?: N
+Location: Deep Freezer| Purchase Date: 2-18-26
+Open?: N| Open Date: None
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Spinach ravioli| Quantity: 3| Perishable?: Y| Days Remaining: 60 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Frozen Specific Item Summary:
+Frozen Type: Frozen Pasta| Home Freeze?: N
+Location: Freezer| Purchase Date: 2-20-26
+Open?: Y| Open Date: 2-24
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Pork shoulder| Quantity: 1| Perishable?: Y| Days Remaining: 60 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Meat Specific Item Summary:
+Meat Type: Pork
+Location: Deep Freezer| Purchase Date: 2-18-26
+Frozen?: Y| Use Today?: N
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Salmon fillet| Quantity: 2| Perishable?: Y| Days Remaining: 1 
+--*--=--*--=--*--=--*--=--*--=--*--=
+
+Meat Specific Item Summary:
+Meat Type: Fish
+Location: Fridge| Purchase Date: 2-15-26
+Frozen?: N| Use Today?: Y
+Salmon fillet Needs to be used TODAY!
+Additional Notes:
+
+--*--=--*--=--*--=--*--=--*--=--*--=
+Name: Taki's| Quantity: 1| Perishable?: N| Days Remaining: 30 
+--*--=--*--=--*--=--*--=--*--=--*--=
+Shelf Stable Specific Item Summary:
+Food/Snack Type: Chips| Flavor: Sweet n Spicy
+Location: SnackShelf| Purchase Date: 2-18-26
+Open?: N| Open Date: None
+Requested By: Ryleigh
+Additional Notes:

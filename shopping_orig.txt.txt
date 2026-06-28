@@ -1,0 +1,5 @@
+Fresh_Produce,Broccoli,0,True,0,,2-20-26,Check Me Before Use!Check For Rot/Mold If None: Is Okay to Eat/Cook.
+Check For Rot/Mold 
+If None: Is Okay to Eat/Cook.,,,,,,,,,,,,,,,,,
+Raw_Meat,Pork shoulder,0,True,60,,2-18-26,,,,,Pork,,,,,,True,False,,,,,,
+Dairy,Milk: whol gallon,0,True,3,,2-24-26,,,,,,Milk,,,,,,,2-24,,,,,
