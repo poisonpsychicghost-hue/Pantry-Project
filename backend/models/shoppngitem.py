@@ -9,7 +9,7 @@ class ShoppingItem(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    fooditem_id = Column(Integer, ForeignKey("food_item"))
+    fooditem_id = Column(Integer, ForeignKey("food_items.id"))
     requested_by = Column(String)
     date_added = Column(Date, nullable=False)
     date_needed = Column(Date)
