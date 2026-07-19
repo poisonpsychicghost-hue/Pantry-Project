@@ -20,6 +20,10 @@ class FoodItem(Base):
     added_on = Column(Date)
     purchased_at = Column(Date)
 
+    ALLOWED_UPDATE_FIELDS = [
+        "location_id", "quantity", "unit", "status", "notes", "item_metadata"
+    ]
+
     #Relationships
     category = relationship("Category")
     location = relationship("InventoryLocation")

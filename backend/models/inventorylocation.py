@@ -12,6 +12,10 @@ class InventoryLocation(Base):
     emoji = Column(String, nullable=False)
     description = Column(String, nullable=False)
 
+    ALLOWED_UPDATED_FIELDS = [
+        "name", "type", "emoji", "description"
+    ]
+
     #relationships
     category = relationship("Category")
     fooditem = relationship("FoodItem")

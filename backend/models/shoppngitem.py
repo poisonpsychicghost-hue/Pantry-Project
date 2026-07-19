@@ -16,6 +16,10 @@ class ShoppingItem(Base):
     completed_at = Column(Date)
     notes = Column(String)
 
+    ALLOWED_UPDATED_FIELDS = [
+        "name", "requested_by", "date_needed", "notes"
+    ]
+
     #relationships
     fooditem = relationship("FoodItem")
     

@@ -14,3 +14,8 @@ class Household(Base):
     settings = Column(JSON, default=lambda: {})
     members = Column(JSON, nullable=False, default=dict)
     encrypted = Column(Boolean, nullable=False)
+
+    ALLOWED_UPDATED_FIELDS = [
+        "household_name", "email", "settings", "members", "encrypted"
+    ]
+    
