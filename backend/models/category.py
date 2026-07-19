@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, JSON
-from sqlalchemy.orm import relationship
+
 from db import Base
 
 class Category(Base):
@@ -11,9 +11,5 @@ class Category(Base):
     style = Column(JSON)
     icon = Column(String)
     description = Column(String)
-    metadata_keys = Column(JSON, default=dict)
-    
-    #relationships
-    location = relationship("InventoryLocation")
-    fooditem = relationship("FoodItem")
-    
+    metadata_keys = Column(JSON, default=list)
+        
