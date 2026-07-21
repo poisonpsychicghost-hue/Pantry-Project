@@ -3,6 +3,9 @@ from models.shoppngitem import ShoppingItem
 def get_shoppingitem(db, shoppingitem_id):
     return db.query(ShoppingItem).filter(ShoppingItem.id == shoppingitem_id).first()
 
+def get_shoppingitem_by_name(db, shoppingitem_name):
+    return db.query(ShoppingItem).filter(ShoppingItem.name.ilike(f"%{shoppingitem_name}%")).all()
+
 def list_shoppingitems(db):
     return db.query(ShoppingItem).all()
 

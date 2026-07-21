@@ -1,5 +1,6 @@
 from repositories.shoppingitem_repository import (
     get_shoppingitem,
+    get_shoppingitem_by_name,
     list_shoppingitems,
     add_shoppingitem,
     update_shoppingitem,
@@ -24,6 +25,9 @@ def update_shoppingitem_service(db, shoppingitem_id, update_data):
     
 def get_shoppingitem_service(db, shoppingitem_id):
     return get_shoppingitem(db, shoppingitem_id)
+
+def get_shoppingitem_by_name_service(db, shoppingitem_name):
+    return get_shoppingitem_by_name(db, shoppingitem_name)
 
 def list_shoppingitem_service(db):
     return list_shoppingitems(db)

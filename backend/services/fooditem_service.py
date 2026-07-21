@@ -1,5 +1,7 @@
 from repositories.fooditem_repository import (
     get_fooditem,
+    get_fooditem_by_name,
+    get_fooditem_by_status,
     list_fooditems,
     add_fooditem,
     update_fooditem,
@@ -38,6 +40,13 @@ def update_fooditem_service(db, fooditem_id, update_data):
 
 def get_fooditem_service(db, fooditem_id):
     return get_fooditem(db, fooditem_id)
+
+def get_fooditem_by_name_service(db, fooditem_name):
+    return get_fooditem_by_name(db, fooditem_name)
+
+def get_fooditem_by_status_service(db, fooditem_status):
+    #need to work out logics after approved status codes locked.
+    return get_fooditem_by_status(db, fooditem_status)
 
 def list_fooditems_service(db):
     return list_fooditems(db)
