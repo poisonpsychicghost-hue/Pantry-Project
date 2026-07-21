@@ -6,7 +6,7 @@ from repositories.shoppingitem_repository import (
     update_shoppingitem,
     delete_shoppingitem
 )
-from models.shoppngitem import ShoppingItem
+from backend.models.shoppingitem import ShoppingItem
 
 ALLOWED_UPDATE_FIELDS = ShoppingItem.ALLOWED_UPDATED_FIELDS
 REQUIRED_CREATE_FIELDS = ShoppingItem.REQUIRED_CREATE_FIELDS

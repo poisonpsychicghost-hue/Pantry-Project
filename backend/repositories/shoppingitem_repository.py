@@ -1,4 +1,4 @@
-from models.shoppngitem import ShoppingItem
+from backend.models.shoppingitem import ShoppingItem
 
 def get_shoppingitem(db, shoppingitem_id):
     return db.query(ShoppingItem).filter(ShoppingItem.id == shoppingitem_id).first()

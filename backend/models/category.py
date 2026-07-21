@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, String, JSON
-
 from db import Base
 
 class Category(Base):
