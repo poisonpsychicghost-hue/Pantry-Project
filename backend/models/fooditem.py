@@ -24,6 +24,10 @@ class FoodItem(Base):
         "location_id", "quantity", "unit", "status", "notes", "item_metadata"
     ]
 
+    REQUIRED_CREATE_FIELDS = [
+        "name", "category_id", "location_id", "quantity", "unit", "expiration_date"
+    ]
+
     #Relationships
     category = relationship("Category")
     location = relationship("InventoryLocation")

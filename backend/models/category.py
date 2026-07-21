@@ -12,4 +12,4 @@ class Category(Base):
     icon = Column(String)
     description = Column(String)
     metadata_keys = Column(JSON, default=list)
-        
+    

@@ -19,6 +19,9 @@ class ShoppingItem(Base):
     ALLOWED_UPDATED_FIELDS = [
         "name", "requested_by", "date_needed", "notes"
     ]
+    REQUIRED_CREATE_FIELDS = [
+        "name", "date_added"
+    ]
 
     #relationships
     fooditem = relationship("FoodItem")

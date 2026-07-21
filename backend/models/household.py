@@ -19,3 +19,6 @@ class Household(Base):
         "household_name", "email", "settings", "members", "encrypted"
     ]
     
+    REQUIRED_CREATE_FIELDS = [
+        "userkey", "household_name", "created_at", "members", "encrypted"
+    ]

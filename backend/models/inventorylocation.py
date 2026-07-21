@@ -15,6 +15,9 @@ class InventoryLocation(Base):
     ALLOWED_UPDATED_FIELDS = [
         "name", "type", "emoji", "description"
     ]
+    REQUIRED_CREATE_FIELDS = [
+        "name", "type", "emoji"
+    ]
 
     #relationships
     category = relationship("Category")
