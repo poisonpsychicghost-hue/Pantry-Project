@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
 from db import Base
 
 class InventoryLocation(Base):
@@ -18,8 +17,3 @@ class InventoryLocation(Base):
     REQUIRED_CREATE_FIELDS = [
         "name", "type", "emoji"
     ]
-
-    #relationships
-    category = relationship("Category")
-    fooditem = relationship("FoodItem")
-
