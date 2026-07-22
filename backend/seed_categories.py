@@ -7,7 +7,9 @@ Seeds Database With Defaulted Categories
 from sqlalchemy.orm import Session
 from db import engine
 from models.category import Category
+import os
 
+print("Using database URL:", os.getenv("DATABASE_URL"))
 session = Session(bind=engine)
 
 seed_categories = [
@@ -46,7 +48,8 @@ seed_categories = [
 ]
 
 for cat in seed_categories:
-    exists = session.query(Category).filter_by(name=cat.name)
+    exists = session.query(Category).filter_by(name=cat.name).first()
+    print(f"Checking category {cat.name}, exists={exists}")
     if not exists:
         session.add(cat)
 

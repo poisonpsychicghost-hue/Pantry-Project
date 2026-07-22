@@ -17,7 +17,9 @@ seed_locations = [
 ]
 
 for loc in seed_locations:
-    if not session.query(InventoryLocation).filter_by(name=loc.name).first():
+    exists = session.query(InventoryLocation).filter_by(name=loc.name).first()
+    print(f"Checking Location {loc.name}, exists={exists}")
+    if not exists:
         session.add(loc)
 
 session.commit()

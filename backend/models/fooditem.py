@@ -60,4 +60,6 @@ class FoodItem(Base):
     #Relationships
     category = relationship("Category")
     location = relationship("InventoryLocation")
-    
+
+    from models.category import Category
+    from models.inventorylocation import InventoryLocation

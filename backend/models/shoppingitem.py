@@ -48,4 +48,4 @@ class ShoppingItem(Base):
 
     #relationships
     fooditem = relationship("FoodItem")
-    
+    from models.fooditem import FoodItem
