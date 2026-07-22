@@ -1,3 +1,9 @@
+"""
+- Shopping Item Routes - 
+Controls CRUD Routes For Shopping Item Entities
+
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from backend.services.shoppingitem_service import (

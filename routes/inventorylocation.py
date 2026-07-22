@@ -1,3 +1,9 @@
+"""
+- Inventory Location Routes - 
+Controls CRUD Routes For Inventory Locations
+
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from backend.services.inventorylocation_service import (
@@ -49,6 +55,6 @@ def update_inventorylocations(location_id: int, patch_data: dict, db: Session = 
 @router.delete("/{location_id}")
 def delete_inventorylocation(location_id: int, db: Session = Depends(get_db)):
     location = delete_inventorylocation_service(db, location_id)
-    if not item:
+    if not location:
         raise HTTPException(status_code=404, detail="Location not found")
     return {"detail": "deleted"}

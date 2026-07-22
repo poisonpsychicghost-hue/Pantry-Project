@@ -1,3 +1,9 @@
+"""
+- Category Seeder -
+Seeds Database With Defaulted Categories
+
+"""
+
 from sqlalchemy.orm import Session
 from db import engine
 from models.category import Category

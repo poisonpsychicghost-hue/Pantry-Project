@@ -1,3 +1,9 @@
+"""
+- Category Router -
+Controls CRUD routes for Category Entities
+
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from backend.services.category_service import (

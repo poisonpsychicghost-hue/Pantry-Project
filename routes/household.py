@@ -1,3 +1,9 @@
+"""
+- House Hold Routes -
+Controls CRUD Routes For Household Entities
+
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from backend.services.household_services import (

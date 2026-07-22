@@ -1,3 +1,9 @@
+"""
+- Food Item Service Layer - 
+Provides Data Validation For Food Item CRUD Methods
+
+"""
+
 from repositories.fooditem_repository import (
     get_fooditem,
     get_fooditem_by_name,
@@ -14,6 +20,19 @@ ALLOWED_UPDATE_FIELDS = FoodItem.ALLOWED_UPDATE_FIELDS
 REQUIRED_CREATE_FIELDS = FoodItem.REQUIRED_CREATE_FIELDS
 
 def create_fooditem_service(db, fooditem_data):
+    """
+    Checks Fields In Input fooditem_data
+    If Missing Required Field > Raises Error
+    If Incorrect Metadata > Raises Error
+    Else > Loads Data Into add_fooditem()
+
+    Args:
+        db: Database To Be Passed
+        fooditem_data: Data For Validatation + Passing
+
+    Return:
+        add_fooditem(db, fooditem_data)    
+    """
     missing = [field for field in REQUIRED_CREATE_FIELDS if field not in fooditem_data or not fooditem_data[field]]
     if missing:
         raise ValueError(f"Missing required field(s): {', '.join(missing)}")
@@ -26,6 +45,20 @@ def create_fooditem_service(db, fooditem_data):
             return add_fooditem(db, fooditem_data)
         
 def update_fooditem_service(db, fooditem_id, update_data):
+    """
+    Checks Fields In Input update_data
+    If Disallowed Field > Raises Error
+    If Incorrect Metadata > Raises Error
+    Else > Loads Data Into  update_fooditem()
+
+    Args:
+        db: Database To Be Passed
+        fooditem_id: Food Item Index To Be Passed
+        upgrade_data: Upgrade Data For Validation + Passing
+
+    Return:
+        update_fooditem(db, fooditem_id, update_data)
+    """
     for field in update_data.keys():
         if field not in ALLOWED_UPDATE_FIELDS:
             raise ValueError(f"Field '{field}' is not allwowed to be updated")
@@ -39,17 +72,67 @@ def update_fooditem_service(db, fooditem_id, update_data):
     return update_fooditem(db, fooditem_id, update_data)
 
 def get_fooditem_service(db, fooditem_id):
+    """
+    Loads get_fooditem()
+
+    Args:
+        db: Database To Be Passed
+        fooditem_id: Food Item Index To Be Passed
+
+    Return:
+        get_fooditem(db, fooditem_id)
+    """
     return get_fooditem(db, fooditem_id)
 
 def get_fooditem_by_name_service(db, fooditem_name):
+    """
+    Loads get_fooditem_by_name()
+
+    Args:
+        db: Database To Be Passed
+        fooditem_name: Food Item Name To Be Passed
+
+    Return:
+        get_fooditem_by_name(db, fooditem_name)
+    """
     return get_fooditem_by_name(db, fooditem_name)
 
 def get_fooditem_by_status_service(db, fooditem_status):
+    """
+    Loads get_fooditem_by_status()
+    (!NEEDS VALIDATION LAYER!)
+
+    Args:
+        db: Database To Be Passed
+        fooditem_status: Food Item Status For Validation + Passing
+
+    Return:
+        get_fooditem_by_status(db, fooditem_status)
+    """
     #need to work out logics after approved status codes locked.
     return get_fooditem_by_status(db, fooditem_status)
 
 def list_fooditems_service(db):
+    """
+    Loads list_fooditems()
+
+    Args:
+        db: Database To Be Passed
+
+    Return:
+        list_fooditems(db)
+    """
     return list_fooditems(db)
 
 def delete_fooditem_service(db, fooditem_id):
+    """
+    Loads delete_fooditem()
+
+    Args:
+        db: Database To Be Passed
+        fooditem_id: Food Item Index To Be Passed
+
+    Return:
+        delete_fooditem(db, fooditem_id)
+    """
     return delete_fooditem(db, fooditem_id)

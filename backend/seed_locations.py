@@ -1,3 +1,9 @@
+"""
+- Location Seeder - 
+Seeds Database With Default Locations
+
+"""
+
 from sqlalchemy.orm import Session
 from db import engine
 from models.inventorylocation import InventoryLocation

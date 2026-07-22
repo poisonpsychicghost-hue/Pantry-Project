@@ -1,7 +1,23 @@
+"""
+Category Entity Model - Defines Category Enitities
+Defines Food Types for FoodItems
+Food Type Examples: Fresh Produce, Meat, Dairy
+Static - User Cannot Edit
+"""
 from sqlalchemy import Column, Integer, String, JSON
 from db import Base
 
 class Category(Base):
+    """
+    Category Class:
+    attributes: 
+        id: Unique Numeric Identifier For Indexing
+        name: Display Name 
+        style: Color-Coding Selection
+        icon: Emoji or SVG Display Image
+        description: Short Explanation Of Category
+        metadata_keys: Unique Attributes Per Category
+    """
     __tablename__ = "categories"
 
     #fields

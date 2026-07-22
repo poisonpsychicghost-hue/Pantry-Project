@@ -1,9 +1,38 @@
+"""
+Food Item Entity Model - Defines Pantry Inventory Item Entities
+Structures Food Items and their Attributes
+Example Items: Milk, Cabbage, Bacon
+Mutable - User Can Edit Whitelist Fields
+"""
+
 from sqlalchemy import Column, Integer, String, Float, Date, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 from db import Base
 
 
 class FoodItem(Base):
+    """
+    FoodItem Class:
+    Attributes:
+        id: Unique Numeric Indetifier For Indexing
+        name: Display Name (Also Used In Search)
+        category_id: Numeric Link To Category for Metadata Allowances
+        location_id: Numeric Link To Location for Display + Search
+        quantity: Numeric Value - Float Allowed For Partials
+        unit: Quantity Unit Identifier
+        expiration_date: Date Expires (Calculated Internally)
+        status: Item Condition Tag (Expired, New, Warning, Etc)
+        notes: User Written Notes For Non-Field Data
+        item_metadata: Category Specific Fields
+        added_on: Date Added To Inventory
+        purchased_on: Date Most Recently Purchased
+    Required:
+        Minimum Needed Fields For Item Creation
+        ["name", "category_id", "location_id", "quantity", "unit", "expiration_date"]
+    Whitelist:
+        Allowed User-Editable Fields
+        ["location_id", "quantity", "unit", "status", "notes", "item_metadata"]
+    """
     __tablename__ = "food_items"
 
     #Fields
