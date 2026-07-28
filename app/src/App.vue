@@ -1,15 +1,14 @@
 <template>
-  <div class="flex h-screen">
-    <SidebarNav class="w-64" />
-    </div>
-    <div class="flex-1 flex flex-col">
+  <div style="display: flex; height: 100vh;">
+    <SidebarNav style="width: 250px; background: #222; color: #fff;" />
+    <div style="flex: 1; display: flex; flex-direction: column;">
       <TopAppBar />
-      <main class="flex-1 overflow-y-auto">
+      <main style="flex: 1; overflow: auto; background: #f9fafb; padding: 24px;">
         <router-view />
         <FloatingAddButton />
       </main>
     </div>
-
+  </div>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex flex-col gap-6 p-4 bg-gray-800 h-full text-white">
+    <nav style="display: flex; flex-direction: column; justify-content: flex-start; height: 100vh; width: 250px; background: #222; color: #fff;">
         <!--NAVIGATION HERE-->
         <router-link to="/" class="nav-link" active-class="active-link">Home</router-link>
         <router-link to="/inventory" class="nav-link" active-class="active-link">Inventory</router-link>
@@ -9,6 +9,7 @@
         <router-link to="/settings" class="nav-link" active-class="active-link">Settings</router-link>
         <router-link to="/startup" class="nav-link" active-class="active-link">Login/Startup</router-link>
         <router-link to="/bulk-add" class="nav-link" active-class="active-link">Bulk Add</router-link>
+
     </nav>
 </template>
 
