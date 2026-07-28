@@ -1,11 +1,15 @@
 <template>
-    <SidebarNav />
-    <div class="flex flex-col flex-1">
-        <TopAppBar />
+  <div class="flex h-screen">
+    <SidebarNav class="w-64" />
+    </div>
+    <div class="flex-1 flex flex-col">
+      <TopAppBar />
+      <main class="flex-1 overflow-y-auto">
         <router-view />
         <FloatingAddButton />
+      </main>
     </div>
-    <p> Test</p>
+
 </template>
 
 <script setup>
