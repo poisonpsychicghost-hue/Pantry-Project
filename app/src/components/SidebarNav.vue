@@ -7,7 +7,7 @@
         <router-link to="/expiration" class="nav-link" active-class="active-link">Expiration</router-link>
         <router-link to="/analytics" class="nav-link" active-class="active-link">Analytics</router-link>
         <router-link to="/settings" class="nav-link" active-class="active-link">Settings</router-link>
-        <router-link to="/startup" class="nav-link" active-class="active-link">Login/Startup</router-link>
+        <router-link to="/login" class="nav-link" active-class="active-link">Login/Startup</router-link>
         <router-link to="/bulk-add" class="nav-link" active-class="active-link">Bulk Add</router-link>
 
     </nav>

@@ -1,5 +1,5 @@
 <template>
     <div>
-        Inventory Temp
+       Inventory Temp
     </div>
 </template>

@@ -13,15 +13,15 @@ import BulkAdd from '../pages/BulkAdd.vue'
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
-    { path: '/', name: 'Inventory', component: Inventory },
-    { path: '/', name: 'PantryItemDetail', component: PantryItemDetail },
-    { path: '/', name: 'ShoppingList', component: ShoppingList },
-    { path: '/', name: 'ShoppingItemDetail', component: ShoppingItemDetail },
-    { path: '/', name: 'Expiration', component: Expiration },
-    { path: '/', name: 'Analytics', component: Analytics },
-    { path: '/', name: 'Settings', component: Settings },
-    { path: '/', name: 'StartupLogin', component: StartupLogin },
-    { path: '/', name: 'BulkAdd', component: BulkAdd },
+    { path: '/inventory', name: 'Inventory', component: Inventory },
+    { path: '/pantry-item', name: 'PantryItemDetail', component: PantryItemDetail },
+    { path: '/shopping-list', name: 'ShoppingList', component: ShoppingList },
+    { path: '/shopping-item', name: 'ShoppingItemDetail', component: ShoppingItemDetail },
+    { path: '/expiration', name: 'Expiration', component: Expiration },
+    { path: '/analytics', name: 'Analytics', component: Analytics },
+    { path: '/settings', name: 'Settings', component: Settings },
+    { path: '/login', name: 'StartupLogin', component: StartupLogin },
+    { path: '/bulk-add', name: 'BulkAdd', component: BulkAdd },
 ]
 
 const router = createRouter({
