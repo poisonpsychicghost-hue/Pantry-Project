@@ -9,10 +9,11 @@ export const useCategoryStore = defineStore('categories',{
     }),
     actions:{
 
-        fetchCategories() {
+        async fetchCategories() {
             this.loading = true
             try {
                 const response = await axios.get('/api/categories/')
+                console.log("Response:", response.data)
                 this.items = response.data
                 this.error = null
             } catch (e) {
@@ -22,7 +23,7 @@ export const useCategoryStore = defineStore('categories',{
             }
         },
 
-        getCategory(id) {
+        async getCategory(id) {
             this.loading = true
             try {
                 const response = await axios.get(`/api/categories/${id}`)
