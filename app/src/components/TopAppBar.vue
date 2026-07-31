@@ -3,7 +3,9 @@
     <div class="font-bold text-xl" style=" color: #fff">Pantry Manager</div>
     <nav class="flex gap-4">
       <router-link to="/" class="nav-link" exact-active-class="active-link">Home</router-link>
-      <router-link to="/settings" class="nav-link" active-class="active-link">Settings</router-link>
+      <router-link to="/inventory" class="nav-link" active-class="active-link">Inventory</router-link>
+      <router-link to="/shopping-list" class="nav-link" active-class="active-link">Shop-List</router-link>
+      <router-link to="/bulk-add" class="nav-link" active-class="active-link">Bulk Add</router-link>
     </nav>
   </header>
 </template>
