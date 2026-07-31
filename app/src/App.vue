@@ -5,7 +5,7 @@
       <TopAppBar />
       <main style="flex: 1; overflow: auto; background: #f9fafb; padding: 24px;">
         <router-view />
-        <FloatingAddButton />
+        <EntryField />
       </main>
     </div>
   </div>
@@ -15,6 +15,7 @@
 import SidebarNav from './components/SidebarNav.vue'
 import TopAppBar from './components/TopAppBar.vue'
 import FloatingAddButton from './components/FloatingAddButton.vue'
+import EntryField from './components/EntryField.vue';
 </script>
 
 <style scoped>
