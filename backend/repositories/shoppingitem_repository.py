@@ -3,7 +3,7 @@
 CRUD Methods For Shopping Item Entites
 """
 
-from backend.models.shoppingitem import ShoppingItem
+from models.shoppingitem import ShoppingItem
 
 def get_shoppingitem(db, shoppingitem_id):
     """

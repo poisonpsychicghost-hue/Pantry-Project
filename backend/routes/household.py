@@ -6,7 +6,7 @@ Controls CRUD Routes For Household Entities
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from backend.services.household_services import (
+from services.household_services import (
     create_household_service,
     update_household_service,
     get_household_service,

@@ -6,7 +6,7 @@ Controls CRUD Routes For Inventory Locations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from backend.services.inventorylocation_service import (
+from services.inventorylocation_service import (
     create_inventorylocation_service,
     update_inventorylocation_service,
     get_inventorylocation_service,

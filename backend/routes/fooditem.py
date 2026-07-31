@@ -6,7 +6,7 @@ Controls CRUD Routes For Food Item Entities
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from backend.services.fooditem_service import(
+from services.fooditem_service import(
     create_fooditem_service,
     update_fooditem_service,
     get_fooditem_service,

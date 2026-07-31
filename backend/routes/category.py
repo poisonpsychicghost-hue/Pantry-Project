@@ -6,7 +6,7 @@ Controls CRUD routes for Category Entities
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from backend.services.category_service import (
+from services.category_service import (
     get_category_service,
     list_categories_service
 )
@@ -20,15 +20,14 @@ def get_db():
         db.close()
 
 router = APIRouter(
-    prefix="/category",
-    tags=["category"]
+    tags=["categories"]
 )
-@router.get("/category_id")
+@router.get("/{category_id}")
 def get_category(category_id: int, db: Session = Depends(get_db)):
     category = get_category_service(db, category_id)
     if not category:
         raise HTTPException(status_code=404, detail="Category not found.")
-    return category
+    return ["category1", "category2"]
 
 @router.get("/")
 def list_categories(db: Session = Depends(get_db)):
