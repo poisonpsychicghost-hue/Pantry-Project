@@ -11,7 +11,7 @@ Household Name & Current User Name/Class
 E.g. "Smith Family — Caleb (Admin)"
 Hamburger Menu:
 Button at right (desktop: real hamburger; mobile: icon)
-Opens full navigation: Home, Pantry, Shopping List, Bulk Add, Settings, Logout, (and Analytics when live)
+Opens Floating full navigation: Home, Pantry, Shopping List, Bulk Add, Settings, Logout, (and Analytics when live)
 
 
 Body: (Scrollable)

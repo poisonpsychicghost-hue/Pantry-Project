@@ -55,7 +55,7 @@ def get_fooditems_by_status(status_name: str, db: Session = Depends(get_db)):
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_fooditem(fooditem_data: dict, db: Session = Depends(get_db)):
     try:
-        return create_fooditem(db, fooditem_data)
+        return create_fooditem_service(db, fooditem_data)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     

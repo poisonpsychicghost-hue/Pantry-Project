@@ -1,13 +1,45 @@
 <template>
-  <div style="display: flex; height: 100vh;">
-    <SidebarNav style="width: 250px; background: #222; color: #fff;" />
-    <div style="flex: 1; display: flex; flex-direction: column;">
-      <TopAppBar />
-      <main style="flex: 1; overflow: auto; background: #f9fafb; padding: 24px;">
-        <router-view />
-        <EntryField />
-      </main>
-    </div>
+  <div class="relative min-h-screen flex flex-col">
+    <TopAppBar @hamburger="openSidebar" />
+
+    <Transition
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="opacity-0 -translate-x-4"
+      enter-to-class="opacity-100 translate-x-0"
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="opacity-100 translate-x-0"
+      leave-to-class="opacity-0 -translate-x-4"
+    >
+      <SidebarNav
+        v-if="sidebarOpen"
+        class="fixed top-0 left-0 h-full z-50"
+        @close="closeSidebar"
+      />
+    </Transition>
+
+    <Transition
+      enter-active-class="transition duration-150 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="sidebarOpen"
+        class="fixed inset-0 bg-black/60 z-40"
+        @click="closeSidebar"
+      ></div>
+    </Transition>
+
+    <main class="flex-1 overflow-y-auto bg-gray-100 p-6">
+      <router-view />
+
+    </main>
+
+    <footer class="text-center p-4 bg-gray-200">
+      Sirius Studios 2026 – Dev Credits
+    </footer>
   </div>
 </template>
 
@@ -15,9 +47,29 @@
 import SidebarNav from './components/SidebarNav.vue'
 import TopAppBar from './components/TopAppBar.vue'
 import FloatingAddButton from './components/FloatingAddButton.vue'
-import EntryField from './components/EntryField.vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+const sidebarOpen = ref(false)
+const windowWidth = ref(window.innerWidth)
+
+function updateWidth() {
+  windowWidth.value = window.innerWidth
+}
+function openSidebar() {
+  sidebarOpen.value = true
+}
+function closeSidebar() {
+  sidebarOpen.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('resize', updateWidth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateWidth)
+})
 </script>
 
 <style scoped>
-
 </style>
