@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export const useInventoryLocationStore = defineStore('users', {
+export const useHouseholdStore = defineStore('users', {
     state: () => ({
         items: [],
         loading: false,

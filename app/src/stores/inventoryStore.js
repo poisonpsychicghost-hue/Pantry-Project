@@ -13,7 +13,7 @@ export const useInventoryStore = defineStore('inventory', {
         async fetchInventory() {
             this.loading = true
             try {
-                const response = await axios.get('/api/fooditems')
+                const response = await axios.get('/api/fooditems/fooditems/')
                 this.items = response.data
                 this.error = null
             } catch (e) {
@@ -24,10 +24,10 @@ export const useInventoryStore = defineStore('inventory', {
         },
 
         // Add Item to Inventory
-        async addItem(item) {
+        async addItem(items) {
             try {
-                const response = await axios.post('/api/fooditems', item)
-                this.item.push(response.data)
+                const response = await axios.post('/api/fooditems/fooditems/', items)
+                this.items.push(response.data)
             } catch (e) {
                 this.error = e
             }
@@ -36,7 +36,7 @@ export const useInventoryStore = defineStore('inventory', {
         // Update an Inventory Item 
         async updateItem(id, updates) {
             try {
-                const response = await axios.patch(`/api/fooditems/${id}`, updates)
+                const response = await axios.patch(`/api/fooditems/fooditems/${id}`, updates)
                 const idx = this.items.findIndex(i => i.id === id)
                 if (idx !== -1) this.items[idx] = response.data
                 this.error = null
@@ -48,7 +48,7 @@ export const useInventoryStore = defineStore('inventory', {
         // Delete an Item by ID
         async deleteItem(id) {
             try {
-                await axios.delete(`/api/fooditems/${id}`)
+                await axios.delete(`/api/fooditems/fooditems/${id}`)
                 this.items = this.items.filter(i => i.id !== id)
                 this.error = null
             } catch (e) {
@@ -60,7 +60,7 @@ export const useInventoryStore = defineStore('inventory', {
         async fetchByName(name) {
             this.loading = true
             try {
-                const response = await axios.get('/api/fooditems/search/', {params: { name }})
+                const response = await axios.get('/api/fooditems/fooditems/search/', {params: { name }})
                 this.items = response.data
                 this.error = null
             } catch (e) {
@@ -74,7 +74,7 @@ export const useInventoryStore = defineStore('inventory', {
         async fetchByStatus(status) {
             this.loading = true
             try {
-                const response = await axios.get('/api/fooditems/search/', {params: { status }})
+                const response = await axios.get(`/api/fooditems/fooditems/search/${status}`, {params: { status }})
                 this.items = response.data
                 this.error = null
             } catch (e) {

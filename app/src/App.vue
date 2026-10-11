@@ -38,7 +38,7 @@
     </main>
 
     <footer class="text-center p-4 bg-gray-200">
-      Sirius Studios 2026 – Dev Credits
+      <p>Sirius Studios 2026  Dev Credits</p>
     </footer>
   </div>
 </template>
