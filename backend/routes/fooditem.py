@@ -73,7 +73,7 @@ def patch_fooditem(item_id: int, patch_data: dict, db: Session = Depends(get_db)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@router.delete("{item_id}")
+@router.delete("/{item_id}")
 def delete_fooditem(item_id: int, db: Session = Depends(get_db)):
     item = delete_fooditem_service(db, item_id)
     if not item:
