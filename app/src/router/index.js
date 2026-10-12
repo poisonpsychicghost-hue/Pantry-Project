@@ -14,9 +14,9 @@ import BulkAdd from '../pages/BulkAdd.vue'
 const routes = [
     { path: '/', name: 'Home', component: Home },
     { path: '/inventory', name: 'Inventory', component: Inventory },
-    { path: '/inventory/:id', name: 'PantryItemDetail', component: PantryItemDetail },
+    { path: '/', name: 'PantryItemDetail', component: PantryItemDetail },
     { path: '/shopping-list', name: 'ShoppingList', component: ShoppingList },
-    { path: '/shopping-item', name: 'ShoppingItemDetail', component: ShoppingItemDetail },
+    { path: '/shopping-list/:id', name: 'ShoppingItemDetail', component: ShoppingItemDetail },
     { path: '/expiration', name: 'Expiration', component: Expiration },
     { path: '/analytics', name: 'Analytics', component: Analytics },
     { path: '/settings', name: 'Settings', component: Settings },
