@@ -82,7 +82,20 @@ export const useInventoryStore = defineStore('inventory', {
             } finally {
                 this.loading = false
             }
+        },
+        // Get Item By id
+        async fetchById(item_id) {
+            this.loading = true
+            try {
+                const response = await axios.get(`/api/fooditems/fooditems/${item_id}`)
+                this.error = null
+                return response.data
+              } catch (e) {
+                this.error = e
+                throw e
+            } finally {
+                this.loading = false
+            }
         }
-
     },
 })
